@@ -1,45 +1,13 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('public/css/style.css')}}?{{time()}}">
-    <title>Каталог</title>
-</head>
-<body>
-    <div class="wrapper">
-{{--        <header class="main__header">--}}
-{{--            <div class="container">--}}
-{{--                <div class="header__col">--}}
-{{--                    <div class="header__logo">--}}
-{{--                        <img src="{{asset('public/storage/logo.svg')}}" alt="">--}}
-{{--                    </div>--}}
-{{--                    <nav class="user__navigation__header">--}}
-{{--                        <ul class="user__nav__list">--}}
-{{--                            <li class="user__nav__item">--}}
-{{--                                <a href="#">Главная</a>--}}
-{{--                            </li>--}}
-{{--                            <li class="user__nav__item">--}}
-{{--                                <a href="{{route('catalog')}}">Каталог</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </nav>--}}
-{{--                </div>--}}
-{{--                <div class="header__col header__sign">--}}
-{{--                    <a href="#" class="header__href__item login">Вход</a>--}}
-{{--                    <a href="#" class="header__href__item signup">Регистрация</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </header>--}}
-        <main>
+<?php $title = 'Каталог' ?>
+@extends('layouts.main')
+
+@section('content')
+<main>
             <section class="allBooks">
                 <div class="container">
                     <div class="books__title__search">
                         <h1>Каталог книг</h1>
-                        <input class="btn" type="text" id="search" placeholder="поиск по автору, жанру">
+                        <input type="text" id="search" placeholder="поиск по автору, жанру">
                     </div>
                     <div class="books__row">
                         <div class="books__col filters">
@@ -73,7 +41,7 @@
                                                 <p>Жанр: {{$book->genre}}</p>
                                             </div>
                                             <div class="btn__container">
-                                                <a href="#" class="btn btn__default">Забронировать</a>
+                                                <a href="#" class="btn__default">Забронировать</a>
                                             </div>
                                         </div>
                                     </li>
@@ -84,6 +52,4 @@
                 </div>
             </section>
         </main>
-    </div>
-</body>
-</html>
+@endsection

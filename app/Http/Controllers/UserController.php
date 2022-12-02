@@ -34,6 +34,16 @@ class UserController extends Controller
             'message' => 'Email или пароль указаны не верно'
         ], 422);
     }
+
+    public function createLogin()
+    {
+        return view('auth.main.auth');
+    }
+
+    public function createRegister()
+    {
+        return view('auth.main.register');
+    }
 //    public function index()
 //    {
 //        return User::all();

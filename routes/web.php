@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {
@@ -10,4 +11,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'Main'], function (){
     Route::get('/catalog', [BookController::class, 'showCatalog'])->name('catalog');
+    Route::get('/auth', [UserController::class, 'createLogin'])->name('auth');
+    Route::get('/register', [UserController::class, 'createRegister'])->name('register');
+});
+
+Route::get('/', function (){
+    return view('welcome');
 });
