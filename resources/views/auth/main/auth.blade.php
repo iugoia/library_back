@@ -20,7 +20,7 @@
                     <input id="show-password" type="checkbox" class="custom-checkbox">
                     <label for="show-password">Показать пароль</label>
                 </p>
-                <button class="btn" type="button">Зарегистрироваться</button>
+                <button class="btn" type="submit">Зарегистрироваться</button>
                 <div class="title">
 						<span>
 							Нет аккаунта?

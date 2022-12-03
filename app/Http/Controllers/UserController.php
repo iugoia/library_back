@@ -15,16 +15,19 @@ class UserController extends Controller
 {
     public function signup(SignupRequest $request)
     {
-        return User::create([
-            'password' => Hash::make($request->password)
+        $filename = $request->file('avatar')->store('/avatars', 'public');
+        $user = User::create([
+                'password' => Hash::make($request->password),
+                'avatar' => $filename
             ] + $request->validated());
+        return redirect()->route('confirmation', compact('user'));
     }
 
     public function login(LoginRequest $request)
     {
         if (Auth::attempt($request->validated()))
         {
-            $token = Auth::user()->createToken();
+            $token = Auth::user()->createToken('api');
 
             return response()->json([
                 'token' => $token->plainTextToken
@@ -35,6 +38,12 @@ class UserController extends Controller
         ], 422);
     }
 
+    public function index()
+    {
+        $users = User::all();
+        return view('welcome', compact('users'));
+    }
+
     public function createLogin()
     {
         return view('auth.main.auth');
@@ -43,6 +52,11 @@ class UserController extends Controller
     public function createRegister()
     {
         return view('auth.main.register');
+    }
+
+    public function confirmation()
+    {
+        return view('auth.main.confirmation');
     }
 //    public function index()
 //    {

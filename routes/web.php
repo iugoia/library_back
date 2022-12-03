@@ -13,6 +13,8 @@ Route::group(['namespace' => 'Main'], function (){
     Route::get('/catalog', [BookController::class, 'showCatalog'])->name('catalog');
     Route::get('/auth', [UserController::class, 'createLogin'])->name('auth');
     Route::get('/register', [UserController::class, 'createRegister'])->name('register');
+    Route::get('/allUsers', [UserController::class, 'index'])->name('users');
+    Route::get('/confirmation', [UserController::class, 'confirmation'])->name('confirmation');
 });
 
 Route::get('/', function (){

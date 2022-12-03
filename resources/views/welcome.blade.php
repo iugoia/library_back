@@ -11,6 +11,7 @@
 <section class="books">
     <div class="container">
         <h1>Главная страница</h1>
+        {{dd($users)}}
     </div>
 </section>
 </body>
