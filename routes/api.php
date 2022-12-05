@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('signup', [UserController::class, 'signup'])->name('signup');
-Route::post('login', [UserController::class, 'login']);
-
+Route::post('login', [UserController::class, 'login'])->name('login');
+Route::get('uniquebooks', [BookController::class, 'filter']);
 Route::resource('books', BookController::class);
 
 Route::resource('feedbacks', FeedbackController::class);

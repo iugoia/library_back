@@ -14,17 +14,19 @@
                             <p>Наличие в бибилотеке</p>
                             <ul class="books__filter__list">
                                 <li class="books__filter__item">
-                                    <label class="filter__checkbox">
-                                        <span>Доступные</span>
-                                        <input type="checkbox" class="filter__checkbox__input" name="available">
-                                    </label>
+                                    <span data-filter="available" class="filter__checkbox">Доступные</span>
                                 </li>
                                 <li class="books__filter__item">
-                                    <label class="filter__checkbox">
-                                        <span>Забронированные</span>
-                                        <input type="checkbox" class="filter__checkbox__input" name="disavailable">
-                                    </label>
+                                    <span data-filter="disavailable" class="filter__checkbox">Забронированные</span>
                                 </li>
+                            </ul>
+                            <p>Жанры</p>
+                            <ul class="books__filter__list">
+                                @foreach($genres as $genre)
+                                <li class="books__filter__item">
+                                    <span data-filter="{{$genre}}" class="filter__checkbox">{{$genre}}</span>
+                                </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="books__col _books">
@@ -52,4 +54,21 @@
                 </div>
             </section>
         </main>
+@endsection
+@section('custom_js')
+    <script>
+        $(document).ready(function(){
+            $('.books__filter__item > span').click(function (){
+                let orderBy = $(this).data('filter')
+
+                $.ajax({
+                    url: {{route('catalog')}},
+                    type: "GET",
+                    data: data,
+                    success: success,
+                    dataType: dataType
+                })
+            })
+        })
+    </script>
 @endsection

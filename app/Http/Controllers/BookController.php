@@ -62,6 +62,17 @@ class BookController extends Controller
     public function showCatalog()
     {
         $books = $this->index();
-        return view('books.main.catalog', compact('books'));
+        $genres = $this->showGenres();
+        return view('books.main.catalog', compact('books', 'genres'));
+    }
+
+    public function showGenres()
+    {
+        $books = Book::all()->unique('genre');
+        $genres = array();
+        foreach ($books as $book){
+            $genres[] = $book->genre;
+        }
+        return $genres;
     }
 }

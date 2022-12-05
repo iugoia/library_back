@@ -37,10 +37,10 @@
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
                         </label>
-                        <span>MENU</span>
+                        <span>Меню</span>
                     </div>
                     <ul class="user__navigation__list">
-                        <li><label><a href="">Главная</a></label></li>
+                        <li><label><a href="{{route('index')}}">Главная</a></label></li>
                         <li><label><a href="{{route('catalog')}}">Каталог</a></label></li>
                         <li><label><a href="{{route('auth')}}">Вход</a></label></li>
                         <li><label><a href="{{route('register')}}">Регистрация</a></label></li>
@@ -75,8 +75,8 @@
     </footer>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{asset('public/js/script.js')}}?{{time()}}"></script>
+@yield('custom_js')
 </body>
-
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\SignupRequest;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,8 +12,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class UserController extends Controller
+class UserController extends Controller implements Authenticatable
 {
+    use \Illuminate\Auth\Authenticatable;
     public function signup(SignupRequest $request)
     {
         $filename = $request->file('avatar')->store('/avatars', 'public');
@@ -20,17 +22,17 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'avatar' => $filename
             ] + $request->validated());
-        return redirect()->route('confirmation', compact('user'));
     }
 
     public function login(LoginRequest $request)
     {
         if (Auth::attempt($request->validated()))
         {
-            $token = Auth::user()->createToken('api');
+//            $token = Auth::user()->createToken('api');
 
             return response()->json([
-                'token' => $token->plainTextToken
+                'data'
+//                'token' => $token->plainTextToken
             ]);
         }
         return response()->json([
@@ -44,15 +46,7 @@ class UserController extends Controller
         return view('welcome', compact('users'));
     }
 
-    public function createLogin()
-    {
-        return view('auth.main.auth');
-    }
 
-    public function createRegister()
-    {
-        return view('auth.main.register');
-    }
 
     public function confirmation()
     {
