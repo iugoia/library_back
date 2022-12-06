@@ -7,7 +7,10 @@
     <main>
         <div class="vacation-request-form form__login">
             <h1 class="reg-headline">Вход</h1>
-            <form method="post" action="{{route('login')}}">
+            @if ($errors->any())
+                dasdasdasd
+            @endif
+            <form method="post" action="{{route('auth')}}">
                 @csrf
                 <p class="input">
                     <label for="login" class="visually-hidden">Почта</label>
@@ -28,7 +31,7 @@
 						</span>
                 </div>
             </form>
-            <a href="{{route('register')}}" class="change-shape">Зарегестрироваться</a>
+            <a href="{{route('register')}}" class="change-shape">Зарегистрироваться</a>
         </div>
     </main>
 @endsection

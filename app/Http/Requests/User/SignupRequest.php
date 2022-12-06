@@ -8,17 +8,17 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class SignupRequest extends FormRequest
 {
-//    public function authorize()
-//    {
-//        return false;
-//    }
+    public function authorize()
+    {
+        return true;
+    }
 
     public function rules()
     {
         return [
-            'login' => ['required', 'string', 'unique:users,login', 'min:4'],
-            'name' => ['required', 'string', 'min:2'],
-            'surname' => ['required', 'string', 'min:3'],
+            'login' => ['required', 'string', 'unique:users,login', 'min:4', 'max:30'],
+            'name' => ['required', 'string', 'min:2', 'max:30'],
+            'surname' => ['required', 'string', 'min:3', 'max:30'],
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'phone' => ['required', 'string', 'unique:users,phone', 'min:11'],
             'password' => ['required', 'string', 'min:5'],

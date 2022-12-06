@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{csrf_token()}}">
     <title>{{$title}}</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{{asset('public/storage/logo.svg')}}" type="image/x-icon">
@@ -42,7 +43,7 @@
                     <ul class="user__navigation__list">
                         <li><label><a href="{{route('index')}}">Главная</a></label></li>
                         <li><label><a href="{{route('catalog')}}">Каталог</a></label></li>
-                        <li><label><a href="{{route('auth')}}">Вход</a></label></li>
+                        <li><label><a href="{{route('login')}}">Вход</a></label></li>
                         <li><label><a href="{{route('register')}}">Регистрация</a></label></li>
                     </ul>
                 </div>
@@ -76,6 +77,7 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{asset('public/js/jquery.maskedinput.min.js')}}"></script>
 <script src="{{asset('public/js/script.js')}}?{{time()}}"></script>
 @yield('custom_js')
 </body>

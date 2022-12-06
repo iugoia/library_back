@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 //    Route::delete('/{id}', [UserController::class, 'destroy']);
 //});
 
+Route::group(['prefix' => 'users'], function () {
+    Route::post('signup', [UserController::class, 'signup'])->name('signup');
+    Route::post('auth', [UserController::class, 'auth'])->name('auth');
+});
 
-Route::post('signup', [UserController::class, 'signup'])->name('signup');
-Route::post('login', [UserController::class, 'login'])->name('login');
+
 Route::get('uniquebooks', [BookController::class, 'filter']);
 Route::resource('books', BookController::class);
-
 Route::resource('feedbacks', FeedbackController::class);
 
 Route::resource('reservations', ReservationController::class);

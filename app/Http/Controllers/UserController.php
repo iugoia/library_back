@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\SignupRequest;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -22,22 +23,35 @@ class UserController extends Controller implements Authenticatable
                 'password' => Hash::make($request->password),
                 'avatar' => $filename
             ] + $request->validated());
+        if ($user){
+            return redirect(route('auth'));
+        }
     }
 
-    public function login(LoginRequest $request)
+    public function auth(LoginRequest $request)
     {
-        if (Auth::attempt($request->validated()))
-        {
-//            $token = Auth::user()->createToken('api');
-
+        if (Auth::attempt($request->validated())){
             return response()->json([
                 'data'
-//                'token' => $token->plainTextToken
             ]);
         }
+
         return response()->json([
             'message' => 'Email или пароль указаны не верно'
         ], 422);
+
+//        if (Auth::attempt($request->validated()))
+//        {
+////            $token = Auth::user()->createToken('api');
+//            $token = Auth::user()->createToken('api');
+//            return response()->json([
+//                'data',
+//                'token' => $token->plainTextToken
+//            ]);
+//        }
+//        return response()->json([
+//            'message' => 'Email или пароль указаны не верно'
+//        ], 422);
     }
 
     public function index()
@@ -46,12 +60,6 @@ class UserController extends Controller implements Authenticatable
         return view('welcome', compact('users'));
     }
 
-
-
-    public function confirmation()
-    {
-        return view('auth.main.confirmation');
-    }
 //    public function index()
 //    {
 //        return User::all();

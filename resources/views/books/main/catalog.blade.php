@@ -43,7 +43,7 @@
                                                 <p>Жанр: {{$book->genre}}</p>
                                             </div>
                                             <div class="btn__container">
-                                                <a href="#" class="btn__default">Забронировать</a>
+                                                <a href="{{route('books.show', $book->id)}}" class="btn__default">Забронировать</a>
                                             </div>
                                         </div>
                                     </li>
@@ -62,11 +62,17 @@
                 let orderBy = $(this).data('filter')
 
                 $.ajax({
-                    url: {{route('catalog')}},
+                    url: "{{route('catalog')}}",
                     type: "GET",
-                    data: data,
-                    success: success,
-                    dataType: dataType
+                    data: {
+                        orderBy: orderBy
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: (data) => {
+                        console.log(data)
+                    }
                 })
             })
         })

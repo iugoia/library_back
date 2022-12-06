@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('avatar');
             $table->enum('role', ['user', 'admin', 'librarian'])->default('user');
-            $table->boolean('activated')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
