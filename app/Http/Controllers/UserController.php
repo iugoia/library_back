@@ -2,62 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\SignupRequest;
-use Illuminate\Auth\Events\Registered;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-class UserController extends Controller implements Authenticatable
+class UserController extends Controller
 {
-    use \Illuminate\Auth\Authenticatable;
+
     public function signup(SignupRequest $request)
     {
+        if (Auth::check()){
+            return redirect(route('UserPersonalAccount'));
+        }
         $filename = $request->file('avatar')->store('/avatars', 'public');
         $user = User::create([
                 'password' => Hash::make($request->password),
                 'avatar' => $filename
             ] + $request->validated());
         if ($user){
-            return redirect(route('auth'));
+            return redirect(route('login'));
         }
+        return response()->json([
+            'message' => 'При сохранении пользователя произошла ошибка'
+        ]);
     }
 
-    public function auth(LoginRequest $request)
+    public function auth(\Illuminate\Http\Request $request)
     {
-        if (Auth::attempt($request->validated())){
-            return response()->json([
-                'data'
-            ]);
+        if (Auth::check()){
+            return redirect(route('UserPersonalAccount'));
         }
 
-        return response()->json([
-            'message' => 'Email или пароль указаны не верно'
-        ], 422);
+        $user = User::where('email', $request->email)->first();
 
-//        if (Auth::attempt($request->validated()))
-//        {
-////            $token = Auth::user()->createToken('api');
-//            $token = Auth::user()->createToken('api');
-//            return response()->json([
-//                'data',
-//                'token' => $token->plainTextToken
-//            ]);
-//        }
-//        return response()->json([
-//            'message' => 'Email или пароль указаны не верно'
-//        ], 422);
+        if ($user && Hash::check($request->password, $user->password)){
+            $token = $user->createToken('api')->plainTextToken;
+
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+
+            return $response;
+        }
+        return response([
+            'message' => 'Пользователь не найден'
+        ], 422);
+    }
+
+    public function logout(User $user)
+    {
+        $user->tokens()->delete();
     }
 
     public function index()
     {
         $users = User::all();
-        return view('welcome', compact('users'));
+        return $users;
     }
 
 //    public function index()

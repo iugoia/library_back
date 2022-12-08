@@ -8,10 +8,10 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class SignupRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return true;
-    }
+//    public function authorize()
+//    {
+//        return true;
+//    }
 
     public function rules()
     {

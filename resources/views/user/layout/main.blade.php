@@ -2,13 +2,13 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{csrf_token()}}">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{$title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="{{asset('public/storage/logo.svg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('public/storage/icons/logo.svg')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{asset('public/css/style.css')}}?{{time()}}">
 </head>
 
@@ -16,8 +16,8 @@
 <div class="wrapper">
     <header class="site-header">
         <div class="container">
-            <nav>
-                <img src="{{asset('public/storage/logo.svg')}}" alt="">
+            <nav class="user-profile__container">
+                <img src="{{asset('public/storage/icons/logo.svg')}}" alt="Logo" class="logo">
                 <input type="checkbox" id="menu" name="menu" class="m-menu__checkbox">
                 <label class="m-menu__toggle" for="menu">
                     <svg width="35" height="35" viewBox="0 0 24 24" stroke="#2B2B2B" stroke-width="2" stroke-linecap="butt"
@@ -40,28 +40,37 @@
                         </label>
                         <span>Меню</span>
                     </div>
-                    <ul class="user__navigation__list">
-                        <li><label><a href="{{route('index')}}">Главная</a></label></li>
-                        <li><label><a href="{{route('catalog')}}">Каталог</a></label></li>
-                        @if (\Illuminate\Support\Facades\Auth::check())
-                            <li><label><a href="{{route('catalog')}}">В личный кабинет</a></label></li>
-                            <li><label><a href="{{route('catalog')}}">Выйти</a></label></li>
-                        @endif
-                        @if (!\Illuminate\Support\Facades\Auth::check())
-                            <li><label><a href="{{route('login')}}">Вход</a></label></li>
-                            <li><label><a href="{{route('register')}}">Регистрация</a></label></li>
-                        @endif
-                    </ul>
+                    <div class="navigation">
+                        <ul class="user-navigation">
+                            <li><a href="{{route('index')}}">Главная</a></li>
+                            <li><a href="{{route('catalog')}}">Каталог</a></li>
+                            <li><a href="#" class="personal-account__link">Личный кабинет</a></li>
+
+                        </ul>
+                        <ul class="account-navigation">
+                            <li><a href="">Личный кабинет</a></li>
+                            <li><a href="">Все пользователи</a></li>
+                            <li><a href="">Мои бронирования</a></li>
+                            <li><a href="">Бронирования</a></li>
+                            <li><a href="">Книги</a></li>
+                            <li><a href="">Добавить книгу</a></li>
+                            <li><a href="">Мои отзывы</a></li>
+                            <li><a href="">Выйти</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </nav>
         </div>
     </header>
 
-    @yield('content')
+@yield('content')
+
+
 
     <footer>
         <div class="container">
-            <div class="site-navigation footer-nav">
+            <div class="site-navigation footer-nav user-profile__container">
                 <span class="copyrightus">© 2022 Untarias team</span>
                 <div class="footer-social">
                     <ul>
@@ -85,6 +94,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{asset('public/js/jquery.maskedinput.min.js')}}"></script>
 <script src="{{asset('public/js/script.js')}}?{{time()}}"></script>
+
 @yield('custom_js')
 </body>
+
 </html>

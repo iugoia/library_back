@@ -10,6 +10,7 @@ use App\Models\Book;
 use App\Models\Feedback;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,7 @@ class BookController extends Controller
         return BooksResource::collection(Book::all());
     }
 
-    public function show(Book $book)
+    public function showPage(Book $book)
     {
         $item = new BooksResource($book);
         $arrDataList = array();
@@ -40,6 +41,9 @@ class BookController extends Controller
 
     public function store(BookStoreRequest $request)
     {
+        if(Auth::user()->role === 'user'){
+            return redirect(route('index'));
+        }
         $filename = $request->file('image')->store('/books', 'public');
         Book::create([
             'name' => $request->name,
@@ -59,6 +63,9 @@ class BookController extends Controller
 
     public function update(Book $book, BookUpdateRequest $request)
     {
+        if(Auth::user()->role === 'user'){
+            return redirect(route('index'));
+        }
         $book->update($request->validated());
 
         return response()->json([
@@ -68,6 +75,9 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        if(Auth::user()->role === 'user'){
+            return redirect(route('index'));
+        }
         Storage::disk('public')->delete($book->image);
         $book->delete();
         return response()->json([

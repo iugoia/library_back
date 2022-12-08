@@ -6,40 +6,49 @@
 
         <div class="vacation-request-form">
             <h1 class="reg-headline">Регистрация</h1>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->messages() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <form method="post" action="{{route('signup')}}" enctype="multipart/form-data">
                 @csrf
                 <p class="half-field input">
                     <label for="name" class="visually-hidden">Имя</label>
                     <input id="name" type="text" placeholder="Имя" name="name">
+                    @error('name')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <p class="half-field input">
                     <label for="surname" class="visually-hidden">Фамилия</label>
                     <input id="surname" type="text" placeholder="Фамилия" name="surname">
+                    @error('surname')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <p class="half-field input">
                     <label for="login" class="visually-hidden">Логин</label>
                     <input id="login" type="text" placeholder="Логин" name="login">
+                    @error('login')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <p class="half-field input">
                     <label for="email" class="visually-hidden">E-mail</label>
                     <input id="email" type="email" placeholder="E-mail" name="email">
+                    @error('email')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <p class="input">
                     <label for="phone" class="visually-hidden">Телефон</label>
                     <input id="phone" type="tel" placeholder="Телефон" name="phone">
+                    @error('phone')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <p class="input">
                     <label for="password" class="visually-hidden">Пароль</label>
                     <input id="password" type="password" placeholder="Пароль" class="password" name="password">
+                    @error('password')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <p class="input-checkbox">
                     <input id="show-password" type="checkbox" class="custom-checkbox">
@@ -47,6 +56,9 @@
                 </p>
                 <p class="input file__input">
                     <input id="avatar" class="download-file" type="file" name="avatar" accept="image/png,image/jpeg, image/jpg">
+                    @error('avatar')
+                    <span class="text-error">{{$message}}</span>
+                    @enderror
                 </p>
                 <button class="btn" type="submit">Зарегистрироваться</button>
                 <div class="title">
@@ -62,7 +74,7 @@
 @section('custom_js')
     <script>
         $(function(){
-            $("#phone").mask("7(999) 999-99-99");
+            $("#phone").mask("+ 7 (999) 999-99-99");
         });
     </script>
 @endsection
