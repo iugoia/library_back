@@ -12,18 +12,18 @@ class PageController extends Controller
         return view('index');
     }
 
-    public function createLogin()
+    public function login()
     {
         if (Auth::check()){
-            return redirect(route('private'));
+            return redirect(route('UserPersonalAccount'));
         }
-        return view('auth.main.auth');
+        return view('auth.main.login');
     }
 
-    public function createRegister()
+    public function register()
     {
         if (Auth::check()){
-            return redirect(route('private'));
+            return redirect(route('UserPersonalAccount'));
         }
         return view('auth.main.register');
     }

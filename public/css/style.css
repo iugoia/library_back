@@ -177,13 +177,13 @@ nav .m-menu__header {
 }
 
 .user-profile__container {
-    margin-left: 180px;
+    margin-left: 260px;
 }
 
 .account-navigation {
     display: flex;
     flex-direction: column;
-    max-width: 180px;
+    max-width: 250px;
     width: 100%;
     height: 100%;
     position: fixed;
@@ -196,7 +196,6 @@ nav .m-menu__header {
 }
 
 .account-navigation li {
-    text-align: center;
     transition: .2s;
 }
 
@@ -258,7 +257,7 @@ footer {
     margin-top: 80px;
     background: var(--color-grey);
     color: var(--color-white);
-    height: 100px;
+    height: 80px;
     min-width: 100%;
 }
 
@@ -278,11 +277,13 @@ footer {
 
 .footer-nav {
     justify-content: space-between;
-    min-height: 100px;
+    height: 100%;
     align-items: center;
     display: flex;
 }
-
+footer > div{
+    height: 100%;
+}
 .us_in_social {
     width: 20px;
     height: 20px;
@@ -398,7 +399,6 @@ input:focus {
 }
 
 .profile__form .download-file {
-    width: calc(100% - 20px);
     padding: 0;
 }
 
@@ -899,7 +899,21 @@ input:focus {
     line-height: 29px;
     margin-bottom: 10px;
 }
-
+.product-box{
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+.product-box img {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+}
 .contacts-few div p:nth-child(2) {
     font-weight: 400;
     font-size: 16px;

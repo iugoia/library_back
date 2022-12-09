@@ -43,7 +43,7 @@
                                                 <p>Жанр: {{$book->genre}}</p>
                                             </div>
                                             <div class="btn__container">
-                                                <a href="{{route('books.show', $book->id)}}" class="btn__default">Забронировать</a>
+                                                <a href="{{route('showPageBook', $book->id)}}" class="btn__default">Забронировать</a>
                                             </div>
                                         </div>
                                     </li>

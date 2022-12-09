@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'avatar'
+        'avatar',
+        'role'
     ];
 
     protected $hidden = [
@@ -34,5 +35,15 @@ class User extends Authenticatable
     public function feedbacks()
     {
         return $this->hasMany(Feedback::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isLibrarian()
+    {
+        return $this->role === 'librarian';
     }
 }

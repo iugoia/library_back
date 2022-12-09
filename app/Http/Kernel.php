@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\AuthenticateApi;
 use App\Http\Middleware\UseAcceptHeader;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -23,6 +22,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Illuminate\Session\Middleware\StartSession::class,
     ];
 
     /**
@@ -46,6 +46,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \App\Http\Middleware\UseAcceptHeader::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         ],
     ];
 
@@ -57,6 +58,8 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
+        'admin' => \App\Http\Middleware\Admin::class,
+        'librarian' => \App\Http\Middleware\Librarian::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

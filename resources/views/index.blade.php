@@ -22,7 +22,7 @@
             <ul class="features">
 
                 <li>
-                    <img src="{{asset('public/storage/img/feature1.png')}}" alt="">
+                    <img src="{{asset('storage/img/feature1.png')}}" alt="">
                     <div>
                         <p>Все библиотечные книги — в одном сервисе</p>
                         <p>Сервис «Библиотеки НЧПК» — это онлайн-витрина, где собраны все книги библиотеки
@@ -39,10 +39,10 @@
                         <p>Оформите единый читательский билет онлайн или в нашей библиотеки, и он появится в вашем
                             личном кабинете. С этим билетом вы сможете брать понравившиеся книги в библиотеке.</p>
                     </div>
-                    <img src="{{asset('public/storage/img/feature2.png')}}" alt="">
+                    <img src="{{asset('storage/img/feature2.png')}}" alt="">
                 </li>
                 <li>
-                    <img src="{{asset('public/storage/img/feature3.png')}}" alt="">
+                    <img src="{{asset('storage/img/feature3.png')}}" alt="">
                     <div>
                         <p>Информация о ваших книгах — в личном кабинете</p>
                         <p>Кабинет читателя — это ваша "книжная онлайн-полка". На ней размещены книги, которые вы
@@ -62,18 +62,18 @@
             <h2>Наши отзывы</h2>
             <ul class="reviews">
                 <li>
-                    <img src="{{asset('public/storage/img/stars1.png')}}" alt="">
+                    <img src="{{asset('storage/img/stars1.png')}}" alt="">
                     <p>Дарина Полегешко</p>
                     <p>Лучшая библиотека в мире! Я счастлива, что живу в Набережных Челнах! Спасибо!!!</p>
                 </li>
                 <li>
-                    <img src="{{asset('public/storage/img/stars2.png')}}" alt="">
+                    <img src="{{asset('storage/img/stars2.png')}}" alt="">
                     <p>Марин Мокрый</p>
                     <p>Честно говоря, я не очень люблю читать книги, но когда узнал об этой библиотеке, пришлось
                         зачисляться на первый курс.</p>
                 </li>
                 <li>
-                    <img src="{{asset('public/storage/img/stars3.png')}}" alt="">
+                    <img src="{{asset('storage/img/stars3.png')}}" alt="">
                     <p>Александра Витяз</p>
                     <p>Прихожу каждый понедельник, дабы насладиться приятным набором книг, да и с помощью онлайн
                         сервиса легко их бронировать, всегда так хотела, но иногда книг не хватает, за это минус

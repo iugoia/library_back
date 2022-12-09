@@ -18,19 +18,42 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::group(['prefix' => 'user'], function () {
-    Route::post('signup', [UserController::class, 'signup'])->name('signup');
-    Route::post('auth', [UserController::class, 'auth'])->name('auth');
+    Route::post('register', [UserController::class, 'signup'])->name('signup');
+    Route::post('login', [UserController::class, 'auth'])->name('auth');
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
 });
-Route::group(['prefix' => 'books'], function(){
-    Route::get('/books/{book}', [BookController::class, 'showPage'])->name('showPageBook');
-    Route::get('/catalog', [BookController::class, 'showCatalog'])->name('catalog');
-});
-Route::middleware('auth:sanctum')->group(function(){
-    Route::group(['prefix' => 'books'], function(){
 
-    });
-    Route::resource('books', BookController::class)->middleware('auth:sanctum');
-    Route::resource('feedbacks', FeedbackController::class)->middleware('auth:sanctum');
-    Route::resource('reservations', ReservationController::class)->middleware('auth:sanctum');
+//Route::middleware()->group(function(){
+    Route::group(['prefix' => 'admin'], function(){
+        Route::group(['prefix' => 'books'], function(){
+            Route::get('/index', [BookController::class, 'index']);
+            Route::post('/store', [BookController::class, 'store']);
+            Route::post('/update', [BookController::class, 'update']);
+            Route::delete('/destroy', [BookController::class, 'destroy']);
+        });
+        Route::group(['prefix' => 'users'], function(){
+            Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.user.index');
+            Route::get('/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.user.create');
+            Route::post('/', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.user.store');
+            Route::get('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'showUpdate'])->name('admin.user.showUpdate');
+            Route::patch('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.user.update');
+            Route::delete('/delete/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.user.destroy');
+        });
+        Route::group(['prefix' => 'books'], function(){
+            Route::get('/', [\App\Http\Controllers\Admin\BookController::class, 'index'])->name('admin.book.index');
+            Route::get('/create', [\App\Http\Controllers\Admin\BookController::class, 'create'])->name('admin.book.create');
+            Route::post('/', [\App\Http\Controllers\Admin\BookController::class, 'store'])->name('admin.book.store');
+            Route::get('/{book}', [\App\Http\Controllers\Admin\BookController::class, 'edit'])->name('admin.book.edit');
+            Route::patch('/{book}', [\App\Http\Controllers\Admin\BookController::class, 'update'])->name('admin.book.update');
+            Route::delete('/delete/{book}', [\App\Http\Controllers\Admin\BookController::class, 'destroy'])->name('admin.book.destroy');
+        });
+        Route::group(['prefix' => 'reservations'], function(){
+            Route::get('/index', [ReservationController::class, 'index']);
+            Route::delete('/destroy', [ReservationController::class, 'destroy']);
+        });
+//    });
+
+//    Route::resource('books', BookController::class)->middleware('auth:sanctum');
+//    Route::resource('feedbacks', FeedbackController::class)->middleware('auth:sanctum');
+//    Route::resource('reservations', ReservationController::class)->middleware('auth:sanctum');
 });

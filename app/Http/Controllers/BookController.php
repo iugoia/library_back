@@ -16,10 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
-    public function index()
-    {
-        return BooksResource::collection(Book::all());
-    }
+
 
     public function showPage(Book $book)
     {
@@ -41,9 +38,6 @@ class BookController extends Controller
 
     public function store(BookStoreRequest $request)
     {
-        if(Auth::user()->role === 'user'){
-            return redirect(route('index'));
-        }
         $filename = $request->file('image')->store('/books', 'public');
         Book::create([
             'name' => $request->name,
@@ -63,9 +57,6 @@ class BookController extends Controller
 
     public function update(Book $book, BookUpdateRequest $request)
     {
-        if(Auth::user()->role === 'user'){
-            return redirect(route('index'));
-        }
         $book->update($request->validated());
 
         return response()->json([
@@ -75,9 +66,6 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
-        if(Auth::user()->role === 'user'){
-            return redirect(route('index'));
-        }
         Storage::disk('public')->delete($book->image);
         $book->delete();
         return response()->json([

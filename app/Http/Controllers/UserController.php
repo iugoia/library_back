@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Requests\User\LoginRequest;
 use App\Http\Requests\User\SignupRequest;
 use App\Models\User;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -16,25 +15,27 @@ class UserController extends Controller
     public function signup(SignupRequest $request)
     {
         if (Auth::check()){
-            return redirect(route('UserPersonalAccount'));
+            return redirect(route('user.account'));
         }
+
         $filename = $request->file('avatar')->store('/avatars', 'public');
         $user = User::create([
                 'password' => Hash::make($request->password),
                 'avatar' => $filename
             ] + $request->validated());
         if ($user){
-            return redirect(route('login'));
+            Auth::login($user);
+            return redirect(route('UserPersonalAccount'));
         }
         return response()->json([
             'message' => 'При сохранении пользователя произошла ошибка'
         ]);
     }
 
-    public function auth(\Illuminate\Http\Request $request)
+    public function auth(LoginRequest $request)
     {
         if (Auth::check()){
-            return redirect(route('UserPersonalAccount'));
+            return redirect(route('user.account'));
         }
 
         $user = User::where('email', $request->email)->first();
