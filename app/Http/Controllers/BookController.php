@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
 {
-
+    public function index()
+    {
+        return BooksResource::collection(Book::all());
+    }
 
     public function showPage(Book $book)
     {

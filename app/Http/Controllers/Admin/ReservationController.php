@@ -1,0 +1,98 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ReservationsResource;
+use App\Models\Book;
+use App\Models\Reservation;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+class ReservationController extends Controller
+{
+    public function index()
+    {
+        $reservations = Reservation::all();
+        $arrDataList = array();
+        $books = array();
+        foreach ($reservations as $reservation){
+            $user = User::find($reservation->user_id);
+            $book = Book::find($reservation->book_id);
+            $arrDataList[] = [
+                'id' => $reservation->id,
+                'username' => $user->login,
+                'userphone' => $user->phone,
+                'book' => $book->name,
+                'bookimage' => $book->image,
+                'bookrack' => $book->rack,
+                'bookrow' => $book->row,
+                'bookshelf' => $book->shelf,
+                'created_at' => $reservation->created_at,
+                'received_time' => $reservation->received_time,
+                'status' => $reservation->status
+            ];
+            $books[] = $book;
+        }
+        return view('admin.reservations.index', compact('arrDataList', 'books'));
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => ['required', 'exists:users,id'],
+            'book_id' => ['required', 'exists:books,id'],
+            'received_time' => ['required', 'date', 'date_format:Y-n-j']
+        ]);
+
+        if ($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $book = Book::find($request->book_id);
+        if ($book->is_available == false){
+            return redirect()->back()->with('error', 'Книга уже забронирована');
+        }
+        $book->is_available = false;
+        $book->save();
+    }
+
+    public function edit($id)
+    {
+        $reservation = Reservation::find($id);
+        $book = Book::find($reservation->book_id);
+        return view('admin.reservations.update', compact('reservation', 'book'));
+    }
+
+    public function update(Reservation $reservation, Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => 'required'
+        ]);
+        if ($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        if ($request->status == 'Возвращено'){
+            $book = Book::find($reservation->book_id);
+            $book->is_available = true;
+            $book->save();
+        }
+        $reservation->update($request->all());
+        return redirect()->back()->with('success', 'Бронирование успешно обновлено');
+    }
+
+    public function destroy($id)
+    {
+        $reservation = Reservation::find($id)->first();
+        if ($reservation->status === 'Выдано'){
+            return redirect()->back()->with('error', 'Бронирование не может быть удалено. Так как книга не возвращена.');
+        }
+        $reservation->delete();
+        return redirect()->back()->with('success', 'Бронирование успешно удалено');
+    }
+}

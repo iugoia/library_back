@@ -6,13 +6,6 @@
         .profile__form{
             margin-left: 0;
         }
-        .form-row{
-            display: flex;
-            justify-content: space-between;
-        }
-        .btn-small{
-            display: unset;
-        }
         .profile__form .btn{
             width: unset;
             padding-left: 30px;
@@ -84,7 +77,7 @@
                 <div class="profile">
                     <div class="avatar__ctn">
                         <div class="account_image">
-                            <img src="{{asset('storage/'.$user->avatar)}}" alt="avatar" class="avatar">
+                            <img src="{{asset('public/storage/'.$user->avatar)}}" alt="avatar" class="avatar">
                         </div>
                     </div>
                     <div class="profile__form">

@@ -7,28 +7,40 @@
     <main>
         <div class="vacation-request-form form__login">
             <h1 class="reg-headline">Вход</h1>
-            @if ($errors->any())
-                dasdasdasd
-            @endif
             <form method="post" action="{{route('auth')}}">
                 @csrf
-                <p class="input">
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{session()->get('error')}}
+                    </div>
+                @endif
+                <fieldset class="input">
                     <label for="login" class="visually-hidden">Почта</label>
                     <input id="login" type="email" name="email" placeholder="Почта">
-                </p>
-                <p class="input">
+                    @error('email')
+                    <div class="text-danger mt-2">
+                        {{$message}}
+                    </div>
+                    @enderror
+                </fieldset>
+                <fieldset class="input">
                     <label for="password" class="visually-hidden">Пароль</label>
                     <input id="password" type="password" name="password" placeholder="Пароль" class="password">
-                </p>
+                        @error('password')
+                        <div class="text-danger mt-2">
+                            {{$message}}
+                        </div>
+                        @enderror
+                </fieldset>
                 <p class="input-checkbox">
                     <input id="show-password" type="checkbox" class="custom-checkbox">
                     <label for="show-password">Показать пароль</label>
                 </p>
-                <button class="btn" type="submit">Войти</button>
+                <button class="btn btn-primary" type="submit">Войти</button>
                 <div class="title">
-						<span>
-							Нет аккаунта?
-						</span>
+                    <span>
+                        Нет аккаунта?
+                    </span>
                 </div>
             </form>
             <a href="{{route('register')}}" class="change-shape">Зарегистрироваться</a>

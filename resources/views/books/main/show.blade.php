@@ -22,19 +22,25 @@
                         <div class="book__img__container">
                             <img src="{{asset('public/storage/' . $item->image)}}" alt="dasdasd">
                         </div>
+                        @if($item->is_available)
                         <div class="btn__container">
-                            <a href="#" class="btn">Забронировать</a>
+                            <a href="#" class="btn btn-primary">Забронировать</a>
                         </div>
+                        @endif
                     </div>
                     <div class="book__info">
-                        <h1>Избранница весны</h1>
+                        <h1>{{$item->name}}</h1>
                         <p><span class="font__bold">Автор:</span> <span>{{$item->author}}</span></p>
                         <p><span class="font__bold">Жанр:</span> <span>{{$item->genre}}</span></p>
                         <p><span class="font__bold">Номер стеллажа:</span> <span>{{$item->rack}}</span></p>
                         <p><span class="font__bold">Номер ряда:</span> <span>{{$item->row}}</span></p>
                         <p><span class="font__bold">Номер полки:</span> <span>{{$item->shelf}}</span></p>
-                        {{--                    <p><span class="font__bold">Рейтинг:</span> <span>4,7</span></p>--}}
-                        <p><span class="font__bold">Описание:</span> <span>{{$item->description}}</span></p>
+                        @if($item->description)
+                            <p><span class="font__bold">Описание:</span> <span>{{$item->description}}</span></p>
+                        @endif
+                        @if(!$item->is_available)
+                            <p><span class="font__available">В настоящее время книга недоступна для бронирования</span></p>
+                        @endif
                     </div>
                 </div>
             </div>

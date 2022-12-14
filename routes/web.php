@@ -17,12 +17,28 @@ Route::group(['prefix' => 'books'], function(){
     Route::get('/catalog', [BookController::class, 'showCatalog'])->name('catalog');
 });
 
-Route::group(['namespace' => 'auth'], function(){
-    Route::get('/register', [PageController::class, 'register'])->name('register');
-    Route::get('/login', [PageController::class, 'login'])->name('login');
-});
+Route::group(['namespace' => 'user'], function(){
+    Route::get('/register', function (){
+        if (Auth::check()){
+            return redirect(route('personal-account'));
+        }
+        return view('auth.main.register');
+    })->name('register');
 
-Route::group(['namespace' => 'user'], function (){
-    Route::get('/account/{user}', [UserAccountController::class, 'personalAccount'])->name('user.account')->middleware('auth');
-    Route::get('/edit-profile/{user}', [UserAccountController::class, 'editProfile'])->name('UserEditProfile')->middleware('auth');
+    Route::get('/login', function (){
+        if (Auth::check()){
+            return redirect(route('personal-account'));
+        }
+        return view('auth.main.login');
+    })->name('login');
+
+
+    Route::middleware('auth')->group(function(){
+        Route::get('/account', function (){
+            return view('user.main.personal');
+        })->name('personal-account');
+        Route::get('/account-edit', function () {
+            return view('user.main.edit');
+        })->name('profile-edit');
+    });
 });

@@ -12,6 +12,11 @@ ol {
     list-style-type: none;
 }
 
+ul, ol{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 a {
     text-decoration: none;
 }
@@ -41,6 +46,8 @@ body {
     --color-active-btn: #C6C6C6;
     --color-input-border: #C6C6C6;
     --color-background-btn: #EFEFEF;
+    --color-background-navigation: #474954;
+    --color-table: #F3F7F0;
 }
 
 *,
@@ -280,6 +287,9 @@ footer {
     height: 100%;
     align-items: center;
     display: flex;
+}
+.footer__user__auth{
+    padding-left: 260px;
 }
 footer > div{
     height: 100%;
@@ -557,7 +567,7 @@ input:focus {
         transition: transform 0.35s;
         z-index: 1;
         overflow: hidden;
-        background-color: #fff;
+        background-color: var(--color-grey);
         display: block;
         padding-left: 0;
     }
@@ -579,6 +589,7 @@ input:focus {
         justify-content: space-around;
         align-items: center;
         border-bottom: 1px solid #e8e8e8;
+        color: #FFF;
     }
 
     nav .m-menu__header span {
@@ -663,13 +674,6 @@ input:focus {
     border: none;
 }
 
-.books__title__search>input {
-    padding: 5px 10px;
-    border: 1px solid #C6C6C6;
-    background: url("http://library/storage/app/public/icons/free-icon-magnifying-glass-162433%201.png") no-repeat;
-    background-size: 15px;
-    background-position: right;
-}
 
 .books__title__search>input:focus,
 .books__title__search>input:active,
@@ -777,10 +781,15 @@ input:focus {
 
 .preview {
     width: 100%;
-    background: url('http://newlibrary/public/storage/img/bg.png') repeat-x;
+    background: url('http://newlibrary/public/storage/img/background.png') repeat-x;
     min-height: 553px;
-    animation: rolling 100s infinite linear;
+    animation: rolling 200s infinite linear;
     /*    ../img/bg.png*/
+}
+@media screen and (max-width: 737px){
+    .footer__user__auth {
+        padding-left: 0;
+    }
 }
 
 .preview-bg {
@@ -1217,11 +1226,15 @@ input:focus {
         display: none;
     }
 
+    .account-navigation{
+        padding: 0 !important;
+    }
+
     .account-navigation {
         min-width: 100%;
         position: relative;
         height: auto;
-        background-color: var(--color-white);
+        background-color: var(--color-grey);
     }
 
     .personal-account__link::before {
@@ -1237,6 +1250,9 @@ input:focus {
         overflow-x: hidden;
         height: calc(100% - 52px);
     }
+    .navigation a{
+        color: #FFF !important;
+    }
 
     .user-profile__container {
         margin-left: 0;
@@ -1247,7 +1263,25 @@ input:focus {
         color: var(--color-background-navigation);
     }
 }
+.error-section{
+    text-align: center;
+}
+.error__content > h1{
+    margin-bottom: 60px;
+}
+.font__available{
+    color: var(--color-blue);
+}
 
+.error__link{
+    display: unset;
+}
+.content__center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 /*форма в профиле*/
 
 .double__input {

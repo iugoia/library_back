@@ -3,10 +3,17 @@
 
 @section('content')
     <style>
-        footer{
+        @if (\Illuminate\Support\Facades\DB::table('books')->count() < 10)
+            footer{
             position: absolute;
             bottom: 0;
         }
+        @endif
+        @if (\Illuminate\Support\Facades\DB::table('books')->count() >= 10)
+            footer{
+            position: unset;
+        }
+        @endif
         .admin__users__table h1{
             margin: 20px 0;
         }
@@ -55,6 +62,11 @@
                     <h1>Все книги</h1>
                     <a href="{{route('admin.book.create')}}" class="btn btn-primary">Добавить книгу</a>
                 </div>
+                @if(session()->has('success'))
+                    <div class="alert alert-success">
+                        {{session()->get('success')}}
+                    </div>
+                @endif
                 <div class="admin__users__table__wrapper">
                     <table class="admin__users__table__table table align-middle mb-0">
                         <thead class="table-light">
@@ -66,6 +78,7 @@
                             <th>Стеллаж</th>
                             <th>Ряд</th>
                             <th>Полка</th>
+                            <th>Статус для бронирования</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
@@ -76,7 +89,7 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="product-box border">
-                                            <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->name}}">
+                                            <img src="{{asset('public/storage/' . $book->image)}}" alt="{{$book->name}}">
                                         </div>
                                         <div class="product-info">
                                             <h6 class="product-name mb-1">{{$book->name}}</h6>
@@ -88,12 +101,20 @@
                                 <td>{{$book->rack}}</td>
                                 <td>{{$book->row}}</td>
                                 <td>{{$book->shelf}}</td>
+                                <td>
+                                    @if(!$book->is_available)
+                                        Недоступно
+                                    @endif
+                                    @if($book->is_available)
+                                        Доступно
+                                    @endif
+                                </td>
                                 <td class="admin__users__nav">
                                     <div class="d-flex align-items-center gap-3 fs-6">
                                         <a href="{{route('admin.book.edit', $book)}}">
                                             <i class="fa-solid fa-pen text-primary"></i>
                                         </a>
-                                        <a target="_blank" href="{{route('showPageBook'), $book}}">
+                                        <a target="_blank" href="{{route('showPageBook', $book)}}">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                         <form class="form__icon" id="form_delete" action="{{route('admin.book.destroy', $book)}}" method="post">

@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 
 class UserAccountController extends Controller
 {
-    public function personalAccount(User $user)
+    public function personalAccount()
     {
-        return view('user.main.personal' . $user->id);
+        return view('user.main.personal');
     }
 
-    public function editProfile(User $user)
+    public function editProfile()
     {
-        return view('user.main.edit' . $user->id);
+        return view('user.main.edit');
     }
 }

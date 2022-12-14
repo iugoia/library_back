@@ -64,11 +64,11 @@ class UserController extends Controller
     public function update(User $user, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'login' => ['required', 'string', Rule::unique('users', 'login')->ignore($user->id), 'min:4', 'max:30'],
-            'name' => ['required', 'string', 'min:2', 'max:30'],
-            'surname' => ['required', 'string', 'min:3', 'max:30'],
-            'email' => ['required', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-            'phone' => ['required', 'string', Rule::unique('users', 'phone')->ignore($user->id), 'min:11'],
+            'login' => ['nullable', 'string', Rule::unique('users', 'login')->ignore($user->id), 'min:4', 'max:30'],
+            'name' => ['nullable', 'string', 'min:2', 'max:30'],
+            'surname' => ['nullable', 'string', 'min:3', 'max:30'],
+            'email' => ['nullable', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone' => ['nullable', 'string', Rule::unique('users', 'phone')->ignore($user->id), 'min:11'],
             'password' => ['nullable', 'string', 'min:5'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png']
         ]);
@@ -79,7 +79,22 @@ class UserController extends Controller
                 ->withInput();
         }
 
-        $user->update($request->all());
+        if ($request->avatar){
+            $filename = $request->file('avatar')->store('/avatars', 'public');
+        } else {
+            $filename = $user->avatar;
+        }
+
+        if ($request->password){
+            $password = Hash::make($request->password);
+        } else {
+            $password = $user->password;
+        }
+
+        $user->update([
+                'password' => $password,
+                'avatar' => $filename
+            ] + $request->all());
 
         return redirect()->back()->with('success', 'Пользователь успешно обновлен');
     }
@@ -87,6 +102,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Пользователь успешно удален');
     }
 }

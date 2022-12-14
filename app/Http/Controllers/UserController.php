@@ -4,119 +4,109 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Requests\User\LoginRequest;
-use App\Http\Requests\User\SignupRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-
-    public function signup(SignupRequest $request)
+    // signup auth
+    public function signup(Request $request)
     {
-        if (Auth::check()){
-            return redirect(route('user.account'));
+        $validator = Validator::make($request->all(), [
+            'login' => ['required', 'string', 'unique:users,login', 'min:4', 'max:30'],
+            'name' => ['required', 'string', 'min:2', 'max:30'],
+            'surname' => ['required', 'string', 'min:3', 'max:30'],
+            'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'phone' => ['required', 'string', 'unique:users,phone', 'min:11'],
+            'password' => ['required', 'string', 'min:5'],
+            'avatar' => ['required', 'file', 'mimes:jpg,jpeg,png']
+        ]);
+
+        if ($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $filename = $request->file('avatar')->store('/avatars', 'public');
         $user = User::create([
                 'password' => Hash::make($request->password),
                 'avatar' => $filename
-            ] + $request->validated());
+            ] + $request->all());
         if ($user){
             Auth::login($user);
-            return redirect(route('UserPersonalAccount'));
+            return redirect(route('personal-account'));
         }
-        return response()->json([
-            'message' => 'При сохранении пользователя произошла ошибка'
+        return redirect()->back()->with('error', 'Ошибка при создании пользователя');
+    }
+
+    public function auth(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string']
         ]);
-    }
 
-    public function auth(LoginRequest $request)
-    {
-        if (Auth::check()){
-            return redirect(route('user.account'));
+        if ($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
-        $user = User::where('email', $request->email)->first();
+        $formFields = $request->only(['email', 'password']);
 
-        if ($user && Hash::check($request->password, $user->password)){
-            $token = $user->createToken('api')->plainTextToken;
-
-            $response = [
-                'user' => $user,
-                'token' => $token
-            ];
-
-            return $response;
+        if (Auth::attempt($formFields)){
+            return redirect(route('personal-account'));
         }
-        return response([
-            'message' => 'Пользователь не найден'
-        ], 422);
+
+        return redirect()->back()->with('error', 'Пользователь не найден');
     }
 
-    public function logout(User $user)
+    public function logout()
     {
-        $user->tokens()->delete();
+        Auth::logout();
+        return redirect()->back();
     }
 
-    public function index()
+    public function update(Request $request)
     {
-        $users = User::all();
-        return $users;
-    }
+        $user = Auth::user();
 
-//    public function index()
-//    {
-//        return User::all();
-//    }
-//
-//    public function show(User $user)
-//    {
-//        return [
-//            'id' => $user->id,
-//            'login' => $user->login,
-//            'name' => $user->name,
-//            'surname' => $user->surname,
-//            'email' => $user->email,
-//            'phone' => $user->phone,
-//            'password' => $user->password,
-//            'role' => $user->role,
-//            'feedbacks' => $user->feedbacks
-//        ];
-//    }
-//
-//    public function create()
-//    {
-//        return 'Hello';
-//    }
-//
-//    public function store(Request $request)
-//    {
-//        $validator = Validator::make($request->all(),[
-//            'name' => 'required',
-//            'surname' => 'required',
-//            'login' => ['required', 'unique:users,login'],
-//            'email' => ['required', 'unique:users,email'],
-//            'phone' => ['required', 'unique:users,password']
-//        ]);
-//        if ($validator->fails()){
-//            return response()->json([
-//                'message' => 'Что-то пошло не так',
-//                'errors' => $validator->errors()
-//            ]);
-//        }
-//        $user = user::create($request->all());
-//        $user->save();
-//    }
-//
-//    public function update($id)
-//    {
-//        return 'тут будет обновлен пользователь с id: ' . $id;
-//    }
-//
-//    public function destroy($id)
-//    {
-//        return 'тут будет удален пользователь под id: ' . $id;
-//    }
+        $validator = Validator::make($request->all(), [
+            'login' => ['nullable', 'string', Rule::unique('users', 'login')->ignore($user->id), 'min:4', 'max:30'],
+            'name' => ['nullable', 'string', 'min:2', 'max:30'],
+            'surname' => ['nullable', 'string', 'min:3', 'max:30'],
+            'email' => ['nullable', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone' => ['nullable', 'string', Rule::unique('users', 'phone')->ignore($user->id), 'min:11'],
+            'password' => ['nullable', 'string', 'min:5'],
+            'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png']
+        ]);
+
+        if ($validator->fails()){
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->avatar){
+            $filename = $request->file('avatar')->store('/avatars', 'public');
+        } else {
+            $filename = $user->avatar;
+        }
+
+        if ($request->password){
+            $password = Hash::make($request->password);
+        } else {
+            $password = $user->password;
+        }
+
+        $user->update([
+                'password' => $password,
+                'avatar' => $filename
+            ] + $request->all());
+
+        return redirect()->back()->with('success', 'Профиль успешно обновлен');
+    }
 }

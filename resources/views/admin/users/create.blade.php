@@ -7,13 +7,6 @@
         .profile__form{
             margin-left: 0;
         }
-        .form-row{
-            display: flex;
-            justify-content: space-between;
-        }
-        .btn-small{
-            display: unset;
-        }
         .profile__form .btn{
             width: unset;
             padding-left: 30px;
@@ -144,6 +137,11 @@
                                         <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
+                                @error('password')
+                                <div class="text-danger mt-2">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                             <div class="form-group avatar__input">
                                 <label for="inputavatar">Аватар</label><span class="text-danger">*</span>

@@ -91,12 +91,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('admin.user.index')}}">
-                                    <i class="fa-solid fa-users"></i>
-                                    Все пользователи
-                                </a>
-                            </li>
-                            <li>
                                 <a href="">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     Выйти

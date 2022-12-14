@@ -1,4 +1,5 @@
-<?php $title = 'Все пользователи' ?>
+<?php $title = 'Все бронирования' ?>
+
 @extends('admin.layout.admin')
 
 @section('content')
@@ -10,11 +11,6 @@
             display: block;
             overflow-x: auto;
             white-space: nowrap;
-        }
-        .admin__user__title__ctn{
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: space-between;
         }
         .admin__user__title__ctn a{
             width: unset;
@@ -28,6 +24,9 @@
         }
         .form__icon button{
             border: none;
+        }
+        table{
+            text-align: center;
         }
         @media (max-width: 737px) {
             .admin__users__table{
@@ -43,28 +42,30 @@
                 margin-bottom: 20px;
             }
         }
-        @if (\Illuminate\Support\Facades\DB::table('users')->count() < 10)
+        @if (\Illuminate\Support\Facades\DB::table('books')->count() < 10)
             footer{
-                position: absolute;
-                bottom: 0;
-            }
+            position: absolute;
+            bottom: 0;
+        }
         @endif
-        @if (\Illuminate\Support\Facades\DB::table('users')->count() >= 10)
+        @if (\Illuminate\Support\Facades\DB::table('books')->count() >= 10)
             footer{
-                position: unset;
-            }
+            position: unset;
+        }
         @endif
     </style>
     <main>
         <section class="admin__users__table user-profile__container">
             <div class="container">
-                <div class="admin__user__title__ctn d-flex">
-                    <h1>Все пользователи</h1>
-                    <a href="{{route('admin.user.create')}}" class="btn btn-primary">Добавить пользователя</a>
-                </div>
+                <h1>Все бронирования</h1>
                 @if(session()->has('success'))
                     <div class="alert alert-success">
                         {{session()->get('success')}}
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{session()->get('error')}}
                     </div>
                 @endif
                 <div class="admin__users__table__wrapper">
@@ -72,38 +73,50 @@
                         <thead class="table-light">
                         <tr>
                             <th>#ID</th>
+                            <th>Книга</th>
+                            <th>Стеллаж</th>
+                            <th>Ряд</th>
+                            <th>Полка</th>
+                            <th>Статус</th>
+                            <th>Дата бронирования</th>
+                            <th>Дата конца бронирования</th>
                             <th>Пользователь</th>
-                            <th>Почта</th>
-                            <th>Имя</th>
-                            <th>Фамилия</th>
-                            <th>Роль</th>
+                            <th>Номер телефона</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($arrDataList as $reservation)
+                            @foreach($books as $book)
                             <tr>
-                                <td>{{$user->id}}</td>
+                                <td>{{$reservation['id']}}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="product-box border">
-                                            <img src="{{asset('public/storage/' . $user->avatar)}}" alt="{{$user->name}}">
+                                            <img src="{{asset('storage/' . $reservation['bookimage'])}}" alt="{{$reservation['book']}}">
                                         </div>
                                         <div class="product-info">
-                                            <h6 class="product-name mb-1">{{$user->login}}</h6>
+                                            <h6 class="product-name mb-1">{{$reservation['book']}}</h6>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->surname}}</td>
-                                <td>{{$user->role}}</td>
+                                <td>{{$reservation['bookrack']}}</td>
+                                <td>{{$reservation['bookrow']}}</td>
+                                <td>{{$reservation['bookshelf']}}</td>
+                                <td>{{$reservation['status']}}</td>
+                                <td>{{$reservation['created_at']}}</td>
+                                <td>{{$reservation['received_time']}}</td>
+                                <td>{{$reservation['username']}}</td>
+                                <td>{{$reservation['userphone']}}</td>
                                 <td class="admin__users__nav">
                                     <div class="d-flex align-items-center gap-3 fs-6">
-                                        <a href="{{route('admin.user.showUpdate', $user)}}">
+                                        <a href="{{route('admin.reservation.edit', $reservation['id'])}}">
                                             <i class="fa-solid fa-pen text-primary"></i>
                                         </a>
-                                        <form class="form__icon" id="form_delete" action="{{route('admin.user.destroy', $user)}}" method="post">
+                                        <a target="_blank" href="{{route('showPageBook', $book)}}">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <form class="form__icon" id="form_delete" action="{{route('admin.reservation.destroy', $reservation['id'])}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit">
@@ -113,6 +126,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         @endforeach
                         </tbody>
                     </table>
@@ -120,5 +134,4 @@
             </div>
         </section>
     </main>
-
 @endsection

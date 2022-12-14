@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('surname', 60);
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('password', 60);
+            $table->string('password');
             $table->string('avatar');
             $table->enum('role', ['user', 'admin', 'librarian'])->default('user');
             $table->rememberToken();
