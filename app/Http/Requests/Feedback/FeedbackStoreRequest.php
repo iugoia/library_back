@@ -15,10 +15,7 @@ class FeedbackStoreRequest extends FormRequest
 
     public function rules()
     {
-        return [
-            'score' => ['required', 'numeric'],
-            'message' => ['required', 'string']
-        ];
+
     }
 
     protected function failedValidation(Validator $validator)

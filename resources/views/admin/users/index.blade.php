@@ -1,5 +1,5 @@
 <?php $title = 'Все пользователи' ?>
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
     <style>
@@ -60,11 +60,16 @@
             <div class="container">
                 <div class="admin__user__title__ctn d-flex">
                     <h1>Все пользователи</h1>
-                    <a href="{{route('admin.user.create')}}" class="btn btn-primary">Добавить пользователя</a>
+                    <a href="{{route('admin.users.create')}}" class="btn btn-primary">Добавить пользователя</a>
                 </div>
                 @if(session()->has('success'))
                     <div class="alert alert-success">
                         {{session()->get('success')}}
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">
+                        {{session()->get('error')}}
                     </div>
                 @endif
                 <div class="admin__users__table__wrapper">
@@ -100,10 +105,10 @@
                                 <td>{{$user->role}}</td>
                                 <td class="admin__users__nav">
                                     <div class="d-flex align-items-center gap-3 fs-6">
-                                        <a href="{{route('admin.user.showUpdate', $user)}}">
+                                        <a href="{{route('admin.users.edit', $user)}}">
                                             <i class="fa-solid fa-pen text-primary"></i>
                                         </a>
-                                        <form class="form__icon" id="form_delete" action="{{route('admin.user.destroy', $user)}}" method="post">
+                                        <form class="form__icon" id="form_delete" action="{{route('admin.users.destroy', $user)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit">

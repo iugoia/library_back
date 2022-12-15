@@ -56,13 +56,16 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Пользователь успешно создан');
     }
 
-    public function showUpdate(User $user)
+    public function edit(User $user)
     {
         return view('admin.users.update', compact('user'));
     }
 
     public function update(User $user, Request $request)
     {
+        if ($user->role === 'admin')
+            return redirect(route('admin.users.index'))->with('error', 'Вы не можете редактировать администратора');
+
         $validator = Validator::make($request->all(), [
             'login' => ['nullable', 'string', Rule::unique('users', 'login')->ignore($user->id), 'min:4', 'max:30'],
             'name' => ['nullable', 'string', 'min:2', 'max:30'],
@@ -101,6 +104,8 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->role === 'admin')
+            return redirect(route('admin.users.index'))->with('error', 'Вы не можете удалить администратора');
         $user->delete();
         return redirect()->back()->with('success', 'Пользователь успешно удален');
     }

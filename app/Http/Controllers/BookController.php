@@ -78,30 +78,47 @@ class BookController extends Controller
 
     public function showCatalog(Request $request)
     {
-        $cat = Book::where('genre', $request->orderBy)->first();
         $books = $this->index();
-        $genres = $this->showGenres();
-
-        if (isset($request->orderBy)){
-            if ($request->orderBy == 'Ужасы'){
-                $books = Book::where('genre', $request->orderBy);
-            }
-        }
-
-        if($request->ajax()){
-            return view('books.main.catalog', compact('books'));
-        }
-
-        return view('books.main.catalog', compact('books', 'genres', 'cat'));
+        return view('books.main.catalog', compact('books'));
     }
 
-    public function showGenres()
+    public function search(Request $request)
     {
-        $books = Book::all()->unique('genre');
-        $genres = array();
-        foreach ($books as $book){
-            $genres[] = $book->genre;
+        if ($request->ajax()){
+            $data = Book::where('id','like','%'.$request->search.'%')
+                ->orwhere('author','like','%'.$request->search.'%')
+                ->orwhere('name','like','%'.$request->search.'%')
+                ->orwhere('genre','like','%'.$request->search.'%')
+                ->get();
+
+            $output = '';
+            if (count($data) > 0){
+                $output = '<ul class="books__catalog__list">';
+
+                foreach ($data as $item) {
+                    $output .= '<li class="book__catalog__item">
+                                        <div class="container__catalog__book">
+                                            <div class="book__catalog__container__image">
+                                                <img src="' . $item->image . '" alt="">
+                                            </div>
+                                            <div class="book__catalog__info">
+                                                <p>Название: ' . $item->name . '</p>
+                                                <p>Автор: ' . $item->author . '</p>
+                                                <p>Жанр: ' . $item->genre . '</p>
+                                            </div>
+                                            <div class="btn__container">
+                                                <a href="" class="btn__default">Забронировать</a>
+                                            </div>
+                                        </div>
+                                    </li>';
+                }
+                $output .= '</ul>';
+                ;
+            }
+            else {
+                $output .= 'Нет совпадений';
+            }
         }
-        return $genres;
+        return $output;
     }
 }

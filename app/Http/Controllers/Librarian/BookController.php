@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Librarian;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BooksResource;
@@ -8,19 +8,20 @@ use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
+use function redirect;
+use function view;
 
 class BookController extends Controller
 {
     public function index()
     {
         $books = BooksResource::collection(Book::all());
-        return view('admin.books.index', compact('books'));
+        return view('librarian.books.index', compact('books'));
     }
 
     public function create()
     {
-        return view('admin.books.create');
+        return view('librarian.books.create');
     }
 
     public function store(Request $request)
@@ -51,7 +52,7 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        return view('admin.books.update', compact('book'));
+        return view('librarian.books.update', compact('book'));
     }
 
     public function update(Book $book, Request $request)

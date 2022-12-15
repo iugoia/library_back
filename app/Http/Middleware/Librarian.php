@@ -17,7 +17,7 @@ class Librarian
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->isLibrarian())
+        if (Auth::user()->isLibrarian() || Auth::user()->isAdmin())
             return $next($request);
         return redirect(route('index'));
     }

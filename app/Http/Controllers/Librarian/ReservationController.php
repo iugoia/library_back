@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Librarian;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ReservationsResource;
 use App\Models\Book;
 use App\Models\Reservation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use function redirect;
+use function view;
 
 class ReservationController extends Controller
 {
@@ -35,7 +36,7 @@ class ReservationController extends Controller
             ];
             $books[] = $book;
         }
-        return view('admin.reservations.index', compact('arrDataList', 'books'));
+        return view('librarian.reservations.index', compact('arrDataList', 'books'));
     }
 
     public function store(Request $request)
@@ -64,7 +65,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id);
         $book = Book::find($reservation->book_id);
-        return view('admin.reservations.update', compact('reservation', 'book'));
+        return view('librarian.reservations.update', compact('reservation', 'book'));
     }
 
     public function update(Reservation $reservation, Request $request)
@@ -90,7 +91,7 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id)->first();
         if ($reservation->status === 'Выдано'){
-            return redirect()->back()->with('error', 'Бронирование не может быть удалено. Так как книга не возвращена.');
+            return redirect()->back()->with('error', 'Бронирование не может быть снято, так как книга не возвращена.');
         }
         $reservation->delete();
         return redirect()->back()->with('success', 'Бронирование успешно удалено');

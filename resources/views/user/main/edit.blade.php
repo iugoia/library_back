@@ -110,6 +110,11 @@
                                         {{session()->get('success')}}
                                     </div>
                                 @endif
+                                @if(session()->has('error'))
+                                    <div class="alert alert-danger">
+                                        {{session()->get('error')}}
+                                    </div>
+                                @endif
                                 <div class="form-row_">
                                     <div class="form-group form-col">
                                         <label for="inputEmail4">Имя</label><span class="text-danger">*</span>
@@ -150,8 +155,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-row_">
-                                    <div class="form-group form-col">
+                                    <div class="form-group">
                                         <label for="phone">Телефон</label><span class="text-danger">*</span>
                                         <input type="text" name="phone" value="{{\Illuminate\Support\Facades\Auth::user()->phone}}" class="form-control" id="phone">
                                         @error('phone')
@@ -160,8 +164,18 @@
                                         </div>
                                         @enderror
                                     </div>
+                                <div class="form-row_">
                                     <div class="form-group form-col">
-                                        <label>Пароль</label>
+                                        <label>Текущий пароль</label><span class="text-danger">*</span>
+                                        <div class="input-group" id="show_hide_password">
+                                            <input class="form-control" name="current_password" type="password">
+                                            <div class="input-group-addon">
+                                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-col">
+                                        <label>Новый пароль</label>
                                         <div class="input-group" id="show_hide_password">
                                             <input class="form-control" name="password" type="password">
                                             <div class="input-group-addon">
@@ -179,7 +193,7 @@
                                     </div>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3">Обновить</button>
+                                <button type="submit" class="btn btn-primary mt-4">Обновить</button>
                             </form>
                         </div>
                     </div>

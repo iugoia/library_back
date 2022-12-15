@@ -1,6 +1,6 @@
 <?php $title = 'Редактирование бронирования' ?>
 
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
 
@@ -32,7 +32,7 @@
                     <h1>Редактирование бронирования</h1>
                     <div class="profile">
                         <div class="profile__form">
-                            <form method="post" action="{{route('admin.reservation.update', $reservation)}}" enctype="multipart/form-data">
+                            <form method="post" action="{{route('librarian.reservations.update', $reservation)}}" enctype="multipart/form-data">
                                 @csrf
                                 @method('patch')
                                 @if(session()->has('success'))

@@ -1,15 +1,15 @@
 <?php $title = 'Все книги' ?>
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
     <style>
-        @if (\Illuminate\Support\Facades\DB::table('books')->count() < 10)
+        @if (\Illuminate\Support\Facades\DB::table('books')->count() < 9)
             footer{
             position: absolute;
             bottom: 0;
         }
         @endif
-        @if (\Illuminate\Support\Facades\DB::table('books')->count() >= 10)
+        @if (\Illuminate\Support\Facades\DB::table('books')->count() >= 9)
             footer{
             position: unset;
         }
@@ -60,7 +60,7 @@
             <div class="container">
                 <div class="admin__user__title__ctn d-flex">
                     <h1>Все книги</h1>
-                    <a href="{{route('admin.book.create')}}" class="btn btn-primary">Добавить книгу</a>
+                    <a href="{{route('librarian.books.create')}}" class="btn btn-primary">Добавить книгу</a>
                 </div>
                 @if(session()->has('success'))
                     <div class="alert alert-success">
@@ -111,13 +111,13 @@
                                 </td>
                                 <td class="admin__users__nav">
                                     <div class="d-flex align-items-center gap-3 fs-6">
-                                        <a href="{{route('admin.book.edit', $book)}}">
+                                        <a href="{{route('librarian.books.edit', $book)}}">
                                             <i class="fa-solid fa-pen text-primary"></i>
                                         </a>
                                         <a target="_blank" href="{{route('showPageBook', $book)}}">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
-                                        <form class="form__icon" id="form_delete" action="{{route('admin.book.destroy', $book)}}" method="post">
+                                        <form class="form__icon" id="form_delete" action="{{route('librarian.books.destroy', $book)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit">

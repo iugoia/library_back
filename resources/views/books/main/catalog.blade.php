@@ -32,32 +32,12 @@
                         <h1>Каталог книг</h1>
                         <div class="d1">
                             <form class="catalog__search">
-                                <input type="text" class="catalog__input__search" placeholder="Поиск по автору, жанру">
+                                <input id="search" type="text" class="catalog__input__search" placeholder="Поиск по автору, жанру">
                                 <button type="submit" class="catalog__input__button"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
                             </form>
                         </div>
                     </div>
-                    <div class="books__row">
-                        <div class="books__col filters">
-                            <p>Наличие в бибилотеке</p>
-                            <ul class="books__filter__list">
-                                <li class="books__filter__item">
-                                    <span data-filter="available" class="filter__checkbox">Доступные</span>
-                                </li>
-                                <li class="books__filter__item">
-                                    <span data-filter="disavailable" class="filter__checkbox">Забронированные</span>
-                                </li>
-                            </ul>
-                            <p>Жанры</p>
-                            <ul class="books__filter__list">
-                                @foreach($genres as $genre)
-                                <li class="books__filter__item">
-                                    <span data-filter="{{$genre}}" class="filter__checkbox">{{$genre}}</span>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="books__col _books">
+                        <div class="books__col _books" id="books__catalog__list">
                             <ul class="books__catalog__list">
                                 @foreach ($books as $book)
                                     <li class="book__catalog__item">
@@ -86,20 +66,14 @@
 @section('custom_js')
     <script>
         $(document).ready(function(){
-            $('.books__filter__item > span').click(function (){
-                let orderBy = $(this).data('filter')
-
+            $("#search").on('keyup', function(){
+                var query = $(this).val();
                 $.ajax({
-                    url: "{{route('catalog')}}",
+                    url: 'book/search',
                     type: "GET",
-                    data: {
-                        orderBy: orderBy
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: (data) => {
-                        console.log(data)
+                    data: {'search': query},
+                    success:function (data){
+                        $('#books__catalog__list').html(data);
                     }
                 })
             })

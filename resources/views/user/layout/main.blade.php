@@ -66,17 +66,39 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{route('user.reservations.index')}}">
                                     <i class="fa-solid fa-receipt"></i>
                                     Мои бронирования
                                 </a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="{{route('user.feedbacks.index')}}">
                                     <i class="fa-solid fa-comment"></i>
                                     Мои отзывы
                                 </a>
                             </li>
+                            @if (\Illuminate\Support\Facades\Auth::user()->role === 'librarian' || \Illuminate\Support\Facades\Auth::user()->role === 'admin')
+                            <li>
+                                <a href="{{route('librarian.reservations.index')}}">
+                                    <i class="fa-solid fa-newspaper"></i>
+                                    Все бронирования
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('librarian.books.index')}}">
+                                    <i class="fa-solid fa-book"></i>
+                                    Книги
+                                </a>
+                            </li>
+                            @endif
+                            @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
+                            <li>
+                                <a href="{{route('admin.users.index')}}">
+                                    <i class="fa-solid fa-users"></i>
+                                    Все пользователи
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                 <a href="{{route('logout')}}">
                                     <i class="fa-solid fa-right-from-bracket"></i>

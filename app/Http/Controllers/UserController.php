@@ -74,6 +74,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
+        if (!Hash::check($request->current_password, $user->password))
+            return redirect()->back()->with('error', 'Пароль не совпадает с текущим');
+
         $validator = Validator::make($request->all(), [
             'login' => ['nullable', 'string', Rule::unique('users', 'login')->ignore($user->id), 'min:4', 'max:30'],
             'name' => ['nullable', 'string', 'min:2', 'max:30'],

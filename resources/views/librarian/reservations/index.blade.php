@@ -1,6 +1,6 @@
 <?php $title = 'Все бронирования' ?>
 
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
     <style>
@@ -93,7 +93,7 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="product-box border">
-                                            <img src="{{asset('storage/' . $reservation['bookimage'])}}" alt="{{$reservation['book']}}">
+                                            <img src="{{asset('public/storage/' . $reservation['bookimage'])}}" alt="{{$reservation['book']}}">
                                         </div>
                                         <div class="product-info">
                                             <h6 class="product-name mb-1">{{$reservation['book']}}</h6>
@@ -110,13 +110,13 @@
                                 <td>{{$reservation['userphone']}}</td>
                                 <td class="admin__users__nav">
                                     <div class="d-flex align-items-center gap-3 fs-6">
-                                        <a href="{{route('admin.reservation.edit', $reservation['id'])}}">
+                                        <a href="{{route('librarian.reservations.edit', $reservation['id'])}}">
                                             <i class="fa-solid fa-pen text-primary"></i>
                                         </a>
                                         <a target="_blank" href="{{route('showPageBook', $book)}}">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
-                                        <form class="form__icon" id="form_delete" action="{{route('admin.reservation.destroy', $reservation['id'])}}" method="post">
+                                        <form class="form__icon" id="form_delete" action="{{route('librarian.reservations.destroy', $reservation['id'])}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit">

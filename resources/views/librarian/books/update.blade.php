@@ -1,6 +1,6 @@
 <?php $title = 'Добавление книги' ?>
 
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
     <style>
@@ -32,7 +32,7 @@
                 <h1>Редактирование книги {{$book->name}}</h1>
                 <div class="profile">
                     <div class="profile__form">
-                        <form method="post" action="{{route('admin.book.update', $book)}}" enctype="multipart/form-data">
+                        <form method="post" action="{{route('librarian.books.update', $book)}}" enctype="multipart/form-data">
                             @csrf
                             @method('patch')
                             @if(session()->has('success'))

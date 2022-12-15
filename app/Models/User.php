@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->role === 'librarian';
     }
+
+    public function reservations($user)
+    {
+        return $user->hasMany(Reservation::class);
+    }
 }

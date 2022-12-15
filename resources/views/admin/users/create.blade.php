@@ -1,5 +1,5 @@
 <?php $title = 'Создание пользователя' ?>
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
 
@@ -58,7 +58,7 @@
                 <h1>Создание пользователя</h1>
                 <div class="profile">
                     <div class="profile__form">
-                        <form method="post" action="{{route('admin.user.store')}}" enctype="multipart/form-data">
+                        <form method="post" action="{{route('admin.users.store')}}" enctype="multipart/form-data">
                             @csrf
                             @if(session()->has('success'))
                                 <div class="alert alert-success">

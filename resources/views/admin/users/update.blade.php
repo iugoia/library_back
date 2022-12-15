@@ -1,5 +1,5 @@
 <?php $title = 'Редактирование пользователя' ?>
-@extends('admin.layout.admin')
+@extends('user.layout.main')
 
 @section('content')
     <style>
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                     <div class="profile__form">
-                        <form method="post" action="{{route('admin.user.update', $user)}}" enctype="multipart/form-data">
+                        <form method="post" action="{{route('admin.users.update', $user)}}" enctype="multipart/form-data">
                             @csrf
                             @method('patch')
                             @if(session()->has('success'))

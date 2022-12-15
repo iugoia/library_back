@@ -15,6 +15,38 @@
         </style>
     @endif
     <main>
+        @if($item->is_available)
+            <?php $currentDate = \Illuminate\Support\Carbon::now()->toArray(); ?>
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Оформить бронирование?</h5>
+                            <a class="modal-close-link" data-bs-dismiss="modal" aria-label="Закрыть">
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <p>Забрать книгу можно будет у библиотекаря. Выберите время окончания бронирования (максимальное время - 14
+                                дней)</p>
+                            <p><strong>Старт бронирования - {{$currentDate['day']}}.{{$currentDate['month']}}.{{$currentDate['year']}}</strong></p>
+                            <p>Выберите дату окончания бронирования</p>
+                            <form method="post" action="{{route('user.reservations.store', $item->id)}}">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="received_time" id="date-input">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                                    <button type="submit" class="btn btn-primary">Забронировать</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
         <section class="showBook">
             <div class="container">
                 <div class="book__info__img">
@@ -24,7 +56,7 @@
                         </div>
                         @if($item->is_available)
                         <div class="btn__container">
-                            <a href="#" class="btn btn-primary">Забронировать</a>
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Забронировать</a>
                         </div>
                         @endif
                     </div>
@@ -40,6 +72,11 @@
                         @endif
                         @if(!$item->is_available)
                             <p><span class="font__available">В настоящее время книга недоступна для бронирования</span></p>
+                        @endif
+                        @if(session()->has('error'))
+                            <div class="alert alert-danger">
+                                {{session()->get('error')}}
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -77,4 +114,16 @@
         @endif
     </main>
 
+@endsection
+@section('custom_js')
+    <script>
+        var dateInput = document.getElementById('date-input');
+        var received_time = new Date();
+        received_time.setDate(received_time.getDate() + 14);
+        received_time = received_time.toISOString().split('T')[0];
+        window.onload = function () {
+            dateInput.setAttribute('max', received_time);
+            console.log(received_time);
+        }
+    </script>
 @endsection
