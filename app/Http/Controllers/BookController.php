@@ -18,7 +18,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        return BooksResource::collection(Book::all());
+        return Book::all();
     }
 
     public function showPage(Book $book)

@@ -3,16 +3,6 @@
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-//Route::apiResource('users', UserController::class);
-
-//Route::group(['namespace' => 'User', 'prefix' => 'users'], function(){
-//    Route::get('/', [UserController::class, 'index']);
-//    Route::get('/{id}', [UserController::class, 'show']);
-//    Route::post('/', [UserController::class, 'store']);
-//    Route::patch('/{id}', [UserController::class, 'update']);
-//    Route::delete('/{id}', [UserController::class, 'destroy']);
-//});
-
 Route::group(['namespace' => 'user'], function () {
     Route::post('register', [UserController::class, 'signup'])->name('signup');
     Route::post('login', [UserController::class, 'auth'])->name('auth');
@@ -40,7 +30,7 @@ Route::middleware('auth')->group(function(){
             Route::delete('/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'destroy'])->name('librarian.books.destroy');
         });
         Route::group(['prefix' => 'reservations'], function(){
-            Route::patch('/{id}', [\App\Http\Controllers\Librarian\ReservationController::class, 'update'])->name('librarian.reservations.update');
+            Route::patch('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'update'])->name('librarian.reservations.update');
             Route::delete('/{id}', [\App\Http\Controllers\Librarian\ReservationController::class, 'destroy'])->name('librarian.reservations.destroy');
         });
         Route::middleware('admin')->group(function(){

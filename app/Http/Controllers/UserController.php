@@ -11,7 +11,6 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    // signup auth
     public function signup(Request $request)
     {
         $validator = Validator::make($request->all(), [

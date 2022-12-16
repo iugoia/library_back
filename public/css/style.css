@@ -887,7 +887,8 @@ input:focus {
 }
 
 .contacts iframe {
-    width: 100%;
+    flex: 0 0 65%;
+    max-width: 65%;
     height: 720px;
 }
 
@@ -895,14 +896,17 @@ input:focus {
     flex-direction: column;
 }
 
-.contacts-few div {
 
+
+.contacts-few div {
     border: 1px solid #0072A3;
-    width: 452px;
+    width: 100%;
     height: 235px;
     padding: 80px 40px;
 }
-
+.contacts-few div:not(:last-of-type){
+    margin-bottom: 7px;
+}
 .contacts-few div p:nth-child(1) {
     font-weight: 700;
     font-size: 18px;
@@ -1040,6 +1044,15 @@ input:focus {
     cursor: pointer;
 }
 
+.book_unavailable{
+    mix-blend-mode: luminosity;
+}
+
+.text-error-available{
+    color: #0072A3;
+    text-align: center;
+}
+
 .btn-primary {
     background-color: var(--color-blue) !important;
 }
@@ -1134,6 +1147,12 @@ input:focus {
     }
 }
 
+@media (max-width: 1118px) {
+    .contacts-few {
+        flex: 0 0 90% !important;
+        max-width: 90% !important;
+    }
+}
 @media (max-width: 1400px) {
 
     .book__info__img>div {
@@ -1167,9 +1186,21 @@ input:focus {
     .contacts {
         flex-direction: column-reverse;
     }
+    .contacts iframe{
+        flex: unset;
+        max-width: 100%;
+    }
 
     .contacts-few {
         flex-direction: row;
+        flex: 0 0 70%;
+        max-width: 70%;
+        margin: 0 auto;
+    }
+
+    .contacts-few > div{
+        border: none;
+        background: #F3F7F0;
     }
 
     .contacts-few div {
@@ -1194,7 +1225,16 @@ input:focus {
 .filters>p:not(:first-of-type) {
     margin: 10px 0;
 }
-
+@media (max-width: 888px) {
+    .contacts-few{
+        flex-wrap: wrap;
+    }
+    .contacts-few div {
+        flex: 0 0 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+}
 @media (max-width: 736px) {
     .reviews li {
         padding: 36px 28px;
@@ -1209,10 +1249,7 @@ input:focus {
     }
 
 
-    .contacts-few div {
-        width: inherit;
 
-    }
 
     .preview-content {
         width: auto;
@@ -1271,6 +1308,10 @@ input:focus {
     .container {
         max-width: 1400px;
         margin: 0 auto;
+    }
+    .contacts-row{
+        flex: 0 0 30%;
+        max-width: 30%;
     }
 }
 

@@ -37,10 +37,15 @@
                             </form>
                         </div>
                     </div>
+                    @if($books === [])
+                        <div class="books__title__search">
+                            <h2>Просим прощения, на данный момент на сайте отсутствуют книги</h2>
+                        </div>
+                    @endif
                         <div class="books__col _books" id="books__catalog__list">
                             <ul class="books__catalog__list">
                                 @foreach ($books as $book)
-                                    <li class="book__catalog__item">
+                                    <li class="book__catalog__item @if (!$book->is_available) book_unavailable @endif">
                                         <div class="container__catalog__book">
                                             <div class="book__catalog__container__image">
                                                 <img src="{{asset('public/storage/' . $book->image)}}" alt="">
@@ -50,11 +55,19 @@
                                                 <p>Автор: {{$book->author}}</p>
                                                 <p>Жанр: {{$book->genre}}</p>
                                             </div>
+                                            @if ($book->is_available)
                                             <div class="btn__container">
                                                 <a href="{{route('showPageBook', $book->id)}}" class="btn__default">Забронировать</a>
                                             </div>
+                                            @endif
+                                            @if (!$book->is_available)
+                                                <div class="btn__container text-error-available">
+                                                    <span>Забронировано</span>
+                                                </div>
+                                            @endif
                                         </div>
                                     </li>
+
                                 @endforeach
                             </ul>
                         </div>

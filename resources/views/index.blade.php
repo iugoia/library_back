@@ -89,22 +89,25 @@
             <div class="contacts">
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.7303543432395!2d52.40935561538992!3d55.728438101339044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415ff1e0aa00315b%3A0xd1c88d987edf6261!2z0J3QsNCx0LXRgNC10LbQvdC-0YfQtdC70L3QuNC90YHQutC40Lkg0L_QtdC00LDQs9C-0LPQuNGH0LXRgdC60LjQuSDQutC-0LvQu9C10LTQtg!5e0!3m2!1sru!2sru!4v1669992777266!5m2!1sru!2sru"
-                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                     style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div class="contacts-few">
-                    <div>
-                        <p>Адрес:</p>
-                        <p>пр-т. P. Беляева, 3, Набережные Челны, Респ. Татарстан, 423812</p>
-                    </div>
-                    <div>
-                        <p>Контакты:</p>
-                        <p>Телефон: 88552583022</p>
-                    </div>
-                    <div>
-                        <p>Официальный сайт</p>
-                        <a href="https://pedcollchelny.ru/" target="_blank">https://pedcollchelny.ru/</a>
+                <div class="contacts-row">
+                    <div class="contacts-few">
+                        <div>
+                            <p>Адрес:</p>
+                            <p>пр-т. P. Беляева, 3, Набережные Челны, Респ. Татарстан, 423812</p>
+                        </div>
+                        <div>
+                            <p>Контакты:</p>
+                            <p>Телефон: 88552583022</p>
+                        </div>
+                        <div>
+                            <p>Официальный сайт</p>
+                            <a href="https://pedcollchelny.ru/" target="_blank">https://pedcollchelny.ru/</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>

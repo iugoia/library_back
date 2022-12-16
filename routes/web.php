@@ -33,7 +33,6 @@ Route::group(['namespace' => 'user'], function(){
         return view('auth.main.login');
     })->name('login');
 
-
     Route::middleware('auth')->group(function(){
         Route::get('/account', function (){
             return view('user.main.personal');
@@ -53,7 +52,7 @@ Route::group(['namespace' => 'user'], function(){
         });
 
         Route::middleware('librarian')->group(function(){
-            Route::group(['prefix' => 'books'], function(){
+            Route::group(['prefix' => 'librarian.books'], function(){
                 Route::get('/', [\App\Http\Controllers\Librarian\BookController::class, 'index'])->name('librarian.books.index');
                 Route::get('/create', [\App\Http\Controllers\Librarian\BookController::class, 'create'])->name('librarian.books.create');
                 Route::get('/edit/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'edit'])->name('librarian.books.edit');

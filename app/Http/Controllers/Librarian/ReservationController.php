@@ -78,8 +78,13 @@ class ReservationController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $book = Book::find($reservation->book_id);
+
+        if ($request->status == 'Выдано' || $request->status == 'Забронировано'){
+            $book->is_available = false;
+            $book->save();
+        }
         if ($request->status == 'Возвращено'){
-            $book = Book::find($reservation->book_id);
             $book->is_available = true;
             $book->save();
         }
@@ -90,6 +95,9 @@ class ReservationController extends Controller
     public function destroy($id)
     {
         $reservation = Reservation::find($id)->first();
+        $book = Book::find($reservation->book_id);
+        $book->is_available = true;
+        $book->save();
         if ($reservation->status === 'Выдано'){
             return redirect()->back()->with('error', 'Бронирование не может быть снято, так как книга не возвращена.');
         }
