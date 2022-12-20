@@ -48,6 +48,10 @@ body {
     --color-background-btn: #EFEFEF;
     --color-background-navigation: #474954;
     --color-table: #F3F7F0;
+    --hue: 223;
+    --bg: hsl(var(--hue),10%,90%);
+    --fg: hsl(var(--hue),10%,10%);
+    --trans-dur: 0.3s;
 }
 
 *,
@@ -57,10 +61,25 @@ body {
     padding: 0;
 }
 
+::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(180, 180, 180);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     color: var(--color-grey);
     font-weight: 500;
+    overflow: overlay;
 }
 
 html,
@@ -683,7 +702,7 @@ input:focus {
 }
 
 .container__catalog__book {
-    width: fit-content;
+    width: 210px;
     margin: 0 auto;
 }
 
@@ -691,6 +710,33 @@ input:focus {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+.books__col _books{
+    margin-bottom: 10px;
+}
+
+.paginator-center > div > nav > ul{
+    margin: 0 auto !important;
+}
+
+.search-role{
+    margin-bottom: 20px;
+}
+
+.search-role > input{
+    width: 20%;
+}
+
+.book__catalog__info{
+    min-height: 110px;
+}
+.product-box img{
+    object-fit: cover;
+}
+
+.book__catalog__info p:nth-child(2){
+    color: rgba(0, 0, 0, 0.55);
 }
 
 .book__catalog__item {
@@ -701,7 +747,7 @@ input:focus {
 }
 
 .book__catalog__item:hover {
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .book__catalog__container__image {
@@ -719,6 +765,7 @@ input:focus {
 
 .book__catalog__info p {
     margin-bottom: 10px;
+    line-height: 110%;
 }
 
 .btn__container {
@@ -777,6 +824,107 @@ input:focus {
 
 .filters>p {
     font-weight: 700;
+}
+
+.pl {
+    display: block;
+    width: 8em;
+    height: 8em;
+}
+.pl__ring,
+.pl__ball1,
+.pl__ball2 {
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    transform-origin: 32px 32px;
+}
+.pl__ring {
+    animation-name: ring;
+}
+.pl__ball1 {
+    animation-name: ball1;
+}
+.pl__ball2 {
+    animation-name: ball2;
+}
+
+/* Dark theme  */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue),10%,10%);
+        --fg: hsl(var(--hue),10%,90%);
+    }
+}
+
+/* Animation */
+@keyframes ring {
+    from {
+        animation-timing-function: ease-in-out;
+        stroke-dashoffset: -122.52;
+        transform: rotate(135deg);
+    }
+    15% {
+        animation-timing-function: ease-in;
+        stroke-dashoffset: -122.52;
+        transform: rotate(90deg);
+    }
+    35% {
+        animation-timing-function: ease-out;
+        stroke-dashoffset: -65.34;
+        transform: rotate(297.5deg);
+    }
+    55% {
+        animation-timing-function: ease-in-out;
+        stroke-dashoffset: -122.52;
+        transform: rotate(505deg);
+    }
+    70% {
+        animation-timing-function: ease-in-out;
+        stroke-dashoffset: -122.52;
+        transform: rotate(490deg);
+    }
+    85%,
+    to {
+        stroke-dashoffset: -122.52;
+        transform: rotate(497.5deg);
+    }
+}
+@keyframes ball1 {
+    from {
+        transform: rotate(14deg);
+    }
+    20% {
+        transform: rotate(-7deg);
+    }
+    60% {
+        transform: rotate(399deg);
+    }
+    75% {
+        transform: rotate(361deg);
+    }
+    90%,
+    to {
+        transform: rotate(374deg);
+    }
+}
+@keyframes ball2 {
+    from {
+        transform: rotate(-21deg);
+    }
+    25% {
+        transform: rotate(-47deg);
+    }
+    60% {
+        transform: rotate(364deg);
+    }
+    75% {
+        transform: rotate(326deg);
+    }
+    90%,
+    to {
+        transform: rotate(339deg);
+    }
 }
 
 .preview {
@@ -1048,6 +1196,10 @@ input:focus {
     mix-blend-mode: luminosity;
 }
 
+.search{
+    padding: 10px 20px;
+}
+
 .text-error-available{
     color: #0072A3;
     text-align: center;
@@ -1070,6 +1222,8 @@ input:focus {
     margin-bottom: 30px;
     font-size: 16px;
 }
+
+
 
 @media (min-width: 576px) {
     .modal-dialog {

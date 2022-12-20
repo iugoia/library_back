@@ -14,8 +14,7 @@ Route::get('/', function (){
 
 Route::group(['namespace' => 'books'], function(){
     Route::get('/books/{book}', [BookController::class, 'showPage'])->name('showPageBook');
-    Route::get('/catalog', [BookController::class, 'showCatalog'])->name('catalog');
-    Route::get('/search', [BookController::class, 'search'])->name('book/search');
+    Route::get('/catalog', [BookController::class, 'index'])->name('catalog');
 });
 
 Route::group(['namespace' => 'user'], function(){

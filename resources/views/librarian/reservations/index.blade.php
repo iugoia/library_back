@@ -93,7 +93,7 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="product-box border">
-                                            <img src="{{asset('public/storage/' . $reservation['bookimage'])}}" alt="{{$reservation['book']}}">
+                                            <img src="{{asset('storage/' . $reservation['bookimage'])}}" alt="{{$reservation['book']}}">
                                         </div>
                                         <div class="product-info">
                                             <h6 class="product-name mb-1">{{$reservation['book']}}</h6>

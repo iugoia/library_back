@@ -77,7 +77,7 @@
                 <div class="profile">
                     <div class="avatar__ctn">
                         <div class="account_image">
-                            <img src="{{asset('public/storage/'.$user->avatar)}}" alt="avatar" class="avatar">
+                            <img src="{{asset('storage/'.$user->avatar)}}" alt="avatar" class="avatar">
                         </div>
                     </div>
                     <div class="profile__form">

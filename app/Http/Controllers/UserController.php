@@ -20,7 +20,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'unique:users,email'],
             'phone' => ['required', 'string', 'unique:users,phone', 'min:11'],
             'password' => ['required', 'string', 'min:5'],
-            'avatar' => ['required', 'file', 'mimes:jpg,jpeg,png']
+            'avatar' => ['required', 'file', 'mimes:jpg,jpeg,png,webp']
         ]);
 
         if ($validator->fails()){

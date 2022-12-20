@@ -15,7 +15,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = BooksResource::collection(Book::all());
+        $books = Book::paginate(8);
         return view('librarian.books.index', compact('books'));
     }
 
@@ -27,8 +27,8 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'min:5', 'string', 'max:60'],
-            'image' => ['required', 'file', 'mimes:jpg,jpeg,png'],
+            'name' => ['required', 'min:4', 'string', 'max:60'],
+            'image' => ['required', 'file', 'mimes:jpg,jpeg,png,webp'],
             'author' => ['required', 'min:5', 'string', 'max:60'],
             'genre' => ['required', 'string', 'max:60'],
             'rack' => ['required', 'numeric'],

@@ -40,7 +40,7 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="product-box border">
-                                            <img src="{{asset('public/storage/' . $item['book']->image)}}" alt="">
+                                            <img src="{{asset('storage/' . $item['book']->image)}}" alt="">
                                         </div>
                                         <div class="product-info">
                                             <h6 class="product-name mb-1">{{$item['book']->name}}</h6>

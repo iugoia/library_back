@@ -18,7 +18,8 @@ class BookController extends Controller
 {
     public function index()
     {
-        return Book::all();
+//        $books = Book::paginate(8);
+        return view('books.main.catalog');
     }
 
     public function showPage(Book $book)
@@ -74,12 +75,6 @@ class BookController extends Controller
         return response()->json([
             'message' => 'Книга успешно удалена'
         ]);
-    }
-
-    public function showCatalog(Request $request)
-    {
-        $books = $this->index();
-        return view('books.main.catalog', compact('books'));
     }
 
     public function search(Request $request)

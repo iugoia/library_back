@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="shortcut icon" href="{{asset('public/storage/icons/logo.svg')}}" type="image/x-icon">
-    <link rel="stylesheet" href="{{asset('public/css/style.css')}}?{{time()}}">
+    <link rel="shortcut icon" href="{{asset('storage/icons/logo.svg')}}" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}?{{time()}}">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
     <header class="site-header user-profile__container">
         <div class="container">
             <nav class="">
-                <img src="{{asset('public/storage/icons/logo.svg')}}" alt="Logo" class="logo">
+                <img src="{{asset('storage/icons/logo.svg')}}" alt="Logo" class="logo">
                 <input type="checkbox" id="menu" name="menu" class="m-menu__checkbox">
                 <label class="m-menu__toggle" for="menu">
                     <svg width="35" height="35" viewBox="0 0 24 24" stroke="#2B2B2B" stroke-width="2" stroke-linecap="butt"
@@ -123,12 +123,12 @@
                     <ul>
                         <li class="us_in_social">
                             <a href="https://web.telegram.org/k/" target="_blank">
-                                <img src="{{asset('public/storage/icons/telegram.svg')}}" alt="">
+                                <img src="{{asset('storage/icons/telegram.svg')}}" alt="">
                             </a>
                         </li>
                         <li class="us_in_social">
                             <a href="https://vk.com/feed" target="_blank">
-                                <img src="{{asset('public/storage/icons/vk.svg')}}" alt="">
+                                <img src="{{asset('storage/icons/vk.svg')}}" alt="">
                             </a>
                         </li>
                     </ul>
@@ -140,8 +140,8 @@
 
 <script src="https://kit.fontawesome.com/a60cb12451.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{asset('public/js/jquery.maskedinput.min.js')}}"></script>
-<script src="{{asset('public/js/script.js')}}?{{time()}}"></script>
+<script src="{{asset('js/jquery.maskedinput.min.js')}}"></script>
+<script src="{{asset('js/script.js')}}?{{time()}}"></script>
 
 @yield('custom_js')
 </body>

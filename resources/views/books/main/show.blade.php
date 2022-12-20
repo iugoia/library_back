@@ -15,7 +15,7 @@
         </style>
     @endif
     <main>
-        @if($item->is_available)
+        @if($item->is_available && \Illuminate\Support\Facades\Auth::check())
             <?php $currentDate = \Illuminate\Support\Carbon::now()->toArray(); ?>
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
                  aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -47,12 +47,30 @@
                 </div>
             </div>
         @endif
+        @if (!\Illuminate\Support\Facades\Auth::check())
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Бронирование недоступно</h5>
+                                <a class="modal-close-link" data-bs-dismiss="modal" aria-label="Закрыть">
+                                    <i class="fa-solid fa-xmark fa-lg"></i>
+                                </a>
+                            </div>
+                            <div class="modal-body">
+                                <p>Бронирование недоступно, так как книга в настоящее время забронирована другим пользователем или вы не вошли в аккаунт.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         <section class="showBook">
             <div class="container">
                 <div class="book__info__img">
                     <div class="img__link">
                         <div class="book__img__container">
-                            <img src="{{asset('public/storage/' . $item->image)}}" alt="dasdasd">
+                            <img src="{{asset('storage/' . $item->image)}}" alt="dasdasd">
                         </div>
                         @if($item->is_available)
                         <div class="btn__container">
@@ -91,15 +109,15 @@
                             <li class="feedback__item">
                                 <div class="book__feedback__rate">
                                     @for($i = 0; $i < $feedback['score']; $i++)
-                                        <img src="{{asset('public/storage/img/fill_star.png')}}" alt="">
+                                        <img src="{{asset('storage/img/fill_star.png')}}" alt="">
                                     @endfor
                                     @for($i = $feedback['score']; $i < 5; $i++)
-                                        <img src="{{asset('public/storage/img/unfill_star.png')}}" alt="">
+                                        <img src="{{asset('storage/img/unfill_star.png')}}" alt="">
                                     @endfor
                                 </div>
                                 <div class="feedback__user__info">
                                     <div class="feedback__user__ctn__img">
-                                        <img src="{{asset('public/storage/' . $feedback['avatar'])}}" alt="">
+                                        <img src="{{asset('storage/' . $feedback['avatar'])}}" alt="">
                                     </div>
                                     <p>{{$feedback['username']}} {{$feedback['usersurname']}}</p>
                                 </div>

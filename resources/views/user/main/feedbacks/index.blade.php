@@ -32,15 +32,15 @@
                         <li class="feedback__item user__feedback__account">
                             <div class="book__feedback__rate feedback__rate__user">
                                 @for($i = 0; $i < $item['feedback']->score; $i++)
-                                    <img src="{{asset('public/storage/img/fill_star.png')}}" alt="">
+                                    <img src="{{asset('storage/img/fill_star.png')}}" alt="">
                                 @endfor
                                 @for($i = $item['feedback']->score; $i < 5; $i++)
-                                    <img src="{{asset('public/storage/img/unfill_star.png')}}" alt="">
+                                    <img src="{{asset('storage/img/unfill_star.png')}}" alt="">
                                 @endfor
                             </div>
                             <div class="feedback__user__info">
                                 <div class="feedback__user__ctn__img">
-                                    <img src="{{asset('public/storage/' . $item['book']->image)}}" alt="">
+                                    <img src="{{asset('storage/' . $item['book']->image)}}" alt="">
                                 </div>
                                 <p>{{$item['book']->name}}</p>
                             </div>
