@@ -19,10 +19,10 @@ class SearchBooks extends Component
     public function render()
     {
         $name = '%' . $this->name . '%';
-        $paginator = $this->books = DB::table('books')
-            ->where(DB::raw('lower(name)'), 'like', strtolower($name))
-            ->orwhere(DB::raw('lower(author)'), 'like', strtolower($name))
-            ->orwhere(DB::raw('lower(genre)'), 'like', strtolower($name))->paginate(8);
+        $paginator = Book::where('name', 'like', $name)
+            ->orwhere('author', 'like', $name)
+            ->orwhere('genre', 'like', $name)->paginate(8);
+
         $this->books = $paginator->items();
         return view('livewire.search-books', ['paginator' => $paginator]);
     }
