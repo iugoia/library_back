@@ -1,4 +1,4 @@
-<?php $title = 'Добавление книги' ?>
+<?php $title = 'Редактирование книги' ?>
 
 @extends('user.layout.main')
 

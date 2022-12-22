@@ -86,37 +86,36 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($arrDataList as $reservation)
-                            @foreach($books as $book)
+                        @for($i = 0; $i < count($arrDataList); $i++)
                             <tr>
-                                <td>{{$reservation['id']}}</td>
+                                <td>{{$arrDataList[$i]['id']}}</td>
                                 <td>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="product-box border">
-                                            <img src="{{asset('storage/' . $reservation['bookimage'])}}" alt="{{$reservation['book']}}">
+                                            <img src="{{asset('storage/' . $arrDataList[$i]['bookimage'])}}" alt="{{$arrDataList[$i]['book']}}">
                                         </div>
                                         <div class="product-info">
-                                            <h6 class="product-name mb-1">{{$reservation['book']}}</h6>
+                                            <h6 class="product-name mb-1">{{$arrDataList[$i]['book']}}</h6>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{$reservation['bookrack']}}</td>
-                                <td>{{$reservation['bookrow']}}</td>
-                                <td>{{$reservation['bookshelf']}}</td>
-                                <td>{{$reservation['status']}}</td>
-                                <td>{{$reservation['created_at']}}</td>
-                                <td>{{$reservation['received_time']}}</td>
-                                <td>{{$reservation['username']}}</td>
-                                <td>{{$reservation['userphone']}}</td>
+                                <td>{{$arrDataList[$i]['bookrack']}}</td>
+                                <td>{{$arrDataList[$i]['bookrow']}}</td>
+                                <td>{{$arrDataList[$i]['bookshelf']}}</td>
+                                <td>{{$arrDataList[$i]['status']}}</td>
+                                <td>{{$arrDataList[$i]['created_at']}}</td>
+                                <td>{{$arrDataList[$i]['received_time']}}</td>
+                                <td>{{$arrDataList[$i]['username']}}</td>
+                                <td>{{$arrDataList[$i]['userphone']}}</td>
                                 <td class="admin__users__nav">
                                     <div class="d-flex align-items-center gap-3 fs-6">
-                                        <a href="{{route('librarian.reservations.edit', $reservation['id'])}}">
+                                        <a href="{{route('librarian.reservations.edit', $arrDataList[$i]['id'])}}">
                                             <i class="fa-solid fa-pen text-primary"></i>
                                         </a>
-                                        <a target="_blank" href="{{route('showPageBook', $book)}}">
+                                        <a target="_blank" href="{{route('showPageBook', $books[$i])}}">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
-                                        <form class="form__icon" id="form_delete" action="{{route('librarian.reservations.destroy', $reservation['id'])}}" method="post">
+                                        <form class="form__icon" id="form_delete" action="{{route('librarian.reservations.destroy', $arrDataList[$i]['id'])}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button type="submit">
@@ -126,8 +125,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
-                        @endforeach
+                        @endfor
                         </tbody>
                     </table>
                 </div>

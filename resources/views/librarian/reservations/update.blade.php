@@ -40,6 +40,11 @@
                                         {{session()->get('success')}}
                                     </div>
                                 @endif
+                                @if(session()->has('error'))
+                                    <div class="alert alert-danger">
+                                        {{session()->get('error')}}
+                                    </div>
+                                @endif
                                 <div class="form-row_">
                                     <div class="form-group form-col-2">
                                         <label for="inputEmail4">Название</label>

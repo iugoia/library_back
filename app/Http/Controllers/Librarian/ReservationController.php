@@ -70,6 +70,9 @@ class ReservationController extends Controller
 
     public function update(Reservation $reservation, Request $request)
     {
+        if (($reservation->status === 'Выдано' && $request->status === 'Забронировано') || ($reservation->status === 'Возвращено' && $request->status === 'Выдано') || ($reservation->status === 'Возвращено' && $request->status === 'Забронировано'))
+            return redirect()->back()->with('error', 'Нельзя поставить статус ниже');
+
         $validator = Validator::make($request->all(), [
             'status' => 'required'
         ]);

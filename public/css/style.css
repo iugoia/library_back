@@ -724,6 +724,12 @@ input:focus {
     margin-bottom: 20px;
 }
 
+.admin__users__table__wrapper {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
 .search-role > input{
     width: 20%;
 }
@@ -1276,8 +1282,8 @@ input:focus {
     overflow: hidden;
 }
 
-.feedback__user__ctn__img img {
-    width: 100%;
+.feedback__user__ctn__img > img {
+    width: 100% !important;
     height: 100%;
     object-fit: cover;
 }
@@ -1614,4 +1620,9 @@ input:focus {
 .edit_proile__form input[type="email"] {
     padding: 15px 0 15px 20px;
     width: calc(100% - 20px);
+}
+@media (max-width: 390px) {
+    .reviews img{
+        width: 200px !important;
+    }
 }

@@ -139,9 +139,11 @@
         var received_time = new Date();
         received_time.setDate(received_time.getDate() + 14);
         received_time = received_time.toISOString().split('T')[0];
-        window.onload = function () {
-            dateInput.setAttribute('max', received_time);
-            console.log(received_time);
+        if (dateInput){
+            window.onload = function () {
+                dateInput.setAttribute('max', received_time);
+                console.log(received_time);
+            }
         }
     </script>
 @endsection

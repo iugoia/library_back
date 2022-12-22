@@ -94,7 +94,7 @@
 		<main class="user-profile__container">
             <div class="container">
                 <div class="">
-                    <h1>Редактирование {{\Illuminate\Support\Facades\Auth::user()->login}}</h1>
+                    <h1>Редактирование профиля</h1>
                     <div class="profile">
                         <div class="avatar__ctn">
                             <div class="account_image">

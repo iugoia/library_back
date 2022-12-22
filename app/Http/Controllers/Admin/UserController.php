@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -82,6 +83,7 @@ class UserController extends Controller
         }
 
         if ($request->avatar){
+            Storage::disk('public')->delete($user->avatar);
             $filename = $request->file('avatar')->store('/avatars', 'public');
         } else {
             $filename = $user->avatar;
@@ -105,6 +107,7 @@ class UserController extends Controller
     {
         if ($user->role === 'admin')
             return redirect(route('admin.users.index'))->with('error', 'Вы не можете удалить администратора');
+        Storage::disk('public')->delete($user->avatar);
         $user->delete();
         return redirect()->back()->with('success', 'Пользователь успешно удален');
     }

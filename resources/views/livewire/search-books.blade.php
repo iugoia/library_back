@@ -19,16 +19,9 @@
                                 <p>{{$book->author}}</p>
                                 <p>{{$book->genre}}</p>
                             </div>
-                            @if ($book->is_available)
                                 <div class="btn__container">
                                     <a href="{{route('showPageBook', $book->id)}}" class="btn__default">Забронировать</a>
                                 </div>
-                            @endif
-                            @if (!$book->is_available)
-                                <div class="btn__container text-error-available">
-                                    <span>Забронировано</span>
-                                </div>
-                            @endif
                         </div>
                     </li>
                 @endforeach
