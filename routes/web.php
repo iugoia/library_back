@@ -56,6 +56,11 @@ Route::group(['namespace' => 'user'], function(){
                 Route::get('/create', [\App\Http\Controllers\Librarian\BookController::class, 'create'])->name('librarian.books.create');
                 Route::get('/edit/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'edit'])->name('librarian.books.edit');
             });
+            Route::group(['prefix' => 'librarian.genres'], function() {
+                Route::get('/', [\App\Http\Controllers\Librarian\GenreController::class, 'index'])->name('librarian.genres.index');
+                Route::get('/create', [\App\Http\Controllers\Librarian\GenreController::class, 'create'])->name('librarian.genres.create');
+                Route::get('/{genre}', [\App\Http\Controllers\Librarian\GenreController::class, 'edit'])->name('librarian.genres.edit');
+            });
             Route::group(['prefix' => 'reservations'], function(){
                 Route::get('/', [\App\Http\Controllers\Librarian\ReservationController::class, 'index'])->name('librarian.reservations.index');
                 Route::get('/edit/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'edit'])->name('librarian.reservations.edit');

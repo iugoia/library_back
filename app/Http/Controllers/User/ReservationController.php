@@ -31,9 +31,15 @@ class ReservationController extends Controller
 
     public function destroy(Reservation $reservation)
     {
+
         if ($reservation->status === 'Забронировано'){
             $book = Book::find($reservation->book_id);
-            $book->is_available = true;
+            $book->count = $book->count + 1;
+            if ($book->count > 0) {
+                $book->is_available = true;
+            } else {
+                $book->is_available = false;
+            }
             $book->save();
             $reservation->delete();
             return redirect()->back()->with('success', 'Бронирование успешно снято');
@@ -54,9 +60,15 @@ class ReservationController extends Controller
         if ($diff > 14)
             return redirect()->back()->with('error', 'Дата выбрана неправильно');
         $book = Book::find($book_id);
-        $book->is_available = false;
-        $book->save();
 
+        $book->count = $book->count - 1;
+        $book->save();
+        if ($book->count > 0) {
+            $book->is_available = true;
+        } else {
+            $book->is_available = false;
+        }
+        $book->save();
         $formFields = [
             'user_id' => Auth::user()->id,
             'book_id' => $book->id,

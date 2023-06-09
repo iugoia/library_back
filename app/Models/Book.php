@@ -15,10 +15,11 @@ class Book extends Model
         'name',
         'image',
         'author',
-        'genre',
+        'genre_id',
         'rack',
         'shelf',
         'row',
+        'count',
         'description',
         'is_available'
     ];

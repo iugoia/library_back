@@ -81,10 +81,11 @@
                     <div class="book__info">
                         <h1>{{$item->name}}</h1>
                         <p><span class="font__bold">Автор:</span> <span>{{$item->author}}</span></p>
-                        <p><span class="font__bold">Жанр:</span> <span>{{$item->genre}}</span></p>
+                        <p><span class="font__bold">Жанр:</span> <span>{{\App\Models\Genre::find($item->genre_id)->name}}</span></p>
                         <p><span class="font__bold">Номер стеллажа:</span> <span>{{$item->rack}}</span></p>
                         <p><span class="font__bold">Номер ряда:</span> <span>{{$item->row}}</span></p>
                         <p><span class="font__bold">Номер полки:</span> <span>{{$item->shelf}}</span></p>
+                        <p><span class="font__bold">Количество экземпляров:</span> <span>{{$item->count}}</span></p>
                         @if($item->description)
                             <p><span class="font__bold">Описание:</span> <span>{{$item->description}}</span></p>
                         @endif

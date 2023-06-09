@@ -30,6 +30,11 @@ Route::middleware('auth')->group(function(){
             Route::patch('/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'update'])->name('librarian.books.update');
             Route::delete('/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'destroy'])->name('librarian.books.destroy');
         });
+        Route::group(['prefix' => 'genres'], function() {
+            Route::post('/', [\App\Http\Controllers\Librarian\GenreController::class, 'store'])->name('librarian.genres.store');
+            Route::patch('/{genre}', [\App\Http\Controllers\Librarian\GenreController::class, 'update'])->name('librarian.genres.update');
+            Route::delete('/{genre}', [\App\Http\Controllers\Librarian\GenreController::class, 'destroy'])->name('librarian.genres.destroy');
+        });
         Route::group(['prefix' => 'reservations'], function(){
             Route::patch('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'update'])->name('librarian.reservations.update');
             Route::delete('/{id}', [\App\Http\Controllers\Librarian\ReservationController::class, 'destroy'])->name('librarian.reservations.destroy');

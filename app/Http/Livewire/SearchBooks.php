@@ -20,8 +20,7 @@ class SearchBooks extends Component
     {
         $name = '%' . $this->name . '%';
         $paginator = Book::where('name', 'like', $name)
-            ->orwhere('author', 'like', $name)
-            ->orwhere('genre', 'like', $name)->paginate(8);
+            ->orwhere('author', 'like', $name)->paginate(8);
 
         $this->books = $paginator->items();
         return view('livewire.search-books', ['paginator' => $paginator]);

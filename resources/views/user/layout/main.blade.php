@@ -90,6 +90,12 @@
                                     Книги
                                 </a>
                             </li>
+                                <li>
+                                    <a href="{{route('librarian.genres.index')}}">
+                                        <i class="fa-solid fa-book"></i>
+                                        Жанры
+                                    </a>
+                                </li>
                             @endif
                             @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
                             <li>

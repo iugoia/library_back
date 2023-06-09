@@ -3,7 +3,7 @@
         <div class="books__title__search">
             <h1>Каталог книг</h1>
             <div class="d1">
-                <input wire:model="name" type="text" class="search" placeholder="автор, жанр, название..">
+                <input wire:model="name" type="text" class="search" placeholder="автор, название..">
             </div>
         </div>
         <div class="books__col _books" id="books__catalog__list">
@@ -17,7 +17,9 @@
                             <div class="book__catalog__info">
                                 <p>{{$book->name}}</p>
                                 <p>{{$book->author}}</p>
-                                <p>{{$book->genre}}</p>
+                                <p>
+                                    {{\App\Models\Genre::find($book->genre_id)->name}}
+                                </p>
                             </div>
                                 <div class="btn__container">
                                     <a href="{{route('showPageBook', $book->id)}}" class="btn__default">Забронировать</a>

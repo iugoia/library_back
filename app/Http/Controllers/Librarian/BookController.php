@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Librarian;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BooksResource;
 use App\Models\Book;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +22,8 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('librarian.books.create');
+        $genres = Genre::all();
+        return view('librarian.books.create', compact('genres'));
     }
 
     public function store(Request $request)
@@ -30,10 +32,11 @@ class BookController extends Controller
             'name' => ['required', 'min:4', 'string', 'max:60'],
             'image' => ['required', 'file', 'mimes:jpg,jpeg,png,webp'],
             'author' => ['required', 'min:5', 'string', 'max:60'],
-            'genre' => ['required', 'string', 'max:60'],
+            'genre_id' => ['required', 'exists:genres,id'],
             'rack' => ['required', 'numeric'],
             'shelf' => ['required', 'numeric'],
             'row' => ['required', 'numeric'],
+            'count' => ['required', 'numeric'],
             'description' => ['nullable', 'string']
         ]);
 
@@ -61,10 +64,11 @@ class BookController extends Controller
             'name' => ['required', 'min:5', 'string', 'max:60'],
             'image' => ['nullable', 'file', 'mimes:jpg,jpeg,png'],
             'author' => ['required', 'min:5', 'string', 'max:60'],
-            'genre' => ['required', 'string', 'max:60'],
+            'genre_id' => ['required', 'exists:genres,id'],
             'rack' => ['required', 'numeric'],
             'shelf' => ['required', 'numeric'],
             'row' => ['required', 'numeric'],
+            'count' => ['required', 'numeric'],
             'description' => ['nullable', 'string']
         ]);
 

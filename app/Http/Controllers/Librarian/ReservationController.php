@@ -57,7 +57,11 @@ class ReservationController extends Controller
         if ($book->is_available == false){
             return redirect()->back()->with('error', 'Книга уже забронирована');
         }
-        $book->is_available = false;
+        if ($book->count > 0) {
+            $book->is_available = true;
+        } else {
+            $book->is_available = false;
+        }
         $book->save();
     }
 
@@ -83,14 +87,16 @@ class ReservationController extends Controller
         }
         $book = Book::find($reservation->book_id);
 
-        if ($request->status == 'Выдано' || $request->status == 'Забронировано'){
-            $book->is_available = false;
-            $book->save();
-        }
         if ($request->status == 'Возвращено'){
-            $book->is_available = true;
+            $book->count = $book->count + 1;
             $book->save();
         }
+        if ($book->count > 0) {
+            $book->is_available = true;
+        } else {
+            $book->is_available = false;
+        }
+        $book->save();
         $reservation->update($request->all());
         return redirect()->back()->with('success', 'Бронирование успешно обновлено');
     }
@@ -99,7 +105,16 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id)->first();
         $book = Book::find($reservation->book_id);
-        $book->is_available = true;
+        if ($reservation->status === 'Забронировано'){
+            $book->count = $book->count + 1;
+            $book->save();
+        }
+
+        if ($book->count > 0) {
+            $book->is_available = true;
+        } else {
+            $book->is_available = false;
+        }
         $book->save();
         if ($reservation->status === 'Выдано'){
             return redirect()->back()->with('error', 'Бронирование не может быть снято, так как книга не возвращена.');

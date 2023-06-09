@@ -32,7 +32,9 @@
                         </div>
                     </td>
                     <td>{{$book->author}}</td>
-                    <td>{{$book->genre}}</td>
+                    <td>
+                        {{\App\Models\Genre::find($book->genre_id)->name}}
+                    </td>
                     <td>{{$book->rack}}</td>
                     <td>{{$book->row}}</td>
                     <td>{{$book->shelf}}</td>
