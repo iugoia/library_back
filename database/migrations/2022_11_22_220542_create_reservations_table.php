@@ -18,8 +18,9 @@ class CreateReservationsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('book_id')->constrained('books')->cascadeOnDelete();
-            $table->date('created_at')->default(DB::raw('CURRENT_DATE')); // время бронирования
-            $table->date('received_time'); // время когда он вернет
+//            $table->date('created_at')->default(DB::raw('CURRENT_DATE'));
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->date('received_time');
             $table->enum('status', ['Забронировано', 'Выдано', 'Возвращено'])->default('Забронировано');
         });
     }

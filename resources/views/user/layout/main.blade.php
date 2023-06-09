@@ -29,7 +29,7 @@
     <header class="site-header user-profile__container">
         <div class="container">
             <nav class="">
-                <img src="{{asset('storage/icons/logo.svg')}}" alt="Logo" class="logo">
+                <img src="{{asset('storage/logo.svg')}}" alt="Logo" class="logo">
                 <input type="checkbox" id="menu" name="menu" class="m-menu__checkbox">
                 <label class="m-menu__toggle" for="menu">
                     <svg width="35" height="35" viewBox="0 0 24 24" stroke="#2B2B2B" stroke-width="2" stroke-linecap="butt"
