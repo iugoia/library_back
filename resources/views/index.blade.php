@@ -1,115 +1,542 @@
-<?php $title = 'Главная страница' ?>
 @extends('layouts.main')
+
+@section('title')
+    НЧПК | Библиотека
+@endsection
+
 @section('content')
-<main>
-    <section class="preview">
-        <div class="preview-bg">
+    <main class="main">
+        <h1 class="hidden">Главная страница сайта НЧПК Библиотека</h1>
+        <section class="promo element_pad">
             <div class="container">
-                <div class="preview-content">
-                    <h1>Библиотека</h1>
-                    <p>Познай дзен читателя и насладись
-                        лучшими произведениями лучших авторов в
-                        нашей библиотеке</p>
-                    <a href="{{route('catalog')}}">Посмотреть книги</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="main__page__content">
-        <div class="container">
-            <h2>Книги в библиотеках НЧПК</h2>
-            <ul class="features">
-
-                <li>
-                    <img src="{{asset('storage/img/feature1.png')}}" alt="">
-                    <div>
-                        <p>Все библиотечные книги — в одном сервисе</p>
-                        <p>Сервис «Библиотеки НЧПК» — это онлайн-витрина, где собраны все книги библиотеки
-                            Набережночелнинского педагогического колледжа. Найдите нужную и закажите не выходя из
-                            дома.
-                            Вы сами выбирайте, когда книгу можно будет забрать, и мы вовремя напомним, что её пора
-                            вернуть.</p>
-                    </div>
-
-                </li>
-                <li>
-                    <div>
-                        <p>Единый читательский билет</p>
-                        <p>Оформите единый читательский билет онлайн или в нашей библиотеки, и он появится в вашем
-                            личном кабинете. С этим билетом вы сможете брать понравившиеся книги в библиотеке.</p>
-                    </div>
-                    <img src="{{asset('storage/img/feature2.png')}}" alt="">
-                </li>
-                <li>
-                    <img src="{{asset('storage/img/feature3.png')}}" alt="">
-                    <div>
-                        <p>Информация о ваших книгах — в личном кабинете</p>
-                        <p>Кабинет читателя — это ваша "книжная онлайн-полка". На ней размещены книги, которые вы
-                            бронировали, а также книги, которые вы уже читаете или прочитали. Вы будете знать, когда
-                            можно забрать забронированную книгу и когда вернуть книгу, у которой заканчивается срок
-                            хранения. Если Вам нужно больше времени для работы с книгой, зайдите в кабинет читателя
-                            и
-                            продлите срок хранения издания на месяц.</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="main__page__content">
-        <div class="container">
-            <h2>Наши отзывы</h2>
-            <ul class="reviews">
-                <li>
-                    <img src="{{asset('storage/img/stars1.png')}}" alt="">
-                    <p>Дарина Полегешко</p>
-                    <p>Лучшая библиотека в мире! Я счастлива, что живу в Набережных Челнах! Спасибо!!!</p>
-                </li>
-                <li>
-                    <img src="{{asset('storage/img/stars2.png')}}" alt="">
-                    <p>Марин Мокрый</p>
-                    <p>Честно говоря, я не очень люблю читать книги, но когда узнал об этой библиотеке, пришлось
-                        зачисляться на первый курс.</p>
-                </li>
-                <li>
-                    <img src="{{asset('storage/img/stars3.png')}}" alt="">
-                    <p>Александра Витяз</p>
-                    <p>Прихожу каждый понедельник, дабы насладиться приятным набором книг, да и с помощью онлайн
-                        сервиса легко их бронировать, всегда так хотела, но иногда книг не хватает, за это минус
-                        звезда, а так, всё идеально, надеюсь у вас всё будет чудесно!</p>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="main__page__content">
-        <div class="container">
-            <h2>Контактная информация</h2>
-            <div class="contacts">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2246.7303543432395!2d52.40935561538992!3d55.728438101339044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415ff1e0aa00315b%3A0xd1c88d987edf6261!2z0J3QsNCx0LXRgNC10LbQvdC-0YfQtdC70L3QuNC90YHQutC40Lkg0L_QtdC00LDQs9C-0LPQuNGH0LXRgdC60LjQuSDQutC-0LvQu9C10LTQtg!5e0!3m2!1sru!2sru!4v1669992777266!5m2!1sru!2sru"
-                     style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div class="contacts-row">
-                    <div class="contacts-few">
-                        <div>
-                            <p>Адрес:</p>
-                            <p>пр-т. P. Беляева, 3, Набережные Челны, Респ. Татарстан, 423812</p>
+                <div class="promo_row">
+                    <div class="promo_col promo_col_info">
+                        <div class="promo_col_info_ctn">
+                            <p class="badge">Все твои любимые книги уже здесь</p>
+                            <div class="promo_animation_ctn">
+                                <p class="promo_heading"><span class="purple">Чтение</span> это увлекательно</p>
+                                <p class="promo_desc">удовольствие от чтения может помочь человеку в профилактике
+                                    душевного и физического здоровья</p>
+                                <a href="#" class="primary_btn">Выбрать книгу</a>
+                            </div>
                         </div>
-                        <div>
-                            <p>Контакты:</p>
-                            <p>Телефон: 88552583022</p>
+                    </div>
+                    <div class="promo_col promo_bg">
+                        <div class="promo_bg_ctn">
+                            <div class="animation_book_fly">
+                                <img src="{{asset('storage/promo_book.png')}}" width="783" height="784"
+                                     alt="летающая книжка">
+                            </div>
                         </div>
-                        <div>
-                            <p>Официальный сайт</p>
-                            <a href="https://pedcollchelny.ru/" target="_blank">https://pedcollchelny.ru/</a>
+                        <div class="promo_bg_ctn">
+                            <img src="{{asset('storage/promo_right_book.png')}}" alt="книга справа" width="783" height="784">
+                        </div>
+                        <div class="promo_bg_ctn">
+                            <img src="{{asset('storage/promo_orange_line.png')}}" alt="оранжевая линия">
+                        </div>
+                        <div class="promo_bg_ctn">
+                            <img src="{{asset('storage/promo_ellipse_lines.png')}}" alt="круг из линий">
+                        </div>
+                        <div class="promo_bg_ctn">
+                            <img src="{{asset('storage/promo_purple_line.png')}}" alt="фиолетовая линия">
+                        </div>
+                        <div class="promo_bg_ctn">
+                            <img src="{{asset('storage/promo_ellipse.png')}}" alt="круг фиолетовый" width="680" height="680">
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
-    </section>
-</main>
+        </section>
+
+        <section class="categories element_pad">
+            <div class="container">
+                <h2 class="main_title">Категории</h2>
+                <p class="desc_aft_title">В ассортименте библиотеки имеется множество категорий книг</p>
+                <ul class="categories_list">
+                    <li class="category_item fadeRight">
+                        <div class="category_item_bg">
+                            <div class="category_item_ctn">
+                                <h3>Психология и эзотерика</h3>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="category_item fadeRight">
+                        <div class="category_item_bg">
+                            <div class="category_item_ctn">
+                                <h3>Подросткам</h3>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="category_item fadeRight">
+                        <div class="category_item_bg">
+                            <div class="category_item_ctn">
+                                <h3>Криминальные романы, действие которых происходит во времена эпидемии</h3>
+                                <a href="#" class="secondary_btn">Каталог</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="category_item fadeRight">
+                        <div class="category_item_bg">
+                            <div class="category_item_ctn">
+                                <h3>Художественная литература</h3>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="category_item fadeLeft">
+                        <div class="category_item_bg">
+                            <div class="category_item_ctn">
+                                <h3>Биография
+                                    и мемуары</h3>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="category_item fadeBottom">
+                        <div class="category_item_bg">
+                            <div class="category_item_ctn">
+                                <h3>Фантастика</h3>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="choose element_pad">
+            <div class="container">
+                <h2 class="main_title">Выбирайте нас</h2>
+                <div class="desc_aft_title">Наш интернет-сервис имеет множество преимуществ</div>
+                <ul class="choose_list">
+                    <li class="choose_item fadeLeft">
+                        <div class="choose_item_ctn">
+                            <header class="choose_item_head">
+                                <h3>
+                                    <span class="strong">Все библиотечные книги — </span> в одном сервисе
+                                </h3>
+                            </header>
+                            <div class="choose_item_row">
+                                <div class="choose_item_col choose_item_img">
+
+                                </div>
+                                <div class="choose_item_col choose_item_info">
+                                    <p>Здесь <span class="purple">вы найдете все произведения</span> из богатой
+                                        коллекции библиотеки Набережночелнинского педагогического колледжа. Без
+                                        необходимости выхода из дома, вы можете выбрать нужную книгу и оформить её
+                                        бронирование. <span class="purple">Вы сами решаете, когда будете готовы
+                                                забрать произведение</span>, а
+                                        мы своевременно напомним вам о дате возврата.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="choose_item fadeLeft">
+                        <div class="choose_item_ctn">
+                            <header class="choose_item_head">
+                                <h3>
+                                    <span class="strong">Единый</span> читательский билет
+                                </h3>
+                            </header>
+                            <div class="choose_item_row">
+                                <div class="choose_item_col choose_item_img">
+
+                                </div>
+                                <div class="choose_item_col choose_item_info">
+                                    <p>Вы можете оформить единый читательский билет в онлайн-режиме или лично
+                                        посетив нашу библиотеку. Этот билет будет автоматически добавлен в ваш
+                                        личный кабинет. Он <span class="purple">позволит вам свободно выбирать
+                                                интересующие произведения</span> из нашего ассортимента.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="choose_item fadeBottom">
+                        <div class="choose_item_ctn">
+                            <header class="choose_item_head">
+                                <h3>
+                                    <span class="strong">Информация о ваших книгах — </span>в личном кабинете
+                                </h3>
+                            </header>
+                            <div class="choose_item_row">
+                                <div class="choose_item_col choose_item_img">
+
+                                </div>
+                                <div class="choose_item_col choose_item_info">
+                                    <p>Личный кабинет читателя - это ваша "книжная онлайн-полка". <span
+                                            class="purple">Здесь вы найдете перечень зарезервированных
+                                                произведений</span>, а также список тех, которые уже были прочитаны или
+                                        находятся в процессе чтения. Ваш кабинет читателя будет содержать информацию
+                                        о том, когда можно получить зарезервированное издание и когда нужно вернуть
+                                        книгу, приближающуюся к дате окончания срока хранения. Если вам нужно
+                                        дополнительное время для работы с произведением, <span class="purple">вы
+                                                можете продлить срок его хранения на месяц</span>, зайдя в свой личный
+                                        кабинет.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="carusel element_pad">
+            <div class="container">
+                <header class="index_catalog_heading">
+                    <h2 class="title_custom2"><span class="strong">Высокооцененные</span> Книги</h2>
+                    <hr>
+                    <div class="aux_carousel_navigation">
+                        <button class="aux_prev_btn"></button>
+                        <button class="aux_next_btn"></button>
+                    </div>
+                </header>
+                <ul class="aux_carousel">
+                    <li class="aux_carousel_item fadeLeft">
+                        <div class="aux_carousel_item_ctn">
+                            <div class="auxshp-entry-main">
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: 122px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                </div>
+                                <h3 class="aux_carousel_item_heading">Кто не спрятался</h3>
+                                <p class="aux_carousel_item_author">Яна Вагнер</p>
+                                <p class="aux_carousel_item_description">История девяти друзей, приехавших в отель на вершине снежной горы</p>
+                                <button class="aux_item_book_btn">Забронировать</button>
+                            </div>
+                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="1">
+                        </div>
+                    </li>
+                    <li class="aux_carousel_item fadeLeft">
+                        <div class="aux_carousel_item_ctn">
+                            <div class="auxshp-entry-main">
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: 122px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                </div>
+                                <h3 class="aux_carousel_item_heading">Реинкарнатор</h3>
+                                <p class="aux_carousel_item_author">Юлия Рыженкова</p>
+                                <p class="aux_carousel_item_description">Перерождение в нашем мире, с воспоминаниями о прошлой жизни</p>
+                                <button class="aux_item_book_btn">Забронировать</button>
+                            </div>
+                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="2">
+                        </div>
+                    </li>
+                    <li class="aux_carousel_item fadeLeft">
+                        <div class="aux_carousel_item_ctn">
+                            <div class="auxshp-entry-main">
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: 122px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                </div>
+                                <h3 class="aux_carousel_item_heading">Кто не спрятался</h3>
+                                <p class="aux_carousel_item_author">Яна Вагнер</p>
+                                <p class="aux_carousel_item_description">История девяти друзей, приехавших в отель на вершине снежной горы</p>
+                                <button class="aux_item_book_btn">Забронировать</button>
+                            </div>
+                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="1">
+                        </div>
+                    </li>
+                    <li class="aux_carousel_item fadeLeft">
+                        <div class="aux_carousel_item_ctn">
+                            <div class="auxshp-entry-main">
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: 122px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                </div>
+                                <h3 class="aux_carousel_item_heading">Реинкарнатор</h3>
+                                <p class="aux_carousel_item_author">Юлия Рыженкова</p>
+                                <p class="aux_carousel_item_description">Перерождение в нашем мире, с воспоминаниями о прошлой жизни</p>
+                                <button class="aux_item_book_btn">Забронировать</button>
+                            </div>
+                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="2">
+                        </div>
+                    </li><li class="aux_carousel_item fadeLeft">
+                        <div class="aux_carousel_item_ctn">
+                            <div class="auxshp-entry-main">
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: 122px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                </div>
+                                <h3 class="aux_carousel_item_heading">Кто не спрятался</h3>
+                                <p class="aux_carousel_item_author">Яна Вагнер</p>
+                                <p class="aux_carousel_item_description">История девяти друзей, приехавших в отель на вершине снежной горы</p>
+                                <button class="aux_item_book_btn">Забронировать</button>
+                            </div>
+                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="1">
+                        </div>
+                    </li>
+                    <li class="aux_carousel_item fadeLeft">
+                        <div class="aux_carousel_item_ctn">
+                            <div class="auxshp-entry-main">
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: 122px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                    </div>
+                                </div>
+                                <h3 class="aux_carousel_item_heading">Реинкарнатор</h3>
+                                <p class="aux_carousel_item_author">Юлия Рыженкова</p>
+                                <p class="aux_carousel_item_description">Перерождение в нашем мире, с воспоминаниями о прошлой жизни</p>
+                                <button class="aux_item_book_btn">Забронировать</button>
+                            </div>
+                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="2">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="index_catalog element_pad">
+            <div class="container">
+                <div class="catalog_ctn">
+                    <header class="index_catalog_heading">
+                        <h2 class="title_custom2"><span class="strong">Каталог</span> Книг</h2>
+                        <hr>
+                        <a href="catalog.html" class="primary_btn">Посмотреть все</a>
+                    </header>
+                    <ul class="catalog_list">
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="catalog_item">
+                            <div class="catalog_item_ctn">
+                                <div class="catalog_item_row">
+                                    <div class="catalog_item_image_ctn">
+                                        <a href="book.html">
+                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
+                                        </a>
+                                    </div>
+                                    <div class="catalog_item_info">
+                                        <h3>103 Home Cooked meals</h3>
+                                        <a href="" class="author_link">Kristi Lee</a>
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: 122px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                            </div>
+                                        </div>
+                                        <p class="book_desc">
+                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="map element_pad">
+            <div class="container">
+                <div class="map_ctn">
+                    <h2 class="fadeTop"><span class="strong">Контактная</span> Информация</h2>
+                    <iframe class="fadeBottom"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1889.2693082550672!2d52.41019510704237!3d55.72840075347918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x415ff1e0aa00315b%3A0xd1c88d987edf6261!2z0J3QsNCx0LXRgNC10LbQvdC-0YfQtdC70L3QuNC90YHQutC40Lkg0L_QtdC00LDQs9C-0LPQuNGH0LXRgdC60LjQuSDQutC-0LvQu9C10LTQtg!5e0!3m2!1sru!2sru!4v1686446068413!5m2!1sru!2sru"
+                            width="100%" height="550" style="border-radius: 15px; border: 0; outline: 0;"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
 @endsection

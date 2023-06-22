@@ -1,109 +1,145 @@
-<?php $title = 'Все жанры' ?>
-@extends('user.layout.main')
+@extends('layouts.auth')
+
+@section('title')
+    НЧПК | Библиотека | Все жанры
+@endsection
 
 @section('content')
-    <style>
-        @if (\Illuminate\Support\Facades\DB::table('books')->count() < 9)
-            footer{
-            position: absolute;
-            bottom: 0;
-        }
-        @endif
-        @if (\Illuminate\Support\Facades\DB::table('books')->count() >= 9)
-            footer{
-            position: unset;
-        }
-        @endif
-        .admin__users__table h1{
-            margin: 20px 0;
-        }
-        .admin__users__table__wrapper{
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-        .admin__user__title__ctn{
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .admin__user__title__ctn a{
-            width: unset;
-            margin-left: 20px;
-            display: unset;
-        }
-        .admin__icons__a button{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-        .form__icon button{
-            border: none;
-        }
-        @media (max-width: 737px) {
-            .admin__users__table{
-                margin-left: 0;
-            }
-        }
-        @media (max-width: 820px) {
-            .admin__user__title__ctn > h1{
-                flex: 0 0 100%;
-            }
-            .admin__user__title__ctn a{
-                margin-left: 0;
-                margin-bottom: 20px;
-            }
-        }
-    </style>
-    <main>
-        <section class="admin__users__table user-profile__container">
-            <div class="container">
-                <div class="admin__user__title__ctn d-flex">
-                    <h1>Все жанры</h1>
-                    <a href="{{route('librarian.genres.create')}}" class="btn btn-primary">Добавить жанр</a>
+    <section class="main_block_lk element_pad">
+        <div class="container">
+            <div class="lk_inner_block">
+                <div class="lk_caption_row">
+                    <h1>Все Жанры</h1>
+                    <a href="{{route('librarian.genres.create')}}" class="primary_btn">
+                        Добавить жанр
+                        <i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i>
+                    </a>
                 </div>
-                @if(session()->has('success'))
-                    <div class="alert alert-success">
-                        {{session()->get('success')}}
+                <div class="lk_filters">
+                    <div class="lk_filter">
+                        <label for="search" class="lk_filter_label">Поиск</label>
+                        <input id="search" name="search" class="input" placeholder="По названию...">
                     </div>
-                @endif
-
-                <div class="admin__users__table__wrapper">
-                    <table class="admin__users__table__table table align-middle mb-0">
-                        <thead class="table-light">
-                        <tr>
-                            <th>#ID</th>
-                            <th>Название жанра</th>
-                            <th>Действия</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($genres as $genre)
-                            <tr>
-                                <td>{{$genre->id}}</td>
-                                <td>{{$genre->name}}</td>
-                                <td class="admin__users__nav">
-                                    <div class="d-flex align-items-center gap-3 fs-6">
-                                        <a href="{{route('librarian.genres.edit', $genre)}}">
-                                            <i class="fa-solid fa-pen text-primary"></i>
-                                        </a>
-                                        <form class="form__icon" id="form_delete" action="{{route('librarian.genres.destroy', $genre)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit">
-                                                <i class="fa-solid fa-trash text-danger"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
                 </div>
-
+                <!--<input type="text" class="input search" placeholder="Поиск по названию...">-->
+                <table class="main_table">
+                    <tr class="main_table_heading">
+                        <th>#ID</th>
+                        <th class="left_alignment">Название жанра</th>
+                        <th>Действия</th>
+                    </tr>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td class="left_alignment">
+                            Детектив
+                        </td>
+                        <td>
+                            <div class="table_actions">
+                                <a href="{{route('librarian.genres.edit')}}" class="text-primary">
+                                    <i class="fa fa-pen fa-solid"></i>
+                                </a>
+                                <form action="#" method="post" class="form_destroy">
+                                    <button type="sumbit" class="btn_icon text-danger">
+                                        <i class="fa fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td class="left_alignment">
+                            Роман
+                        </td>
+                        <td>
+                            <div class="table_actions">
+                                <a href="#" class="text-primary">
+                                    <i class="fa fa-pen fa-solid"></i>
+                                </a>
+                                <form action="#" method="post" class="form_destroy">
+                                    <button type="sumbit" class="btn_icon text-danger">
+                                        <i class="fa fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td class="left_alignment">
+                            Фантастика
+                        </td>
+                        <td>
+                            <div class="table_actions">
+                                <a href="#" class="text-primary">
+                                    <i class="fa fa-pen fa-solid"></i>
+                                </a>
+                                <form action="#" method="post" class="form_destroy">
+                                    <button type="sumbit" class="btn_icon text-danger">
+                                        <i class="fa fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td class="left_alignment">
+                            Художественная литература
+                        </td>
+                        <td>
+                            <div class="table_actions">
+                                <a href="#" class="text-primary">
+                                    <i class="fa fa-pen fa-solid"></i>
+                                </a>
+                                <form action="#" method="post" class="form_destroy">
+                                    <button type="sumbit" class="btn_icon text-danger">
+                                        <i class="fa fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td class="left_alignment">
+                            Психология
+                        </td>
+                        <td>
+                            <div class="table_actions">
+                                <a href="#" class="text-primary">
+                                    <i class="fa fa-pen fa-solid"></i>
+                                </a>
+                                <form action="#" method="post" class="form_destroy">
+                                    <button type="sumbit" class="btn_icon text-danger">
+                                        <i class="fa fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td class="left_alignment">
+                            Психология
+                        </td>
+                        <td>
+                            <div class="table_actions">
+                                <a href="#" class="text-primary">
+                                    <i class="fa fa-pen fa-solid"></i>
+                                </a>
+                                <form action="#" method="post" class="form_destroy">
+                                    <button type="sumbit" class="btn_icon text-danger">
+                                        <i class="fa fa-solid fa-trash-can"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-        </section>
-    </main>
-
+        </div>
+    </section>
 @endsection

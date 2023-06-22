@@ -1,58 +1,30 @@
-<?php $title = 'Добавление жанра' ?>
+@extends('layouts.auth')
 
-@extends('user.layout.main')
+@section('title')
+    НЧПК | Библиотека | Добавить жанр
+@endsection
 
 @section('content')
-    <style>
-        .form-row_{
-            display: flex;
-            justify-content: space-between;
-        }
-        .form-row_ > .form-col-2{
-            flex: 0 0 49%;
-            max-width: 49%;
-        }
-        .form-row_ > .form-col-3{
-            flex: 0 0 32%;
-            max-width: 32%;
-        }
-        .form-group label{
-            margin: 10px 0;
-        }
-        .profile__form{
-            margin-left: 0;
-        }
-        .profile__form .btn{
-            width: 100%;
-        }
-    </style>
-    <main class="user-profile__container">
+    <section class="main_block_lk element_pad">
         <div class="container">
-            <div>
-                <h1>Создание жанра</h1>
-                <div class="profile">
-                    <div class="profile__form">
-                        <form method="post" action="{{route('librarian.genres.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            @if(session()->has('success'))
-                                <div class="alert alert-success">
-                                    {{session()->get('success')}}
-                                </div>
-                            @endif
-                            <div class="form-group form-col-2">
-                                <label for="inputEmail4">Название</label><span class="text-danger">*</span>
-                                <input type="text" name="name" class="form-control" id="inputEmail4" placeholder="Введите название">
-                                @error('name')
-                                <div class="text-danger mt-2">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                            </div>
-                            <button type="submit" class="btn btn-primary mt-3">Создать</button>
-                        </form>
-                    </div>
+            <div class="lk_inner_block">
+                <div class="lk_caption_row">
+                    <h1>Добавить Жанр</h1>
                 </div>
+
+                <form action="" method="post">
+                    <div class="add_genre_form">
+                        <div class="add_genre_column">
+                            <label class="add_genre_label" for="genre_name">Название жанра *</label>
+                            <input class="add_genre_input" id="genre_name" type="text" placeholder="Нонфикшен">
+                        </div>
+                    </div>
+
+                    <div class="comment_form_rating_input_control">
+                        <input name="submit" type="submit" id="submit" class="book_info_section_reviews_submit edit_book" value="Сохранить изменения">
+                    </div>
+                </form>
             </div>
         </div>
-    </main>
+    </section>
 @endsection

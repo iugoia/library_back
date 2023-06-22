@@ -1,145 +1,66 @@
-<?php $title = 'Добавление книги' ?>
+@extends('layouts.auth')
 
-@extends('user.layout.main')
+@section('title')
+    НЧПК | Библиотека | Все книги
+@endsection
 
 @section('content')
-    <style>
-        .form-row_{
-            display: flex;
-            justify-content: space-between;
-        }
-        .form-row_ > .form-col-2{
-            flex: 0 0 49%;
-            max-width: 49%;
-        }
-        .form-row_ > .form-col-3{
-            flex: 0 0 32%;
-            max-width: 32%;
-        }
-        .form-group label{
-            margin: 10px 0;
-        }
-        .profile__form{
-            margin-left: 0;
-        }
-        .profile__form .btn{
-            width: 100%;
-        }
-    </style>
-    <main class="user-profile__container">
+    <section class="main_block_lk element_pad">
         <div class="container">
-            <div>
-                @if ($genres->isEmpty())
-                    <h1>Создайте жанр перед тем, как добавлять книгу</h1>
-                @else
-                    <h1>Создание книги</h1>
-                    <div class="profile">
-                        <div class="profile__form">
-                            <form method="post" action="{{route('librarian.books.store')}}" enctype="multipart/form-data">
-                                @csrf
-                                @if(session()->has('success'))
-                                    <div class="alert alert-success">
-                                        {{session()->get('success')}}
-                                    </div>
-                                @endif
-                                <div class="form-row_">
-                                    <div class="form-group form-col-2">
-                                        <label for="inputEmail4">Название</label><span class="text-danger">*</span>
-                                        <input type="text" name="name" class="form-control" id="inputEmail4" placeholder="Введите название">
-                                        @error('name')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group form-col-2">
-                                        <label for="inputPassword4">Автор</label><span class="text-danger">*</span>
-                                        <input type="text" name="author" class="form-control" id="inputPassword4" placeholder="Введите автора">
-                                        @error('author')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword43" class="form-label">Жанр</label><span class="text-danger">*</span>
-                                    <select name="genre_id" id="" class="form-select">
-                                        @foreach($genres as $genre)
-                                            <option value="{{$genre->id}}">{{$genre->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('genre_id')
-                                    <div class="text-danger mt-2">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group avatar__input">
-                                    <label for="inputavatar">Изображение</label><span class="text-danger">*</span>
-                                    <input type="file" name="image" class="form-control" id="inputavatar" accept="image/png,image/jpeg, image/jpg">
-                                    @error('image')
-                                    <div class="text-danger mt-2">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="form-row_">
-                                    <div class="form-group form-col-4">
-                                        <label for="inputEmail4">Стеллаж</label><span class="text-danger">*</span>
-                                        <input type="number" name="rack" class="form-control" id="inputEmail4" placeholder="Введите стеллаж">
-                                        @error('rack')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group form-col-4">
-                                        <label for="inputPassword4">Ряд</label><span class="text-danger">*</span>
-                                        <input type="number" name="row" class="form-control" id="inputPassword4" placeholder="Введите ряд">
-                                        @error('row')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group form-col-4">
-                                        <label for="inputPassword4">Полка</label><span class="text-danger">*</span>
-                                        <input type="number" name="shelf" class="form-control" id="inputPassword4" placeholder="Введите полку">
-                                        @error('shelf')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group form-col-4">
-                                        <label for="inputEmail4">Количество экземпляров</label><span class="text-danger">*</span>
-                                        <input type="number" name="count" class="form-control" id="inputEmail4" placeholder="Введите стеллаж">
-                                        @error('count')
-                                        <div class="text-danger mt-2">
-                                            {{$message}}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
+            <div class="lk_inner_block">
+                <div class="lk_caption_row">
+                    <h1>Добавить книгу</h1>
+                </div>
 
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Описание</label>
-                                    <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                    @error('description')
-                                    <div class="text-danger mt-2">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
+                <form action="" method="post">
+                    <div class="add_book_form">
+                        <div class="add_form_row">
+                            <div class="add_form_item">
+                                <label class="add_form_item_label" for="book_name">Название книги *</label>
+                                <input class="add_form_item_input" id="book_name" type="text" placeholder="Избранница весны">
+                            </div>
+                            <div class="add_form_item">
+                                <label class="add_form_item_label" for="input__file">Фотография *</label>
+                                <div class="input__wrapper">
+                                    <label class="add_form_field__file-wrapper" for="input__file">
+                                        <div class="add_form_field__file-button">Выберите файл</div>
+                                        <div class="add_form_field__file-fake">Файл не выбран</div>
+                                    </label>
+                                    <input type="file" id="input__file" class="input__file">
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3">Создать</button>
-                            </form>
+                            </div>
+                        </div>
+                        <div class="add_form_row">
+                            <div class="add_form_item">
+                                <label class="add_form_item_label" for="book_genre">Жанр *</label>
+                                <select class="add_form_item_input" name="" id="book_genre">
+                                    <option value="">Детектив</option>
+                                </select>
+                            </div>
+                            <div class="add_form_item">
+                                <label class="add_form_item_label" for="book_author">Автор *</label>
+                                <select class="add_form_item_input" name="" id="book_author">
+                                    <option value="">Джуллия Филлипс</option>
+                                </select>
+                            </div>
+                            <div class="add_form_item">
+                                <label class="add_form_item_label" for="book_inst">Количество экземпляров</label>
+                                <input class="add_form_item_input" type="text" name="" id="book_inst">
+                            </div>
+                        </div>
+                        <div class="add_form_row">
+                            <div class="add_form_item">
+                                <label class="add_form_item_label" for="book_description">Описание</label>
+                                <textarea class="add_form_item_textarea" placeholder="Текст отзыва" name="" id="book_description" cols="30" rows="10"></textarea>
+                            </div>
                         </div>
                     </div>
-                @endif
 
-
+                    <div class="comment_form_rating_input_control">
+                        <input name="submit" type="submit" id="submit" class="book_info_section_reviews_submit edit_book" value="Сохранить изменения">
+                    </div>
+                </form>
             </div>
         </div>
-    </main>
+    </section>
 @endsection
