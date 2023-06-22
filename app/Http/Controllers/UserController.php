@@ -17,7 +17,7 @@ class UserController extends Controller
             'login' => ['required', 'string', 'unique:users,login', 'min:4', 'max:30'],
             'name' => ['required', 'string', 'min:2', 'max:30'],
             'surname' => ['required', 'string', 'min:3', 'max:30'],
-            'email' => ['required', 'string', 'email', 'unique:users,email'],
+            'email' => ['required', 'string', 'email', 'unique:users,email', 'min:15', 'max:100'],
             'phone' => ['required', 'string', 'unique:users,phone', 'min:11'],
             'password' => ['required', 'string', 'min:5'],
             'avatar' => ['required', 'file', 'mimes:jpg,jpeg,png,webp']
@@ -80,7 +80,7 @@ class UserController extends Controller
             'login' => ['nullable', 'string', Rule::unique('users', 'login')->ignore($user->id), 'min:4', 'max:30'],
             'name' => ['nullable', 'string', 'min:2', 'max:30'],
             'surname' => ['nullable', 'string', 'min:3', 'max:30'],
-            'email' => ['nullable', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+            'email' => ['nullable', 'string', 'email', Rule::unique('users', 'email')->ignore($user->id), 'min:15', 'max:60'],
             'phone' => ['nullable', 'string', Rule::unique('users', 'phone')->ignore($user->id), 'min:11'],
             'password' => ['nullable', 'string', 'min:5'],
             'avatar' => ['nullable', 'file', 'mimes:jpg,jpeg,png']
