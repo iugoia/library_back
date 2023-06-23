@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/feedback', [\App\Http\Controllers\User\FeedbackController::class, 'update'])->name('user.feedbacks.update');
 
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, '__invoke'])->name('registration');
+Route::post('/login', [\App\Http\Controllers\LoginController::class, '__invoke'])->name('auth');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/logout', [\App\Http\Controllers\LogoutController::class, '__invoke'])->name('logout');
+});
 
 //Route::group(['namespace' => 'user'], function () {
 //    Route::post('register', [UserController::class, 'signup'])->name('signup');

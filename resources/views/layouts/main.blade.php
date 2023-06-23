@@ -36,15 +36,28 @@
                     </ul>
                 </nav>
                 <ul class="lk__nav">
-                    <li class="lk__nav__item">
-                        <a href="{{route('register')}}" class="icon_btn">
-                            Зарегистрироваться
-                            <i class="fa fa-regular fa-user"></i>
-                        </a>
-                    </li>
-                    <li class="lk__nav__item">
-                        <a href="{{route('login')}}">Войти</a>
-                    </li>
+                    @if(\Illuminate\Support\Facades\Auth::user()):
+                        <li class="lk__nav__item">
+                            <a href="{{route('user.reservations.index')}}" class="icon_btn">
+                                Личный кабинет
+                                <i class="fa fa-regular fa-user"></i>
+                            </a>
+                        </li>
+                        <li class="lk__nav__item">
+                            <a href="{{route('logout')}}">Выйти</a>
+                        </li>
+                    @else
+                        <li class="lk__nav__item">
+                            <a href="{{route('register')}}" class="icon_btn">
+                                Зарегистрироваться
+                                <i class="fa fa-regular fa-user"></i>
+                            </a>
+                        </li>
+                        <li class="lk__nav__item">
+                            <a href="{{route('login')}}">Войти</a>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
         </div>

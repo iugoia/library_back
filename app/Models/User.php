@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->role === 'librarian';
     }
 
+    public function isSupport()
+    {
+        return $this->role === 'support';
+    }
+
     public function reservations($user)
     {
         return $user->hasMany(Reservation::class);

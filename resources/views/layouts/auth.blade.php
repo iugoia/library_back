@@ -37,15 +37,27 @@
                     </ul>
                 </nav>
                 <ul class="lk__nav">
+                    @if(\Illuminate\Support\Facades\Auth::user()):
                     <li class="lk__nav__item">
-                        <a href="{{route('register')}}" class="icon_btn">
-                            Зарегистрироваться
+                        <a href="{{route('user.reservations.index')}}" class="icon_btn">
+                            Личный кабинет
                             <i class="fa fa-regular fa-user"></i>
                         </a>
                     </li>
                     <li class="lk__nav__item">
-                        <a href="{{route('login')}}">Войти</a>
+                        <a href="{{route('logout')}}">Выйти</a>
                     </li>
+                    @else
+                        <li class="lk__nav__item">
+                            <a href="{{route('register')}}" class="icon_btn">
+                                Зарегистрироваться
+                                <i class="fa fa-regular fa-user"></i>
+                            </a>
+                        </li>
+                        <li class="lk__nav__item">
+                            <a href="{{route('login')}}">Войти</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -62,6 +74,7 @@
                     <i class="fa-solid fa-comment fa-xl"></i>
                     <span>Мои отзывы</span>
                 </a>
+                @if(\Illuminate\Support\Facades\Auth::user()->role === 'librarian' || \Illuminate\Support\Facades\Auth::user()->role === 'admin'):
                 <a href="{{route('librarian.books.index')}}">
                     <i class="fa fa-book fa-xl"></i>
                     <span>Все книги</span>
@@ -78,20 +91,25 @@
                     <i class="fa-solid fa-octagon-check fa-xl"></i>
                     <span>Все бронирования</span>
                 </a>
+                @endif
+                @if (\Illuminate\Support\Facades\Auth::user()->role === 'support' || \Illuminate\Support\Facades\Auth::user()->role === 'admin'):
                 <a href="{{route('support.feedbacks.index')}}">
                     <i class="fa-solid fa-comments fa-xl"></i>
                     <span>Все отзывы</span>
                 </a>
+                @endif
+                @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin'):
                 <a href="{{route('admin.users.index')}}">
                     <i class="fa-solid fa-users fa-xl"></i>
                     <span>Все пользователи</span>
                 </a>
+                @endif
                 <a href="{{route('user.settings.index')}}">
                     <i class="fa-solid fa-gear fa-xl"></i>
                     <span>Настройки</span>
                 </a>
 
-                <a href="#">
+                <a href="{{route('logout')}}">
                     <i class="fa-solid fa-right-from-bracket fa-xl"></i>
                     <span>Выйти</span>
 

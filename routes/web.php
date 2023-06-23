@@ -25,64 +25,76 @@ Route::group(['namespace' => 'auth'], function() {
     })->name('register');
 });
 
-Route::group(['namespace' => 'user'], function() {
-    Route::group(['namespace' => 'reservation', 'prefix' => 'reservatons'], function() {
-        Route::get('/', [\App\Http\Controllers\User\ReservationController::class, 'index'])->name('user.reservations.index');
-    });
-    Route::group(['namespace' => 'feedback', 'prefix' => 'feedback'], function() {
-        Route::get('/', [\App\Http\Controllers\User\FeedbackController::class, 'index'])->name('user.feedbacks.index');
-        Route::get('/create', [\App\Http\Controllers\User\FeedbackController::class, 'create'])->name('user.feedbacks.create');
-        Route::get('/edit', [\App\Http\Controllers\User\FeedbackController::class, 'edit'])->name('user.feedbacks.edit');
-    });
+Route::middleware('auth')->group(function() {
 
-    Route::group(['namespace' => 'settings', 'prefix' => 'settings'], function() {
-        Route::get('/', [\App\Http\Controllers\User\SettingController::class, 'indexSettings'])->name('user.settings.index');
-        Route::get('/security', [\App\Http\Controllers\User\SettingController::class, 'indexSecurity'])->name('user.settings.security');
-    });
-
-    Route::group(['namespace' => 'support', 'prefix' => 'support'], function() {
-        Route::group(['namespace' => 'feedbacks', 'prefix' => 'feedback'], function() {
-            Route::get('/', [\App\Http\Controllers\Support\FeedbackController::class, 'index'])->name('support.feedbacks.index');
+    Route::group(['namespace' => 'user'], function() {
+        Route::group(['namespace' => 'reservation', 'prefix' => 'reservatons'], function() {
+            Route::get('/', [\App\Http\Controllers\User\ReservationController::class, 'index'])->name('user.reservations.index');
+        });
+        Route::group(['namespace' => 'feedback', 'prefix' => 'feedback'], function() {
+            Route::get('/', [\App\Http\Controllers\User\FeedbackController::class, 'index'])->name('user.feedbacks.index');
+            Route::get('/create', [\App\Http\Controllers\User\FeedbackController::class, 'create'])->name('user.feedbacks.create');
+            Route::get('/edit', [\App\Http\Controllers\User\FeedbackController::class, 'edit'])->name('user.feedbacks.edit');
         });
 
-        Route::group(['namespace' => 'answers', 'prefix' => 'answer'], function() {
-            Route::get('/create', [\App\Http\Controllers\Support\AnswerController::class, 'create'])->name('support.answers.create');
-        });
-    });
-
-    Route::group(['namespace' => 'librarian'], function () {
-        Route::group(['namespace' => 'books', 'prefix' => 'book'], function() {
-            Route::get('/', [\App\Http\Controllers\Librarian\BookController::class, 'index'])->name('librarian.books.index');
-            Route::get('/create', [\App\Http\Controllers\Librarian\BookController::class, 'create'])->name('librarian.books.create');
-            Route::get('/edit', [\App\Http\Controllers\Librarian\BookController::class, 'edit'])->name('librarian.books.edit');
+        Route::group(['namespace' => 'settings', 'prefix' => 'settings'], function() {
+            Route::get('/', [\App\Http\Controllers\User\SettingController::class, 'indexSettings'])->name('user.settings.index');
+            Route::get('/security', [\App\Http\Controllers\User\SettingController::class, 'indexSecurity'])->name('user.settings.security');
         });
 
-        Route::group(['namespace' => 'authors', 'prefix' => 'author'], function() {
-            Route::get('/', [\App\Http\Controllers\Librarian\AuthorController::class, 'index'])->name('librarian.authors.index');
-            Route::get('/create', [\App\Http\Controllers\Librarian\AuthorController::class, 'create'])->name('librarian.authors.create');
-            Route::get('/edit', [\App\Http\Controllers\Librarian\AuthorController::class, 'edit'])->name('librarian.authors.edit');
+        Route::middleware('support')->group(function() {
+            Route::group(['namespace' => 'support', 'prefix' => 'support'], function() {
+                Route::group(['namespace' => 'feedbacks', 'prefix' => 'feedback'], function() {
+                    Route::get('/', [\App\Http\Controllers\Support\FeedbackController::class, 'index'])->name('support.feedbacks.index');
+                });
+
+                Route::group(['namespace' => 'answers', 'prefix' => 'answer'], function() {
+                    Route::get('/create', [\App\Http\Controllers\Support\AnswerController::class, 'create'])->name('support.answers.create');
+                });
+            });
         });
 
-        Route::group(['namespace' => 'genres', 'prefix' => 'genre'], function() {
-            Route::get('/', [\App\Http\Controllers\Librarian\GenreController::class, 'index'])->name('librarian.genres.index');
-            Route::get('/create', [\App\Http\Controllers\Librarian\GenreController::class, 'create'])->name('librarian.genres.create');
-            Route::get('/edit', [\App\Http\Controllers\Librarian\GenreController::class, 'edit'])->name('librarian.genres.edit');
-        });
+        Route::middleware('librarian')->group(function() {
+            Route::group(['namespace' => 'librarian'], function () {
+                Route::group(['namespace' => 'books', 'prefix' => 'book'], function() {
+                    Route::get('/', [\App\Http\Controllers\Librarian\BookController::class, 'index'])->name('librarian.books.index');
+                    Route::get('/create', [\App\Http\Controllers\Librarian\BookController::class, 'create'])->name('librarian.books.create');
+                    Route::get('/edit', [\App\Http\Controllers\Librarian\BookController::class, 'edit'])->name('librarian.books.edit');
+                });
 
-        Route::group(['namespace' => 'reservations', 'prefix' => 'libreservations'], function () {
-            Route::get('/', [\App\Http\Controllers\Librarian\ReservationController::class, 'index'])->name('librarian.reservations.index');
-            Route::get('/edit', [\App\Http\Controllers\Librarian\ReservationController::class, 'edit'])->name('librarian.reservations.edit');
-        });
+                Route::group(['namespace' => 'authors', 'prefix' => 'author'], function() {
+                    Route::get('/', [\App\Http\Controllers\Librarian\AuthorController::class, 'index'])->name('librarian.authors.index');
+                    Route::get('/create', [\App\Http\Controllers\Librarian\AuthorController::class, 'create'])->name('librarian.authors.create');
+                    Route::get('/edit', [\App\Http\Controllers\Librarian\AuthorController::class, 'edit'])->name('librarian.authors.edit');
+                });
 
-        Route::group(['namespace' => 'admin'], function() {
-            Route::group(['namespace' => 'users', 'prefix' => 'user'], function() {
-                Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users.index');
-                Route::get('/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.users.create');
-                Route::get('/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.users.edit');
+                Route::group(['namespace' => 'genres', 'prefix' => 'genre'], function() {
+                    Route::get('/', [\App\Http\Controllers\Librarian\GenreController::class, 'index'])->name('librarian.genres.index');
+                    Route::get('/create', [\App\Http\Controllers\Librarian\GenreController::class, 'create'])->name('librarian.genres.create');
+                    Route::get('/edit', [\App\Http\Controllers\Librarian\GenreController::class, 'edit'])->name('librarian.genres.edit');
+                });
+
+                Route::group(['namespace' => 'reservations', 'prefix' => 'libreservations'], function () {
+                    Route::get('/', [\App\Http\Controllers\Librarian\ReservationController::class, 'index'])->name('librarian.reservations.index');
+                    Route::get('/edit', [\App\Http\Controllers\Librarian\ReservationController::class, 'edit'])->name('librarian.reservations.edit');
+                });
+
+                Route::middleware('admin')->group(function() {
+                    Route::group(['namespace' => 'admin'], function() {
+                        Route::group(['namespace' => 'users', 'prefix' => 'user'], function() {
+                            Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('admin.users.index');
+                            Route::get('/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('admin.users.create');
+                            Route::get('/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('admin.users.edit');
+                        });
+                    });
+                });
+
             });
         });
     });
 });
+
+
 
 //Route::get('/', function (){
 //    return view('index');

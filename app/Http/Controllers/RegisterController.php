@@ -28,17 +28,13 @@ class RegisterController extends Controller
         if ($request->password !== $request->password_retry)
             return redirect()->back()->with('error', "Пароли не совпадают");
 
-        $filename = $request->file('avatar')->store('/avatars', 'public');
         $user = User::create([
-                'password' => Hash::make($request->password),
-                'avatar' => $filename
+                'password' => Hash::make($request->password)
             ] + $request->all());
+
         if ($user){
-            Auth::login($user);
-            return redirect(route('personal-account'));
+            return redirect(route('login'));
         }
         return redirect()->back()->with('error', 'Ошибка при создании пользователя');
-
-        dd($request->all());
     }
 }
