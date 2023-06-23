@@ -31,7 +31,7 @@
                             <a href="{{route('catalog')}}" class="user__nav__link">Каталог</a>
                         </li>
                         <li class="user__nav__item">
-                            <a href="index.html" class="user__nav__link">Контакты</a>
+                            <a href="{{route('works')}}" class="user__nav__link">Бронирование книг</a>
                         </li>
                     </ul>
                 </nav>

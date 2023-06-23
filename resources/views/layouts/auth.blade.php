@@ -32,7 +32,7 @@
                             <a href="{{route('catalog')}}" class="user__nav__link">Каталог</a>
                         </li>
                         <li class="user__nav__item">
-                            <a href="index.html" class="user__nav__link">Контакты</a>
+                            <a href="{{route('works')}}" class="user__nav__link">Бронирование книг</a>
                         </li>
                     </ul>
                 </nav>
@@ -74,19 +74,19 @@
                     <i class="fa-solid fa-rectangle-list fa-xl"></i>
                     <span>Жанры</span>
                 </a>
+                <a href="{{route('librarian.reservations.index')}}">
+                    <i class="fa-solid fa-octagon-check fa-xl"></i>
+                    <span>Все бронирования</span>
+                </a>
                 <a href="{{route('support.feedbacks.index')}}">
                     <i class="fa-solid fa-comments fa-xl"></i>
                     <span>Все отзывы</span>
                 </a>
-                <a href="#">
+                <a href="{{route('admin.users.index')}}">
                     <i class="fa-solid fa-users fa-xl"></i>
                     <span>Все пользователи</span>
                 </a>
-                <a href="#">
-                    <i class="fa-solid fa-octagon-check fa-xl"></i>
-                    <span>Все бронирования</span>
-                </a>
-                <a href="#">
+                <a href="{{route('user.settings.index')}}">
                     <i class="fa-solid fa-gear fa-xl"></i>
                     <span>Настройки</span>
                 </a>

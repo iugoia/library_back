@@ -1035,7 +1035,6 @@ fieldset{
     padding: 60px;
     background: #fff;
     border-radius: 20px;
-    width: 100%;
 }
 
 .catalog_row {
@@ -1053,43 +1052,15 @@ fieldset{
 
 .catalog_list{
     display: flex;
-    gap: 4%;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
-/*.catalog_item{
+.catalog_item{
     flex: 0 0 22%;
     margin-bottom: 30px;
-}*/
-.catalog_item{
-    margin-bottom: 30px;
-    width: 22%;
 }
 
-@media (max-width:1440px) {
-    .catalog_list{
-        gap: 4.5%;
-    }
-    .catalog_item{
-        flex: 0 0 30%;
-    }
-}
-@media (max-width:1024px) {
-    .catalog_list{
-        gap: 7%;
-    }
-    .catalog_item{
-        flex: 0 0 44%;
-    }
-}
-@media (max-width:768px) {
-    .catalog_list{
-        gap: 7%;
-    }
-    .catalog_item{
-        flex: 0 0 100%;
-    }
-}
 .catalog_item_image_ctn{
     border-radius: 15px;
     width: 100%;
@@ -1397,7 +1368,7 @@ fieldset{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+
 }
 .lk_filter .input{
     width: 260px;
@@ -1408,27 +1379,46 @@ fieldset{
     color: #949494;
 }
 
+/*выпадающий список
+.input_select{
+    appearance: none;
+    background: url(../media/image/icons/select_arrow.png) no-repeat right;
+    background-position-x: calc(100% - 15px);
+}
+.input_select option{
+    color: #152542;
+}
+.input_select option:focus{
+    background: #F9F8FC;
+}
+*/
 
-/*выпадающие списки*/
+
+
 .__select {
     position: relative;
-    width: 100%;
-    height: 42px;
+    width: 290px;
+    height: 40px;
+&[data-state="active"] {
+.__select__title {
+&::before {
+     transform: translate(-3px, -50%) rotate(-45deg);
+ }
+
+&::after {
+     transform: translate(3px, -50%) rotate(45deg);
+ }
 }
-.__select[data-state="active"] .__select__title::before{
-    transform: translate(-3px, -50%) rotate(-45deg);
+.__select__content {
+    opacity: 1;
 }
-.__select[data-state="active"] .__select__title::after{
-    transform: translate(3px, -50%) rotate(45deg);
-}
-.__select[data-state="active"] .__select__content{
-    display: flex;
-}
-.__select[data-state="active"] .__select__label{
+.__select__label{
     height: 30px;
     border-bottom: 1px solid #C6C6C6;
     color: #152542;
     vertical-align: middle;
+}
+}
 }
 .__select__title {
     display: flex;
@@ -1440,23 +1430,24 @@ fieldset{
     cursor: pointer;
     box-sizing: border-box;
     padding-left: 15px;
-    font-weight: 500;
-    font-size: 14px;
+&::before,
+&::after {
+     content: "";
+     position: absolute;
+     left: 88%;
+     display: block;
+     width: 10px;
+     height: 2px;
+     transition: all 0.3s ease-out;
+     background-color: #152542;
+     transform: translate(-3px, -50%) rotate(45deg);
+ }
+&::after {
+     transform: translate(3px, -50%) rotate(-45deg);
+ }
 }
-.__select__title::before,
-.__select__title::after{
-    content: "";
-    position: absolute;
-    right: 20px;
-    display: block;
-    width: 10px;
-    height: 2px;
-    transition: all 0.3s ease-out;
-    background-color: #152542;
-    transform: translate(-3px, -50%) rotate(45deg);
-}
-.__select__title::after {
-    transform: translate(3px, -50%) rotate(-45deg);
+.__select__title:focus{
+    border: 1px solid #5617D2;
 }
 .__select__content {
     position: absolute;
@@ -1468,65 +1459,13 @@ fieldset{
     border-radius: 5px;
     background-color: #ffffff;
     transition: all 0.3s ease-out;
-    display: none;
+    opacity: 0;
     z-index: 8;
 }
 .__select__label{
     padding: 7px 0 7px 16px;
-    font-weight: 500;
-    font-size: 14px;
 }
 
-
-/*версия с селектом
-.select {
-    display: block;
-    width: 100%;
-    position: relative;
-}
-.new-select {
-    position: relative;
-    border: 1px solid #C6C6C6;
-    border-radius: 7px;
-    padding: 10px 20px;
-    cursor: pointer;
-    user-select: none;
-}
-.new-select__list {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    border: 1px solid #C6C6C6;
-    cursor: pointer;
-    width: 100%;
-    z-index: 2;
-    background: #fff;
-    user-select: none;
-    border-radius: 5px;
-}
-.new-select__list.on {
-    display: block;
-}
-.new-select__item span {
-    display: block;
-    padding: 10px 20px;
-    border-bottom: 1px solid #C6C6C6;
-}
-.new-select__item span:hover {
-    color: #5617D2;
-}
-.new-select:after {
-    content: '';
-    display: block;
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    right: 9px;
-    top: 12px;
-    background: url('../media/image/icons/select_arrow.png') no-repeat right center / cover;
-    opacity: 0.6;
-}
-*/
 .main_table{
     text-align: center;
     font-weight: 500;
@@ -2292,255 +2231,6 @@ p.name_user{
     cursor: pointer;
 }
 
-/*Настройки*/
-
-
-
-.lk_block_settings{
-    padding: 0px 0px 100px 0px;
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0px 5px 20px rgba(21, 37, 66, 0.15);
-    margin-bottom: 3%;
-    height: 100%;
-
-}
-.left_block_settings{
-    padding: 30px 25px 43%;
-    background: #FFFFFF;
-    border-radius: 0px;
-    float: left;
-    text-decoration: none;
-    transition: 0.15s ease-in-out;
-    box-shadow: 0px 5px 20px rgba(21, 37, 66, 0.15);
-}
-.a_setting{
-    text-decoration: none;
-    color: #666;
-
-}
-.li_setting{
-    height: 40px;
-
-    color: rgba(86, 23, 210, 0.8);
-    min-height: 10em;
-    display: table-cell;
-    vertical-align: middle
-}
-.li_security{
-    font-family: 'Montserrat';
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 49px;
-    display: flex;
-    align-items: center;
-    color: rgba(21, 37, 66, 0.8);
-}
-
-.a_user{
-    padding: 20px 0px;
-    color: rgba(86, 23, 210, 0.8);
-    text-align: center;
-    vertical-align: middle;
-}
-.a_security{
-    color: rgba(86, 23, 210, 0.8);
-}
-.svg20{
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-.border_settings{
-    padding: 10px;
-    background-color: rgba(86, 23, 210, 0.1);
-    border-radius: 5px;
-
-}
-.border_security{
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-}
-.right_block{
-    padding: 20px;
-
-
-    margin-left: 22pc;
-}
-
-
-.nav_setings{
-    width: 260px;
-}
-.icon_settings{
-    padding: 8px 10px;
-    border: 1px solid #C6C6C6;
-    border-radius: 5px;
-    position: absolute;
-    margin: 30px;
-}
-.icon_settings:hover{
-    background-color: #5617D2;
-
-    color:#fff ;
-}
-.img_settings{
-    width: 100px;
-    margin-bottom: 30px
-
-}
-.settings_field{
-    display: flex;
-    margin: 30px 0;
-
-}
-.input_set{
-    padding-right: 200px;
-}
-.p_set{
-    padding: 0 0 10px 20px ;
-}
-.right_button_set{
-    display: block;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 25px;
-    color: #fff;
-    background-color: #5617D2;
-    width: 200px;
-    position: absolute;
-    right: 15%;
-
-    border: 1px solid #5617D2;
-}
-.right_button_set:hover{
-    background-color: #fff;
-
-    color:#5617D2 ;
-}
-.right_block_set{
-    width: 100%;
-    margin-top: 10%;
-    height: 2px;
-    background-color: rgba(21, 37, 66, 0.15);
-
-}
-.p_security{
-    width: 80%;
-    margin-bottom: 3%;
-}
-/*Ошибка 404*/
-.s404_block{
-    text-align: center;
-    padding-top:3% ;
-}
-.p404_block{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-.but_404{
-    display: block;
-    border-radius: 5px;
-    padding: 20px;
-    margin-top: 25px;
-    color: #fff;
-    background-color: #5617D2;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2%;
-    border: 1px solid #5617D2;
-}
-.but_404:hover{
-    background-color: #fff;
-
-    color:#5617D2 ;
-}
-/*Страница как это рабртает Work*/
-
-.text_work{
-    margin-top: 40%;
-    font-size: 1.5em;
-}
-.text_work_big{
-    margin-top: 15%;
-    font-size: 1.5em;
-}
-.choose_item_work1{background-image: url('http://newlibrary/public/storage/choose_work1.png');
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 300px 300px;
-    margin: 50px;
-
-    height: calc(100% - 100px); height: 450px;}
-.choose_item_work2{background-image: url('http://newlibrary/public/storage/choose_work2.png');
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 300px 300px;
-    margin: 50px;
-    height: calc(100% - 100px);}
-.choose_item_1{
-    background: #9B87C7;
-    border-radius: 20px;
-
-}
-.choose_item_2{
-    background: #858C99;
-    border-radius: 20px;
-
-}
-.choose_item_3{
-    background: #889FC9;
-    border-radius: 20px;
-    grid-area: third;
-}
-.choose_item_work3{background-image: url('http://newlibrary/public/storage/choose_work3.png');;
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 400px 390px;
-    margin: 50px;
-    height: calc(100% - 100px);}
-.choose_item_1{
-    background: #9B87C7;
-    border-radius: 20px;
-}
-.choose_item_4{
-    background: #668CD2;
-    border-radius: 20px;
-
-
-}
-.choose_item_5{
-    background: #57AED8;
-    border-radius: 20px;
-}
-.choose_item_work4{background-image: url('http://newlibrary/public/storage/choose_work4.png');
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 300px 300px;
-    margin: 50px;
-
-    height: calc(100% - 100px); height: 450px;}
-.choose_item_work5{background-image: url('http://newlibrary/public/storage/choose_work5.png');
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 300px 300px;
-    margin: 50px;
-    height: calc(100% - 100px);}
-.choose_item_1{
-    background: #9B87C7;
-    border-radius: 20px;
-
-}
-
-
 /* Редактирование Бронирования */
 
 .book_info_section_reviews_submit.edit_book{
@@ -2558,6 +2248,7 @@ p.name_user{
 .edit_reservation_column{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .edit_reservation_img{
@@ -2669,13 +2360,13 @@ p.name_user{
 
 .add_form_field__file-button {
     display: flex;
-    justify-content: center;
     align-items: center;
     width: 50%;
     height: 39px;
     background: #EFEFEF;
     border: 1px solid #C6C6C6;
     border-radius: 4px 0px 0px 4px;
+    padding-left: 15px;
 }
 
 .add_form_input__file {
@@ -2709,38 +2400,4 @@ p.name_user{
     grid-template-rows: repeat(4,1fr);
     gap: 30px;
     margin-bottom: 130px;
-}
-
-.alert{
-    padding: 14px 30px;
-    width: calc(100% - 60px);
-    border-radius: 7px;
-    font-size: 15px;
-}
-
-.alert-error{
-    background: rgba(255, 228, 230, 1);
-    color: #E57A82;
-    font-weight: 600;
-}
-
-.alert-success{
-    background: rgba(209, 250, 229, 1);
-    color: rgba(83, 173, 127, 1);
-}
-
-.mt-1{
-    margin-top: .25rem;
-}
-
-.mb-1{
-    margin-bottom: .25rem;
-}
-
-.mb-2{
-    margin-bottom: .50rem;
-}
-
-.text-center{
-    text-align: center;
 }

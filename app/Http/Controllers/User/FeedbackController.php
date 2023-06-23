@@ -17,6 +17,11 @@ class FeedbackController extends Controller
         return view('user.feedbacks.edit');
     }
 
+    public function create()
+    {
+        return view('user.feedbacks.create');
+    }
+
     public function update(Request $request)
     {
         dd($request->all());

@@ -17,7 +17,7 @@
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_name">Имя и фамилия *</label>
-                                <input class="add_form_item_input" id="book_name" type="text" placeholder="Избранница весны">
+                                <input class="add_form_item_input input" id="book_name" type="text" placeholder="Избранница весны">
                             </div>
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="input__file">Фотография</label>
@@ -26,14 +26,14 @@
                                         <div class="add_form_field__file-button">Выберите файл</div>
                                         <div class="add_form_field__file-fake">Файл не выбран</div>
                                     </label>
-                                    <input type="file"id="input__file" class="input__file">
+                                    <input type="file" id="input__file" class="input__file input">
                                 </div>
                             </div>
                         </div>
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_description">Описание</label>
-                                <textarea class="add_form_item_textarea" placeholder="Текст отзыва" name="" id="book_description" cols="30" rows="10"></textarea>
+                                <textarea class="add_form_item_textarea input" placeholder="Текст отзыва" name="" id="book_description" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>

@@ -17,6 +17,9 @@
                                 <a href="#" class="eye_icon">
                                     <i class="fa fa-eye fa-solid"></i>
                                 </a>
+                                <a href="{{route('user.feedbacks.create')}}" class="text-primary">
+                                    <i class="fa fa-comment fa-solid"></i>
+                                </a>
                                 <form action="#" method="post" class="form_destroy">
                                     <button type="sumbit" class="btn_icon text-danger">
                                         <i class="fa fa-solid fa-trash-can"></i>
