@@ -33,12 +33,20 @@
                     @method('patch')
                     <div class="right_block">
                         <h1 style="text-transform: unset">Профиль | {{$user->login}}</h1>
-                        @if($user->avatar)
-                            <img src="{{asset('storage/' . $user->avatar)}}" alt="" class="img_settings">
-                        @else
-                            <img src="{{asset('storage/human.png')}}" alt="" class="img_settings">
-                        @endif
-                        <label for="input_file" class="icon_settings">Изменить</label>
+                        <div class="settings_avatar_btns">
+                            <div class="settings_avatar_ctn">
+                                @if($user->avatar)
+                                    <img src="{{asset('storage/' . $user->avatar)}}" alt="" class="img_settings">
+                                @else
+                                    <img src="{{asset('storage/human.png')}}" alt="" class="img_settings">
+                                @endif
+                            </div>
+
+                            <div class="btns_flex">
+                                <label for="input_file" class="icon_settings">Изменить</label>
+                            </div>
+                        </div>
+
                         <input type="file" name="avatar" accept="image/png,image/jpg,image/jpeg,image/webp" id="input_file" style="display: none">
                         @error('avatar')
                         <div class="text-danger">
@@ -94,6 +102,10 @@
                     <div class="right_block_set">
                         <button type="submit" class="right_button_set primary_btn">Сохранить</button>
                     </div>
+                </form>
+                <form action="{{route('user.settings.deleteAvatar')}}" method="post">
+                    @method('patch')
+                    <button class="btn btn_danger icon_settings btn-position" type="submit">Удалить</button>
                 </form>
             </div>
         </div>

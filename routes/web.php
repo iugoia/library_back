@@ -3,9 +3,7 @@
 use App\Http\Controllers\UserAccountController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function() {
-    return view('index');
-})->name('index');
+Route::get('/', [\App\Http\Controllers\IndexController::class, '__invoke'])->name('index');
 
 Route::get('/works', function() {
     return view('works');
@@ -51,7 +49,8 @@ Route::middleware('auth')->group(function() {
                 });
 
                 Route::group(['namespace' => 'answers', 'prefix' => 'answer'], function() {
-                    Route::get('/create', [\App\Http\Controllers\Support\AnswerController::class, 'create'])->name('support.answers.create');
+                    Route::get('/{feedback}/{user}', [\App\Http\Controllers\Support\AnswerController::class, 'create'])->name('support.answers.create');
+                    Route::get('/{feedback}/{user}/{answer}', [\App\Http\Controllers\Support\AnswerController::class, 'edit'])->name('support.answers.edit');
                 });
             });
         });

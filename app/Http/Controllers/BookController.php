@@ -20,6 +20,19 @@ class BookController extends Controller
         $author = Author::find($book->author_id);
         $author_books = Book::all()->where('author_id', '=', $author->id);
         $feedbacks = Feedback::all()->where('book_id', '=', $book->id);
-        return view('book', compact('book', 'author_books', 'author', 'feedbacks'));
+        if (!$feedbacks->isEmpty()){
+            $countFeedbacks = $feedbacks->count();
+            $sum = 0;
+            foreach ($feedbacks as $feedback){
+                $sum += $feedback->score;
+            }
+            $sumAvg = $sum / $countFeedbacks;
+            $widthRating = ($sumAvg * 22) + (floor($sumAvg) * 3);
+        } else {
+            $sumAvg = 0;
+            $widthRating = 0;
+        }
+
+        return view('book', compact('book', 'author_books', 'author', 'feedbacks', 'widthRating', 'sumAvg'));
     }
 }

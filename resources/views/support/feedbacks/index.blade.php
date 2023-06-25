@@ -86,83 +86,151 @@
                         </select>-->
                     </div>
                 </div>
+                @if(session()->has('success'))
+                    <div class="alert alert-success mb-3">
+                        {{session()->get('success')}}
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-error mb-3">
+                        {{session()->get('error')}}
+                    </div>
+                @endif
+                @foreach($arrDataList as $item)
+                    <?php
+                        $ratingWidth = $item['feedback']->score * 20 + $item['feedback']->score * 4;
+                        ?>
+                    @if($item['answer']->isEmpty())
+                        <div class="comment_shadow">
+                            <div class="comment_border">
+                                <div class="comment_button">
+                                    <?php
+                                        $book = \App\Models\Book::find($item['feedback']->book_id);
+                                        ?>
+                                    <a href="{{route('book', $book)}}" class="but_eye" target="_blank">
+                                        <i class="fa fa-eye fa-solid"></i>
+                                    </a>
+                                    <form action="{{route('support.feedbacks.destroy', $item['feedback'])}}" method="post" class="but_destroy">
+                                        @method('delete')
+                                        <button type="submit" class="btn_icon text-danger">
+                                            <i class="fa fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="comment_inner">
+                                    <div class="comment_image">
+                                        @if($item['user']->avatar)
+                                        <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
+                                        @else
+                                            <img src="{{asset('storage/human.png')}}" alt="book">
+                                        @endif
+                                    </div>
+                                    <div class="comment_info">
+                                        <p class="comment_name">{{$item['user']->name}} {{$item['user']->surname}}</p>
+                                        <p class="comment_phone">{{$item['user']->phone}}</p>
+                                        <div class="comment_star">
+                                            <div class="book_stars_par" style="margin: 0">
+                                                <div class="book_stars_unfill">
+                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                                </div>
+                                                <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
+                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                                </div>
+                                            </div>
+                                            <p class="comment_date">{{date('d.m.Y', strtotime($item['feedback']->updated_at))}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="comment_text">
+                                    {{$item['feedback']->message}}
+                                </p>
+                                <a href="{{route('support.answers.create', [$item['feedback'], $item['user']])}}" class="primary_btn btn_comment">Ответить</a>
+                            </div>
+                        </div>
+                    @else
+                        <div class="comment_shadow">
+                            <div class="comment_border">
+                                <div class="comment_button">
+                                    <p class="comment_heading">Отзыв пользователя</p>
+                                    <a href="#" class="but_eye">
+                                        <i class="fa fa-eye fa-solid"></i>
+                                    </a>
+                                    <form action="{{route('support.feedbacks.destroy', $item['feedback'])}}" method="post" class="but_destroy">
+                                        @method('delete')
+                                        <button type="submit" class="btn_icon text-danger">
+                                            <i class="fa fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="comment_inner">
+                                    <div class="comment_image">
+                                        @if($item['user']->avatar)
+                                            <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
+                                        @else
+                                            <img src="{{asset('storage/human.png')}}" alt="book">
+                                        @endif
+                                    </div>
+                                    <div class="comment_info">
+                                        <p class="comment_name">{{$item['user']->name}} {{$item['user']->surname}}</p>
+                                        <p class="comment_phone">{{$item['user']->phone}}</p>
+                                        <div class="comment_star">
+                                            <div class="book_stars_par" style="margin: 0">
+                                                <div class="book_stars_unfill">
+                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                                </div>
+                                                <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
+                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                                </div>
+                                            </div>
+                                            <p class="comment_date">{{date('d.m.Y', strtotime($item['feedback']->updated_at))}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="comment_text">
+                                    {{$item['feedback']->message}}
+                                </p>
+                            </div>
+                        </div>
+                        <!--ответ-->
+                        @foreach($item['answer'] as $answer)
+                            <?php
+                                $support = \App\Models\User::find($answer->user_id);
+                            ?>
+                            <div class="comment_shadow comment_answer">
+                                <div class="comment_border">
+                                    <div class="comment_button">
+                                        <p class="comment_heading">Ответ Тех.Поддержки</p>
+                                        <a href="{{route('support.answers.edit', [$item['feedback'], $item['user'], $answer])}}" class="text-primary">
+                                            <i class="fa fa-pen fa-solid"></i>
+                                        </a>
+                                        <form action="{{route('support.answers.destroy', $answer)}}" method="post" class="but_destroy" style="margin-left: 10px">
+                                            @method('delete')
+                                            <button type="submit" class="btn_icon text-danger">
+                                                <i class="fa fa-solid fa-trash-can"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="comment_inner">
+                                        <div class="comment_image">
+                                            @if($item['user']->avatar)
+                                                <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
+                                            @else
+                                                <img src="{{asset('storage/human.png')}}" alt="book">
+                                            @endif
+                                        </div>
+                                        <div class="comment_info">
+                                            <p class="comment_name">{{$support->name}} {{$support->surname}}</p>
+                                            <p class="comment_date">{{date('d.m.Y', strtotime($answer->updated_at))}}</p>
+                                        </div>
+                                    </div>
+                                    <p class="comment_text">{{$answer->comment}}</p>
+                                </div>
+                            </div>
+                        @endforeach
 
-                <div class="comment_shadow">
-                    <div class="comment_border">
-                        <div class="comment_button">
-                            <a href="#" class="but_eye">
-                                <i class="fa fa-eye fa-solid"></i>
-                            </a>
-                            <form action="#" method="post" class="but_destroy">
-                                <button type="sumbit" class="btn_icon text-danger">
-                                    <i class="fa fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="comment_inner">
-                            <div class="comment_image">
-                                <img src="{{asset('storage/human.png')}}" alt="book">
-                            </div>
-                            <div class="comment_info">
-                                <p class="comment_name">Дарья Терешкова</p>
-                                <p class="comment_phone">+7 (960)-085-00-00</p>
-                                <div class="comment_star">
-                                    <img src="{{asset('storage/filled_stars.png')}}" alt="star">
-                                    <p class="comment_date">21.11.2022</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="comment_text">Прекрасная книга. Каждая ее строчка просто завораживает. Произведение
-                            читается на одном дыхании. Просто капец какая интересная книга, я вот даже еще раз об этом
-                            скажу, ну прям потрясающая!! Обожаю читать, а книги в чудесном педагогическом колледже мои
-                            любимые
-                        </p>
-                        <a href="answer_comment.html" class="primary_btn btn_comment">Ответить</a>
-                    </div>
-                </div>
-                <div class="comment_shadow">
-                    <div class="comment_border">
-                        <div class="comment_button">
-                            <a href="#" class="but_eye">
-                                <i class="fa fa-eye fa-solid"></i>
-                            </a>
-                            <form action="#" method="post" class="but_destroy">
-                                <button type="sumbit" class="btn_icon text-danger">
-                                    <i class="fa fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="comment_inner">
-                            <div class="comment_image">
-                                <img src="{{asset('storage/human.png')}}" alt="book">
-                            </div>
-                            <div class="comment_info">
-                                <p class="comment_name">Дарья Терешкова</p>
-                                <p class="comment_phone">+7 (960)-085-00-00</p>
-                                <div class="comment_star">
-                                    <img src="{{asset('storage/filled_stars.png')}}" alt="star">
-                                    <p class="comment_date">21.11.2022</p>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="comment_text">Прекрасная книга. Каждая ее строчка просто завораживает. Произведение
-                            читается на одном дыхании. Просто капец какая интересная книга, я вот даже еще раз об этом
-                            скажу, ну прям потрясающая!! Обожаю читать, а книги в чудесном педагогическом колледже мои
-                            любимые
-                        </p>
-                        <a href="answer_comment.html" class="primary_btn btn_comment">Ответить</a>
-                    </div>
-                </div>
-                <!--<a href="#" class="primary_btn btn_comment">
-                    Добавить книгу
-                    <svg class="svg-inline--fa fa-plus fa-xl" style="color: #ffffff;" aria-hidden="true" focusable="false"
-                        data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512" data-fa-i2svg="">
-                        <path fill="currentColor"
-                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z">
-                        </path>
-                    </svg> <i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i>
-                </a>-->
+                    @endif
+                @endforeach
+
             </div>
         </div>
     </section>

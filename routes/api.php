@@ -18,12 +18,25 @@ Route::middleware('auth')->group(function() {
         Route::group(['namespace' => 'settings'], function() {
             Route::patch('/update/settings', [\App\Http\Controllers\User\SettingController::class, 'updateSettings'])->name('user.settings.updateSettings');
             Route::patch('/update/security', [\App\Http\Controllers\User\SettingController::class, 'updateSecurity'])->name('user.settings.updateSecurity');
+            Route::patch('/update/settings/delete-avatar', [\App\Http\Controllers\User\SettingController::class, 'deleteAvatar'])->name('user.settings.deleteAvatar');
         });
 
         Route::group(['prefix' => 'feedbacks'], function() {
             Route::post('/{book}', [\App\Http\Controllers\User\FeedbackController::class, 'store'])->name('user.feedbacks.store');
             Route::patch('/{feedback}', [\App\Http\Controllers\User\FeedbackController::class, 'update'])->name('user.feedbacks.update');
             Route::delete('/{feedback}', [\App\Http\Controllers\User\FeedbackController::class, 'destroy'])->name('user.feedbacks.destroy');
+        });
+    });
+
+    Route::middleware('support')->group(function() {
+        Route::group(['prefix' => 'answers'], function() {
+            Route::post('/{feedback}/{user}', [\App\Http\Controllers\Support\AnswerController::class, 'store'])->name('support.answers.store');
+            Route::patch('/{answer}', [\App\Http\Controllers\Support\AnswerController::class, 'update'])->name('support.answers.update');
+            Route::delete('/{answer}', [\App\Http\Controllers\Support\AnswerController::class, 'destroy'])->name('support.answers.destroy');
+        });
+
+        Route::group(['prefix' => 'supfeedbacks'], function() {
+            Route::delete('/{feedback}', [\App\Http\Controllers\Support\FeedbackController::class, 'destroy'])->name('support.feedbacks.destroy');
         });
     });
 

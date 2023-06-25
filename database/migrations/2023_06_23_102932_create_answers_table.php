@@ -15,8 +15,9 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('feedback_id')->constrained('feedback');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('feedback_id')->constrained('feedback')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('support_id')->constrained('users')->cascadeOnDelete();
             $table->text('comment');
             $table->timestamps();
         });

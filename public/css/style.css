@@ -1113,6 +1113,7 @@ fieldset{
     margin-bottom: 40px;
     margin-top: 14px;
     width: 122px;
+    height: 30px;
 }
 
 .book_stars_fill{
@@ -1718,6 +1719,16 @@ p.name_user{
 
 
 /* верстка страницы мои Отзывы */
+
+.comment_answer{
+    background: #F4F4F4;
+    width: 93%;
+    margin-left: auto;
+}
+.comment_button .comment_heading{
+    margin-right: auto;
+}
+
 .comment_shadow{
     box-shadow: 0px 5px 20px rgba(21, 37, 66, 0.15);
     margin-bottom: 3%;
@@ -1932,9 +1943,18 @@ p.name_user{
     display: flex;
     gap: 90px;
 }
-.book_info_section_author_img img{
+
+.book_info_section_author_img{
+    max-width: 270px;
     border-radius: 20px;
+    overflow: hidden;
 }
+
+.book_info_section_author_img img{
+    width: 100%;
+    object-fit: contain;
+}
+
 .book_info_section_author_info{
     margin-top: 50px;
 }
@@ -2062,11 +2082,6 @@ p.name_user{
 .comment_rating_and_date>.book_stars_par{
     margin: 0;
 }
-.comment_rating_and_date>.book_stars_par{
-    width: 120px;
-    margin-right: 15px;
-    height: 25px;
-}
 
 .stars a {
     position: relative;
@@ -2154,7 +2169,14 @@ p.name_user{
 .book_author_related_books_list_item_img img{
     filter: drop-shadow(0px 10px 40px rgba(21, 37, 66, 0.2));
     border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
+.book_author_related_books_list_item_img{
+    max-width: 250px;
+}
+
 .book_author_related_books_list_item_heading{
     font-weight: 700;
     font-size: 20px;
@@ -2371,21 +2393,71 @@ p.name_user{
 .nav_setings{
     width: 260px;
 }
+
+.btns_flex{
+    display: flex;
+    margin-left: 30px;
+}
+
+.btns_flex .btn_danger{
+    margin-left: 15px;
+}
+
 .icon_settings{
     padding: 8px 10px;
-    border: 1px solid #C6C6C6;
+    border: 1px solid #5617D2;
+    color: #5617D2;
     border-radius: 5px;
-    position: absolute;
-    margin: 30px;
+    display: block;
+    cursor: pointer;
+    background: none;
+    font-family: "Montserrat";
+    font-size: 16px;
 }
+
+.btn-position{
+    position: absolute;
+    top: 131px;
+    left: 620px;
+}
+
 .icon_settings:hover{
     background-color: #5617D2;
-
     color:#fff ;
 }
+
+.settings_avatar_ctn{
+    width: 100px;
+    height: 93px;
+    /*border-radius: 50%;*/
+    overflow: hidden;
+}
+
+.settings_avatar_ctn img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.settings_avatar_btns{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px
+}
+
+.btn_danger{
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn_danger:hover{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .img_settings{
     width: 100px;
-    margin-bottom: 30px
 
 }
 .settings_field{

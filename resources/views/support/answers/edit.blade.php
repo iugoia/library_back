@@ -1,19 +1,18 @@
 @extends('layouts.auth')
 
 @section('title')
-    НЧПК | Библиотека | Ответить на отзыв
+    НЧПК | Библиотека | Редактирование
 @endsection
 
 <?php
 $ratingWidth = $feedback->score * 20 + $feedback->score * 4;
-$answer = \App\Models\Answer::all()->where('feedback_id', '=', $feedback->id);
 ?>
 
 @section('content')
     <section class="main_block_lk element_pad">
         <div class="container">
             <div class="lk_inner_block">
-                <h1>Оставить сообщение пользователю</h1>
+                <h1>Редактировать ответ пользователю</h1>
                 @if(session()->has('success'))
                     <div class="alert alert-success mb-3">
                         {{session()->get('success')}}
@@ -56,14 +55,18 @@ $answer = \App\Models\Answer::all()->where('feedback_id', '=', $feedback->id);
                         </p>
                     </div>
                 </div>
-                @if($answer->isEmpty())
-                    <form action="{{route('support.answers.store', [$feedback, $user])}}" method="post">
-                        <h2 class="comment_heading">Ваше сообщение</h2>
-                        <textarea name="comment" id="comment_answer"
-                                  cols="30" rows="7" class="input comment_textarea" placeholder="Текст сообщения"></textarea>
-                        <button type="submit" class="primary_btn btn_comment answer_submit">Отправить</button>
-                    </form>
-                @endif
+                <form action="{{route('support.answers.update', [$feedback, $user])}}" method="post">
+                    @method('patch')
+                    <h2 class="comment_heading">Ваше сообщение</h2>
+                    <textarea name="comment" id="comment_answer"
+                              cols="30" rows="7" class="input comment_textarea" placeholder="Текст сообщения">{{$answer->comment}}</textarea>
+                    @error('comment')
+                    <div class="text-danger">
+                        {{$message}}
+                    </div>
+                    @enderror
+                    <button type="submit" class="primary_btn btn_comment answer_submit">Отправить</button>
+                </form>
             </div>
         </div>
     </section>

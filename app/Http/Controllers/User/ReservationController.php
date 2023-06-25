@@ -32,7 +32,7 @@ class ReservationController extends Controller
             ->where('book_id', '=', $book->id);
         if ($reservation_user){
             foreach ($reservation_user as $reservation_current){
-                if ($reservation_current->status = "Забронировано"){
+                if ($reservation_current->status == "Забронировано"){
                     return redirect()->back()->with('error', "Вы уже забронировали данную книгу");
                 }
             }

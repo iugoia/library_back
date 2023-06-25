@@ -84,18 +84,32 @@
                                                 </div>
                                                 <div class="catalog_item_info">
                                                     <h3>{{$book->name}}</h3>
-                                                    <?php
+                                                    @php
                                                         $author = \App\Models\Author::find($book->author_id);
-                                                    ?>
+                                                        $feedbacks = \App\Models\Feedback::all()->where('book_id', '=', $book->id);
+                                                        if(!$feedbacks->isEmpty()){
+                                                            $countFeedbacks = $feedbacks->count();
+                                                            $sum = 0;
+                                                            foreach ($feedbacks as $feedback){
+                                                                $sum += $feedback->score;
+                                                            }
+                                                            $sumAvg = $sum / $countFeedbacks;
+                                                            $widthRating = ($sumAvg * 22) + (floor($sumAvg) * 3);
+                                                        } else {
+                                                            $widthRating = 122;
+                                                        }
+                                                    @endphp
                                                     <a href="dsadasdasd" class="author_link">{{$author->name}}</a>
-                                                    <div class="book_stars_par">
-                                                        <div class="book_stars_unfill">
-                                                            <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                                    @if(!$feedbacks->isEmpty())
+                                                        <div class="book_stars_par">
+                                                            <div class="book_stars_unfill">
+                                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                                            </div>
+                                                            <div class="book_stars_fill" style="width: {{$widthRating}}px">
+                                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                                            </div>
                                                         </div>
-                                                        <div class="book_stars_fill" style="width: 122px">
-                                                            <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                                        </div>
-                                                    </div>
+                                                    @endif
                                                     <p class="book_desc">
                                                         {{$book->description}}
                                                     </p>

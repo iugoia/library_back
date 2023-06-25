@@ -26,14 +26,17 @@
                             <p class="book_show_description_text">
                                 {{$book->description}}
                             </p>
-                            <div class="book_stars_par">
-                                <div class="book_stars_unfill">
-                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                            @if(!$feedbacks->isEmpty())
+                                <div class="book_stars_par">
+                                    <div class="book_stars_unfill">
+                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                    </div>
+                                    <div class="book_stars_fill" style="width: {{$widthRating}}px">
+                                        <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                    </div>
                                 </div>
-                                <div class="book_stars_fill" style="width: 122px">
-                                    <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                </div>
-                            </div>
+                            @endif
+
                         </div>
                         <div class="book_show_description_row">
                             <p>
@@ -78,75 +81,49 @@
                             <div class="widget_inner_author">
                                 <h2 class="hidden">Об авторе</h2>
                                 <div class="book_info_section_author_img">
-                                    <img src="{{asset('storage/authors/author1.png')}}" alt="Автор">
+                                    <img src="{{asset('storage/' . $author->photo)}}" alt="{{$author->name}}">
                                 </div>
                                 <div class="book_info_section_author_info">
-                                    <p class="book_info_section_author_heading">Джуллия Филлипс</p>
-                                    <p class="book_info_section_author_text">Американская писательница и кинопродюсер, первая женщина, получившая «Оскар» за «Лучший фильм».  Во время учебы в Москве Филлипс,
-                                        впечатленная Россией, поняла, что хочет стать писательницей и написать книгу о нашей стране. Получив стипендию Фулбрайта на создание романа,
-                                        она год провела на Камчатке, чтобы прочувствовать атмосферу отдаленного изолированного региона и передать особенности местного менталитета.</p>
+                                    <p class="book_info_section_author_heading">{{$author->name}}</p>
+                                    <p class="book_info_section_author_text">{{$author->description}}</p>
                                 </div>
                             </div>
                             <div class="widget_inner_reviews widget_hide" id="tab_reviews">
-{{--                                <div class="widget_inner_reviews_addComment">--}}
-{{--                                    <p class="book_info_section_reviews_heading">Оставить отзыв</p>--}}
-{{--                                    <form action="" method="post" class="book_info_section_reviews_form">--}}
-{{--                                        <div class="comment_form_rating">--}}
-{{--                                            <label for="rating" class="comment_form_rating_heading">Ваша оценка</label>--}}
-{{--                                            <p class="stars">--}}
-{{--                                                <span>--}}
-{{--                                                    <a class="star" href="#">1</a>--}}
-{{--                                                    <a class="star" href="#">2</a>--}}
-{{--                                                    <a class="star" href="#">3</a>--}}
-{{--                                                    <a class="star" href="#">4</a>--}}
-{{--                                                    <a class="star" href="#">5</a>--}}
-{{--                                                </span>--}}
-{{--                                            </p>--}}
-{{--                                            <div class="rating hidden">--}}
-{{--                                                <input class="rating_radio" type="radio" name="rating" value="1">--}}
-{{--                                                <input class="rating_radio" type="radio" name="rating" value="2">--}}
-{{--                                                <input class="rating_radio" type="radio" name="rating" value="3">--}}
-{{--                                                <input class="rating_radio" type="radio" name="rating" value="4">--}}
-{{--                                                <input class="rating_radio" type="radio" name="rating" value="5">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="comment_form_rating_input_control">--}}
-{{--                                            <textarea id="comment" name="comment" placeholder="Текст отзыва" cols="100" rows="10"></textarea>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="comment_form_rating_input_control">--}}
-{{--                                            <input name="submit" type="submit" id="submit" class="book_info_section_reviews_submit" value="Отправить">--}}
-{{--                                        </div>--}}
-{{--                                    </form>--}}
-{{--                                    <span class="blue_bottom_line"></span>--}}
-{{--                                </div>--}}
                                 <div class="widget_inner_reviews_comments">
                                     <h2 class="comments_title">Отзывы</h2>
                                     <ul class="comment_list hide_reviews">
                                         @foreach($feedbacks as $feedback)
+                                            @php
+                                            $user = \App\Models\User::find($feedback->user_id);
+                                            $ratingWidth = $feedback->score * 22 + $feedback->score * 3;
+                                            @endphp
                                             <li class="comment_list_item">
                                                 <div class="comment_user_info">
                                                     <div class="comment_user_info_img">
-                                                        <img alt="Пользователь" src="#######">
+                                                        @if($user->avatar)
+                                                            <img alt="Пользователь" src="{{asset('storage/' . $user->avatar)}}">
+                                                        @else
+                                                            <img alt="Пользователь" src="{{asset('storage/human.png')}}">
+                                                        @endif
                                                     </div>
                                                     <div class="comment_user_info_desc">
-                                                        <p class="comment_user_info_desc_name">########</p>
+                                                        <p class="comment_user_info_desc_name">Владислав Череватый</p>
                                                         <div class="comment_rating_and_date">
-                                                            <div class="book_stars_par">
+                                                            <div class="book_stars_par" style="margin: 0">
                                                                 <div class="book_stars_unfill">
-                                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
                                                                 </div>
-                                                                <div class="book_stars_fill">
-                                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                                                <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
+                                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
                                                                 </div>
                                                             </div>
-                                                            <p class="comment_user_info_desc_date">########</p>
+                                                            <p class="comment_user_info_desc_date" style="margin-left: 15px;">{{date('d.m.Y', strtotime($feedback->updated_at))}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="comment_user_text">
-                                                    <p>########</p>
+                                                    <p>{{$feedback->message}}</p>
                                                 </div>
-                                                <button type="button" class="primary_btn btn_comment answer_comment_btn">Ответить</button>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -155,69 +132,59 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="widget_inner_answer widget_hide">
-{{--                                <div class="widget_inner_reviews_addComment">--}}
-{{--                                    <p class="book_info_section_reviews_heading">Оставить сообщение пользователю</p>--}}
-{{--                                    <form action="" method="post" class="book_info_section_reviews_form">--}}
-{{--                                        <div class="comment_form_rating_input_control">--}}
-{{--                                            <textarea id="comment" name="comment" placeholder="Текст сообщения" cols="100" rows="10"></textarea>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="comment_form_rating_input_control">--}}
-{{--                                            <input name="submit" type="submit" id="submit" class="book_info_section_reviews_submit" value="Отправить">--}}
-{{--                                        </div>--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
-                            </div>
                         </div>
                     </div>
                 </div>
             </section>
-        @else
+        @elseif(!$feedbacks->isEmpty())
             <section class="woocommerce-tabs widget-tabs book_info_section element_pad">
                 <div class="container">
                     <div class="book_info_section_content">
-                        <ul class="widget_tabs">
-                            <li class="widget_tabs_link" id="tab_reviews">
-                                <p>Отзывы</p>
-                            </li>
-                        </ul>
                         <div class="widget_inner">
-                            <div class="widget_inner_answer">
+                            <div class="widget_inner_reviews" id="tab_reviews">
                                 <div class="widget_inner_reviews_comments">
-                                    <h2 class="comments_title">Отзывы пользователей</h2>
+                                    <h2 class="comments_title">Отзывы</h2>
                                     <ul class="comment_list hide_reviews">
                                         @foreach($feedbacks as $feedback)
+                                            @php
+                                                $user = \App\Models\User::find($feedback->user_id);
+                                                $ratingWidth = $feedback->score * 22 + $feedback->score * 3;
+                                            @endphp
                                             <li class="comment_list_item">
                                                 <div class="comment_user_info">
                                                     <div class="comment_user_info_img">
-                                                        <img alt="Пользователь" src="#######">
+                                                        @if($user->avatar)
+                                                            <img alt="Пользователь" src="{{asset('storage/' . $user->avatar)}}">
+                                                        @else
+                                                            <img alt="Пользователь" src="{{asset('storage/human.png')}}">
+                                                        @endif
                                                     </div>
                                                     <div class="comment_user_info_desc">
-                                                        <p class="comment_user_info_desc_name">########</p>
+                                                        <p class="comment_user_info_desc_name">Владислав Череватый</p>
                                                         <div class="comment_rating_and_date">
-                                                            <div class="book_stars_par">
+                                                            <div class="book_stars_par" style="margin: 0">
                                                                 <div class="book_stars_unfill">
-                                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
                                                                 </div>
-                                                                <div class="book_stars_fill">
-                                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                                                <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
+                                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
                                                                 </div>
                                                             </div>
-                                                            <p class="comment_user_info_desc_date">########</p>
+                                                            <p class="comment_user_info_desc_date" style="margin-left: 15px;">{{date('d.m.Y', strtotime($feedback->updated_at))}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="comment_user_text">
-                                                    <p>########</p>
+                                                    <p>{{$feedback->message}}</p>
                                                 </div>
-                                                <button type="button" class="primary_btn btn_comment answer_comment_btn">Ответить</button>
                                             </li>
                                         @endforeach
                                     </ul>
+                                    <div class="show_all_reviews">
+                                        <button type="button" class="show_all_reviews_button">Читать все</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
                         </div>
                     </div>
                 </div>
@@ -236,6 +203,21 @@
                 </div>
                 <ul class="book_author_related_books_list">
                     @foreach($author_books as $author_book)
+                        @php
+                            $feedbacks = \App\Models\Feedback::all()->where('book_id', '=', $author_book->id);
+                            if (!$feedbacks->isEmpty()){
+                                $countFeedbacks = $feedbacks->count();
+                                $sum = 0;
+                                foreach ($feedbacks as $feedback){
+                                    $sum += $feedback->score;
+                                }
+                                $sumAvg = $sum / $countFeedbacks;
+                                $widthRatingca = ($sumAvg * 22) + (floor($sumAvg) * 3);
+                            } else {
+                                $sumAvg = 0;
+                                $widthRatingca = 0;
+                            }
+                        @endphp
                         <li class="book_author_related_books_list_item">
                             <a href="{{route('book', $author_book)}}">
                                 <div class="book_author_related_books_list_item_img">
@@ -246,14 +228,17 @@
                             <div class="book_author_related_books_list_item_row">
                                 <p class="book_author_related_books_list_item_heading">{{$author_book->name}}</p>
                                 <a href="author.html" class="book_author_related_books_list_item_text">{{\App\Models\Author::find($author_book->author_id)->name}}</a>
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                @if(!$feedbacks->isEmpty())
+                                    <div class="book_stars_par">
+                                        <div class="book_stars_unfill">
+                                            <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                        </div>
+                                        <div class="book_stars_fill" style="width: {{$widthRatingca}}px">
+                                            <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                        </div>
                                     </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                    </div>
-                                </div>
+                                @endif
+
                             </div>
                         </li>
                     @endforeach

@@ -52,7 +52,7 @@
                                     @if($user->avatar)
                                         <img class="user_avatar" src="{{asset('storage/' . $user->avatar)}}" alt="user">
                                     @else
-                                        <img class="user_avatar" src="{{asset('storage/authors/author1.png')}}" alt="user">
+                                        <img class="user_avatar" src="{{asset('storage/human.png')}}" alt="user">
                                     @endif
                                 </div>
                                 <p class="name_user">

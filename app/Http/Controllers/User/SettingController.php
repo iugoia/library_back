@@ -82,4 +82,12 @@ class SettingController extends Controller
         }
         return redirect()->back()->with('success', "Данные успешно изменены");
     }
+
+    public function deleteAvatar()
+    {
+        $user = Auth::user();
+        $user->avatar = null;
+        $user->save();
+        return redirect()->back()->with('success', "Аватарка успешно удалена");
+    }
 }

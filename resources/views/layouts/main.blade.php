@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="{{asset('css/style.css?' . time())}}">
     <link rel="stylesheet" href="{{asset('css/fadeBlock.css')}}">
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
+
+{{--    favicon    --}}
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{{asset('storage/favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('storage/favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('storage/favicon/favicon-16x16.png')}}">
+    <link rel="mask-icon" href="{{asset('storage/favicon/safari-pinned-tab.svg')}}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <title>
         @yield('title')
     </title>

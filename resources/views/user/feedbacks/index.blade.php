@@ -50,7 +50,7 @@
                                 <div class="comment_info">
                                     <p class="comment_name">{{ \Illuminate\Support\Facades\Auth::user()->name }} {{\Illuminate\Support\Facades\Auth::user()->surname}}</p>
                                     <div class="comment_star">
-                                        <div class="book_stars_par">
+                                        <div class="book_stars_par" style="margin: 0">
                                             <div class="book_stars_unfill">
                                                 <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
                                             </div>
