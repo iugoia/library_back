@@ -17,7 +17,7 @@ class Support
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->isSupport())
+        if (Auth::user()->isSupport() || Auth::user()->isAdmin())
             return $next($request);
         return redirect(route('index'));
     }

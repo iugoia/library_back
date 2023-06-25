@@ -28,7 +28,8 @@
                     </nav>
 
                 </div>
-                <form action="#" method="post">
+                <form action="{{route('user.settings.updateSecurity')}}" method="post">
+                    @method('patch')
                     <div class="right_block">
                         <h1 class="">Безопасность</h1>
                         <p class="p_security">Если безопасность вашего аккаунта находится под угрозой, немедленно
@@ -40,15 +41,25 @@
                         <fieldset class="settings_field">
                             <div class="input_wrapper input_set">
                                 <p class="p_set">Телефон</p>
-                                <input id="input1" class="input" type="text" placeholder="+7 (ххх) - ххх -хх - 55"
-                                       name="login">
+                                <input id="input1" class="input phone" type="text" placeholder="+7 (ххх) - ххх -хх - 55"
+                                       name="phone" value="{{$user->phone}}">
                                 <span class="message1"></span>
+                                @error('phone')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                             <div class="input_wrapper input_set">
-                                <p class="p_set">Почта</p>
-                                <input id="input2" class="input" type="text" placeholder="da*****@gmail.com"
-                                       name="surname">
+                                <p class="p_set">Логин</p>
+                                <input class="input" type="text" placeholder="Введите логин"
+                                       name="login" value="{{$user->login}}">
                                 <span class="message2"></span>
+                                @error('login')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </fieldset>
                         <h2 class="p_security">Пароль</h2>
@@ -57,23 +68,47 @@
                         <fieldset class="settings_field">
                             <div class="input_wrapper input_set">
 
-                                <input id="input3" class="input" type="text" placeholder="Текущий пароль"
-                                       name="login">
+                                <input id="input3" class="input" type="password" placeholder="Текущий пароль"
+                                       name="current_password">
                                 <span class="message1"></span>
+
                             </div>
                             <div class="input_wrapper input_set">
 
-                                <input id="input4" class="input" type="text" placeholder="Новый пароль"
-                                       name="surname">
+                                <input id="input4" class="input" type="password" placeholder="Новый пароль"
+                                       name="password">
                                 <span class="message2"></span>
+                                @error('password')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </fieldset>
+                        @if(session()->has('success'))
+                            <div class="alert alert-success mt-3">
+                                {{session()->get('success')}}
+                            </div>
+                        @endif
+                        @if(session()->has('error'))
+                            <div class="alert alert-error mt-3">
+                                {{session()->get('error')}}
+                            </div>
+                        @endif
                     </div>
                     <div class="right_block_set"></div>
-                    <button type="submit" class="right_button_set">Сохранить Изменения</button>
+                    <button type="submit" class="right_button_set primary_btn">Сохранить</button>
                 </form>
             </div>
         </div>
     </section>
 
+@endsection
+
+@section('custom_js')
+    <script>
+        $(function(){
+            $(".phone").mask("+ 7 (999) 999-99-99");
+        });
+    </script>
 @endsection

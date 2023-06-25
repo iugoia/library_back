@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
+    <style>
+        footer{
+            display: none;
+        }
+    </style>
     <main class="main">
         <section class="catalog element_pad">
             <div class="container">
@@ -22,7 +27,7 @@
                             </ul>
                         </div>
                         <div class="heading_col heading_col_info">
-                            <h2>Показано 1-16 из 18 результатов</h2>
+                            <h2>Показано 1-{{\App\Models\Book::count()}} из {{\App\Models\Book::count()}} результатов</h2>
                             <div class="catalog_sort">
                                 <p class="sort_row sort_icon" id="sortRow">
                                     <img src="{{asset('storage/icons/sortRow.png')}}" alt="" width="30" height="13">
@@ -68,32 +73,37 @@
                     <div class="catalog_row catalog_index">
                         <div class="catalog_index_ctn">
                             <ul class="catalog_list">
-                                <li class="catalog_item">
-                                    <div class="catalog_item_ctn">
-                                        <div class="catalog_item_row">
-                                            <div class="catalog_item_image_ctn">
-                                                <a href="book.html">
-                                                    <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                                </a>
-                                            </div>
-                                            <div class="catalog_item_info">
-                                                <h3>103 Home Cooked meals</h3>
-                                                <a href="" class="author_link">Kristi Lee</a>
-                                                <div class="book_stars_par">
-                                                    <div class="book_stars_unfill">
-                                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                                    </div>
-                                                    <div class="book_stars_fill" style="width: 122px">
-                                                        <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                                    </div>
+                                @foreach($books as $book)
+                                    <li class="catalog_item">
+                                        <div class="catalog_item_ctn">
+                                            <div class="catalog_item_row">
+                                                <div class="catalog_item_image_ctn">
+                                                    <a href="{{route('book', $book)}}">
+                                                        <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->name}}">
+                                                    </a>
                                                 </div>
-                                                <p class="book_desc">
-                                                    Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                                </p>
+                                                <div class="catalog_item_info">
+                                                    <h3>{{$book->name}}</h3>
+                                                    <?php
+                                                        $author = \App\Models\Author::find($book->author_id);
+                                                    ?>
+                                                    <a href="dsadasdasd" class="author_link">{{$author->name}}</a>
+                                                    <div class="book_stars_par">
+                                                        <div class="book_stars_unfill">
+                                                            <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                                        </div>
+                                                        <div class="book_stars_fill" style="width: 122px">
+                                                            <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <p class="book_desc">
+                                                        {{$book->description}}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

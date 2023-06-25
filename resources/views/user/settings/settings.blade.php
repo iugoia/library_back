@@ -29,50 +29,70 @@
                     </nav>
 
                 </div>
-                <form action="#" method="post">
+                <form action="{{route('user.settings.updateSettings')}}" method="post" enctype="multipart/form-data">
+                    @method('patch')
                     <div class="right_block">
-                        <h1>Профиль</h1>
-                        <img src="{{asset('storage/human.png')}}" alt="" class="img_settings">
-                        <a href="#" class="icon_settings">Изменить</a>
+                        <h1 style="text-transform: unset">Профиль | {{$user->login}}</h1>
+                        @if($user->avatar)
+                            <img src="{{asset('storage/' . $user->avatar)}}" alt="" class="img_settings">
+                        @else
+                            <img src="{{asset('storage/human.png')}}" alt="" class="img_settings">
+                        @endif
+                        <label for="input_file" class="icon_settings">Изменить</label>
+                        <input type="file" name="avatar" accept="image/png,image/jpg,image/jpeg,image/webp" id="input_file" style="display: none">
+                        @error('avatar')
+                        <div class="text-danger">
+                            {{$message}}
+                        </div>
+                        @enderror
                         <h2>Личные данные</h2>
-
 
                         <fieldset class="settings_field">
                             <div class="input_wrapper input_set">
                                 <p class="p_set">Имя</p>
-                                <input id="input1" class="input" type="text" placeholder="Имя" name="login">
+                                <input id="input1" class="input" type="text" value="{{$user->name}}" name="name">
                                 <span class="message1"></span>
+                                @error('name')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                             <div class="input_wrapper input_set">
                                 <p class="p_set">Фамилия</p>
-                                <input id="input2" class="input" type="text" placeholder="Фамилия" name="surname">
+                                <input id="input2" class="input" type="text" value="{{$user->surname}}" name="surname">
                                 <span class="message2"></span>
+                                @error('surname')
+                                <div class="text-danger">
+                                    {{$message}}
+                                </div>
+                                @enderror
                             </div>
                         </fieldset>
-                        <h2>Логин</h2>
+                        <h2>Почта</h2>
 
 
                         <fieldset class="settings_field">
                             <div class="input_wrapper input_set">
-
-                                <input id="input1" class="input" type="text" placeholder="Текущий логин"
-                                       name="login">
+                                <input id="input1" class="input" type="text" placeholder="Введите почту"
+                                       name="email" value="{{$user->email}}">
                                 <span class="message1"></span>
                             </div>
-                            <div class="input_wrapper input_set">
-
-                                <input id="input2" class="input" type="text" placeholder="Новый логин"
-                                       name="surname">
-                                <span class="message2"></span>
-                            </div>
                         </fieldset>
-
-
-
+                        @error('email')
+                        <div class="text-danger">
+                            {{$message}}
+                        </div>
+                        @enderror
+                        @if(session()->has('success'))
+                            <div class="alert alert-success mt-3">
+                                {{session()->get('success')}}
+                            </div>
+                        @endif
                     </div>
 
                     <div class="right_block_set">
-                        <button type="submit" class="right_button_set">Сохранить Изменения</button>
+                        <button type="submit" class="right_button_set primary_btn">Сохранить</button>
                     </div>
                 </form>
             </div>

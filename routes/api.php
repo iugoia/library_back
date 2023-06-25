@@ -3,13 +3,60 @@
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/feedback', [\App\Http\Controllers\User\FeedbackController::class, 'update'])->name('user.feedbacks.update');
-
 Route::post('/register', [\App\Http\Controllers\RegisterController::class, '__invoke'])->name('registration');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, '__invoke'])->name('auth');
 
 Route::middleware('auth')->group(function() {
     Route::get('/logout', [\App\Http\Controllers\LogoutController::class, '__invoke'])->name('logout');
+
+    Route::group(['prefix' => 'user'], function() {
+        Route::group(['prefix' => 'reservations'], function() {
+            Route::post('/{book}', [\App\Http\Controllers\User\ReservationController::class, 'store'])->name('user.reservations.store');
+            Route::delete('/{id}', [\App\Http\Controllers\User\ReservationController::class, 'destroy'])->name('user.reservations.destroy');
+        });
+
+        Route::group(['namespace' => 'settings'], function() {
+            Route::patch('/update/settings', [\App\Http\Controllers\User\SettingController::class, 'updateSettings'])->name('user.settings.updateSettings');
+            Route::patch('/update/security', [\App\Http\Controllers\User\SettingController::class, 'updateSecurity'])->name('user.settings.updateSecurity');
+        });
+
+        Route::group(['prefix' => 'feedbacks'], function() {
+            Route::post('/{book}', [\App\Http\Controllers\User\FeedbackController::class, 'store'])->name('user.feedbacks.store');
+            Route::patch('/{feedback}', [\App\Http\Controllers\User\FeedbackController::class, 'update'])->name('user.feedbacks.update');
+            Route::delete('/{feedback}', [\App\Http\Controllers\User\FeedbackController::class, 'destroy'])->name('user.feedbacks.destroy');
+        });
+    });
+
+    Route::middleware('librarian')->group(function() {
+        Route::group(['prefix' => 'genres'], function() {
+            Route::post('/', [\App\Http\Controllers\Librarian\GenreController::class, 'store'])->name('librarian.genres.store');
+            Route::patch('/{genre}', [\App\Http\Controllers\Librarian\GenreController::class, 'update'])->name('librarian.genres.update');
+            Route::delete('/{genre}', [\App\Http\Controllers\Librarian\GenreController::class, 'destroy'])->name('librarian.genres.destroy');
+        });
+
+        Route::group(['prefix' => 'authors'], function() {
+            Route::post('/', [\App\Http\Controllers\Librarian\AuthorController::class, 'store'])->name('librarian.authors.store');
+            Route::patch('/{author}', [\App\Http\Controllers\Librarian\AuthorController::class, 'update'])->name('librarian.authors.update');
+            Route::delete('/{author}', [\App\Http\Controllers\Librarian\AuthorController::class, 'destroy'])->name('librarian.authors.destroy');
+        });
+
+        Route::group(['prefix' => 'books'], function() {
+            Route::post('/', [\App\Http\Controllers\Librarian\BookController::class, 'store'])->name('librarian.books.store');
+            Route::patch('/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'update'])->name('librarian.books.update');
+            Route::delete('/{book}', [\App\Http\Controllers\Librarian\BookController::class, 'destroy'])->name('librarian.books.destroy');
+        });
+
+        Route::group(['prefix' => 'libreservations'], function() {
+            Route::patch('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'update'])->name('librarian.reservations.update');
+            Route::delete('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'destroy'])->name('librarian.reservations.destroy');
+        });
+
+        Route::group(['namespace' => 'admin'], function() {
+            Route::post('/', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.users.store');
+            Route::patch('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.users.update');
+            Route::delete('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.users.destroy');
+        });
+    });
 });
 
 //Route::group(['namespace' => 'user'], function () {

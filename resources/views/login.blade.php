@@ -31,6 +31,11 @@
                             {{session()->get('error')}}
                         </div>
                     @endif
+                    @if(session()->has('success'))
+                        <div class="alert alert-success">
+                            {{session()->get('success')}}
+                        </div>
+                    @endif
                     <input class="primary_btn login_btn" type="submit" value="Войти в аккаунт">
                     <a class="additional_btn" href="{{route('register')}}">Нет аккаунта?</a>
                 </form>

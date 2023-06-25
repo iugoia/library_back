@@ -11,8 +11,8 @@ class BooksResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->getUrlAddress(),
-            'author' => $this->author,
+            'image' => $this->image,
+            'author_id' => $this->author,
             'genre' => $this->genre,
             'rack' => $this->rack,
             'shelf' => $this->shelf,

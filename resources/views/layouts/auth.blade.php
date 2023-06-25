@@ -37,7 +37,7 @@
                     </ul>
                 </nav>
                 <ul class="lk__nav">
-                    @if(\Illuminate\Support\Facades\Auth::user()):
+                    @if(\Illuminate\Support\Facades\Auth::user())
                     <li class="lk__nav__item">
                         <a href="{{route('user.reservations.index')}}" class="icon_btn">
                             Личный кабинет
@@ -74,7 +74,7 @@
                     <i class="fa-solid fa-comment fa-xl"></i>
                     <span>Мои отзывы</span>
                 </a>
-                @if(\Illuminate\Support\Facades\Auth::user()->role === 'librarian' || \Illuminate\Support\Facades\Auth::user()->role === 'admin'):
+                @if(\Illuminate\Support\Facades\Auth::user()->role === 'librarian' || \Illuminate\Support\Facades\Auth::user()->role === 'admin')
                 <a href="{{route('librarian.books.index')}}">
                     <i class="fa fa-book fa-xl"></i>
                     <span>Все книги</span>
@@ -92,13 +92,13 @@
                     <span>Все бронирования</span>
                 </a>
                 @endif
-                @if (\Illuminate\Support\Facades\Auth::user()->role === 'support' || \Illuminate\Support\Facades\Auth::user()->role === 'admin'):
+                @if (\Illuminate\Support\Facades\Auth::user()->role === 'support' || \Illuminate\Support\Facades\Auth::user()->role === 'admin')
                 <a href="{{route('support.feedbacks.index')}}">
                     <i class="fa-solid fa-comments fa-xl"></i>
                     <span>Все отзывы</span>
                 </a>
                 @endif
-                @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin'):
+                @if (\Illuminate\Support\Facades\Auth::user()->role === 'admin')
                 <a href="{{route('admin.users.index')}}">
                     <i class="fa-solid fa-users fa-xl"></i>
                     <span>Все пользователи</span>
@@ -120,9 +120,19 @@
         @yield('content')
 
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('js/all.min.js')}}"></script>
+    <script src="{{asset('js/jquery.mask.js')}}"></script>
     <script src="{{asset('js/fadeBlock.js')}}"></script>
+    <script src="{{asset('js/bookPageWidget.js')}}"></script>
     <script src="{{asset('js/bookReviewStars.js')}}"></script>
+    <script src="{{asset('js/catalog.js')}}"></script>
+    <script src="{{asset('js/hideReviews.js')}}"></script>
+    <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{asset('js/selectAnimation.js')}}"></script>
+    <script src="{{asset('js/validation.js')}}"></script>
+    <script src="{{asset('js/bookingModal.js')}}"></script>
+    @yield('custom_js')
 </div>
 </body>
 </html>

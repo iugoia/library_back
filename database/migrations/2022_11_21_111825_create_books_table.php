@@ -17,11 +17,8 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->string('image')->unique();
-            $table->string('author', 50);
+            $table->foreignId('author_id')->constrained('authors');
             $table->foreignId('genre_id')->constrained('genres');
-            $table->integer('rack');
-            $table->integer('shelf');
-            $table->integer('row');
             $table->text('description')->nullable();
             $table->integer('count');
             $table->boolean('is_available')->default(1);

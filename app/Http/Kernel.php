@@ -42,7 +42,6 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            \App\Http\Middleware\UseAcceptHeader::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         ],

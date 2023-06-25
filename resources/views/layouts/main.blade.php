@@ -36,7 +36,7 @@
                     </ul>
                 </nav>
                 <ul class="lk__nav">
-                    @if(\Illuminate\Support\Facades\Auth::user()):
+                    @if(\Illuminate\Support\Facades\Auth::user())
                         <li class="lk__nav__item">
                             <a href="{{route('user.reservations.index')}}" class="icon_btn">
                                 Личный кабинет
@@ -88,8 +88,19 @@
             </div>
         </div>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{asset('js/all.min.js')}}"></script>
+    <script src="{{asset('js/jquery.mask.js')}}"></script>
     <script src="{{asset('js/fadeBlock.js')}}"></script>
+    <script src="{{asset('js/bookPageWidget.js')}}"></script>
+    <script src="{{asset('js/bookReviewStars.js')}}"></script>
+    <script src="{{asset('js/catalog.js')}}"></script>
+    <script src="{{asset('js/hideReviews.js')}}"></script>
+    <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{asset('js/selectAnimation.js')}}"></script>
+    <script src="{{asset('js/validation.js')}}"></script>
+    <script src="{{asset('js/bookingModal.js')}}"></script>
+    @yield('custom_js')
 </div>
 </body>
 

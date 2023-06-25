@@ -12,11 +12,22 @@
                     <h1>Редактирование Жанра</h1>
                 </div>
 
-                <form action="" method="post">
+                <form action="{{route('librarian.genres.update', $genre)}}" method="post">
+                    @method('patch')
                     <div class="add_genre_form">
                         <div class="add_genre_column">
                             <label class="add_genre_label" for="genre_name">Название жанра *</label>
-                            <input class="add_genre_input" id="genre_name" type="text" placeholder="Нонфикшен">
+                            <input class="add_genre_input" id="genre_name" type="text" name="name" value="{{$genre->name}}">
+                            @error('name')
+                            <div class="text-danger mt-3">
+                                {{$message}}
+                            </div>
+                            @enderror
+                            @if(session()->has('success'))
+                                <div class="alert alert-success mt-3">
+                                    {{session()->get('success')}}
+                                </div>
+                            @endif
                         </div>
                     </div>
 

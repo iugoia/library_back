@@ -17,7 +17,7 @@
                         <input id="input1" class="input" type="text" placeholder="Имя" name="name">
                         <span class="message1"></span>
                         @error('name')
-                        <div class="text-danger mb-2 text-center">
+                        <div class="text-danger mb-2">
                             {{$message}}
                         </div>
                         @enderror
@@ -26,17 +26,22 @@
                         <input id="input2" class="input" type="text" placeholder="Фамилия" name="surname">
                         <span class="message2"></span>
                         @error('surname')
-                        <div class="text-danger mb-2 text-center">
+                        <div class="text-danger mb-2">
                             {{$message}}
                         </div>
                         @enderror
                     </div>
                     <input class="input" type="text" placeholder="Логин" name="login">
+                    @error('login')
+                    <div class="text-danger mb-2" style="text-align: left">
+                        {{$message}}
+                    </div>
+                    @enderror
                     <div class="input_wrapper" id="password">
                         <input class="input" type="password" placeholder="Пароль" name="password">
                         <span class="message"></span>
                         @error('password')
-                        <div class="text-danger mb-2 text-center">
+                        <div class="text-danger mb-2">
                             {{$message}}
                         </div>
                         @enderror

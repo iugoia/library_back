@@ -22,6 +22,16 @@
                     </div>
                 </div>
                 <!--<input type="text" class="input search" placeholder="Поиск по имени, телефону, роли, почте...">-->
+                @if(session()->has('success'))
+                    <div class="alert alert-success mb-5">
+                        {{session()->get('success')}}
+                    </div>
+                @endif
+                @if(session()->has('error'))
+                    <div class="alert alert-error mb-5">
+                        {{session()->get('error')}}
+                    </div>
+                @endif
                 <table class="main_table">
                     <tr class="main_table_heading">
                         <th>#ID</th>
@@ -34,120 +44,51 @@
                         <th>Действия</th>
                     </tr>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td class="table_image_text left_alignment">
-                            <div class="table_image_ctn">
-                                <img class="user_avatar" src="{{asset('storage/authors/author1.png')}}" alt="user">
-                            </div>
-                            <p class="name_user">
-                                darya
-                            </p>
-                        </td>
-                        <td>
-                            darya@mail.ru
-                        </td>
-                        <td>
-                            Дарья
-                        </td>
-                        <td>
-                            Терешкова
-                        </td>
-                        <td>
-                            +7 (960) - 000 - 00 - 00
-                        </td>
-                        <td>
-                            Админ
-                        </td>
-                        <td>
-                            <div class="table_actions">
-                                <a href="{{route('admin.users.edit')}}" class="text-primary">
-                                    <i class="fa fa-pen fa-solid"></i>
-                                </a>
-                                <form action="#" method="post" class="form_destroy">
-                                    <button type="sumbit" class="btn_icon text-danger">
-                                        <i class="fa fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td class="table_image_text left_alignment">
-                            <div class="table_image_ctn">
-                                <img class="user_avatar" src="{{asset('storage/authors/author1.png')}}" alt="user">
-                            </div>
-                            <p class="name_user">
-                                darya
-                            </p>
-                        </td>
-                        <td>
-                            darya@mail.ru
-                        </td>
-                        <td>
-                            Дарья
-                        </td>
-                        <td>
-                            Терешкова
-                        </td>
-                        <td>
-                            +7 (960) - 000 - 00 - 00
-                        </td>
-                        <td>
-                            Пользователь
-                        </td>
-                        <td>
-                            <div class="table_actions">
-                                <a href="#" class="text-primary">
-                                    <i class="fa fa-pen fa-solid"></i>
-                                </a>
-                                <form action="#" method="post" class="form_destroy">
-                                    <button type="sumbit" class="btn_icon text-danger">
-                                        <i class="fa fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td class="table_image_text left_alignment">
-                            <div class="table_image_ctn">
-                                <img class="user_avatar" src="{{asset('storage/authors/author1.png')}}" alt="user">
-                            </div>
-                            <p class="name_user">
-                                darya
-                            </p>
-                        </td>
-                        <td>
-                            darya@mail.ru
-                        </td>
-                        <td>
-                            Дарья
-                        </td>
-                        <td>
-                            Терешкова
-                        </td>
-                        <td>
-                            +7 (960) - 000 - 00 - 00
-                        </td>
-                        <td>
-                            Библиотекарь
-                        </td>
-                        <td>
-                            <div class="table_actions">
-                                <a href="#" class="text-primary">
-                                    <i class="fa fa-pen fa-solid"></i>
-                                </a>
-                                <form action="#" method="post" class="form_destroy">
-                                    <button type="sumbit" class="btn_icon text-danger">
-                                        <i class="fa fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach($users as $user)
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td class="table_image_text left_alignment">
+                                <div class="table_image_ctn">
+                                    @if($user->avatar)
+                                        <img class="user_avatar" src="{{asset('storage/' . $user->avatar)}}" alt="user">
+                                    @else
+                                        <img class="user_avatar" src="{{asset('storage/authors/author1.png')}}" alt="user">
+                                    @endif
+                                </div>
+                                <p class="name_user">
+                                    {{$user->login}}
+                                </p>
+                            </td>
+                            <td>
+                                {{$user->email}}
+                            </td>
+                            <td>
+                                {{$user->name}}
+                            </td>
+                            <td>
+                                {{$user->surname}}
+                            </td>
+                            <td>
+                                {{$user->phone}}
+                            </td>
+                            <td>
+                                {{$user->role}}
+                            </td>
+                            <td>
+                                <div class="table_actions">
+                                    <a href="{{route('admin.users.edit', $user)}}" class="text-primary">
+                                        <i class="fa fa-pen fa-solid"></i>
+                                    </a>
+                                    <form action="{{route('admin.users.destroy', $user)}}" method="post" class="form_destroy">
+                                        @method('delete')
+                                        <button type="submit" class="btn_icon text-danger">
+                                            <i class="fa fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
