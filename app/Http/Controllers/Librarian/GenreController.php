@@ -62,8 +62,8 @@ class GenreController extends Controller
 
     public function destroy(Genre $genre)
     {
-        $books = Book::where('genre_id', '=', $genre->id)->get();
-        if (!isEmpty($books))
+        $books = Book::where('genre_id', '=', $genre->id);
+        if ($books->count() > 0)
             return redirect()->back()->with('error', "Удалите сначала книги, у которых проставлен данный жанр");
         $genre->delete();
         return redirect()->back()->with('success', "Жанр успешно удален");

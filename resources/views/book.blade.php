@@ -103,11 +103,11 @@
                                                         @if($user->avatar)
                                                             <img alt="Пользователь" src="{{asset('storage/' . $user->avatar)}}">
                                                         @else
-                                                            <img alt="Пользователь" src="{{asset('storage/human.png')}}">
+                                                            <img alt="Пользователь" src="{{asset('storage/human.jpg')}}">
                                                         @endif
                                                     </div>
                                                     <div class="comment_user_info_desc">
-                                                        <p class="comment_user_info_desc_name">Владислав Череватый</p>
+                                                        <p class="comment_user_info_desc_name">{{$user->name}} {{$user->surname}}</p>
                                                         <div class="comment_rating_and_date">
                                                             <div class="book_stars_par" style="margin: 0">
                                                                 <div class="book_stars_unfill">
@@ -156,11 +156,11 @@
                                                         @if($user->avatar)
                                                             <img alt="Пользователь" src="{{asset('storage/' . $user->avatar)}}">
                                                         @else
-                                                            <img alt="Пользователь" src="{{asset('storage/human.png')}}">
+                                                            <img alt="Пользователь" src="{{asset('storage/human.jpg')}}">
                                                         @endif
                                                     </div>
                                                     <div class="comment_user_info_desc">
-                                                        <p class="comment_user_info_desc_name">Владислав Череватый</p>
+                                                        <p class="comment_user_info_desc_name">{{$user->name}} {{$user->surname}}</p>
                                                         <div class="comment_rating_and_date">
                                                             <div class="book_stars_par" style="margin: 0">
                                                                 <div class="book_stars_unfill">

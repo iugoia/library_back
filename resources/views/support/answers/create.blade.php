@@ -32,7 +32,7 @@ $answer = \App\Models\Answer::all()->where('feedback_id', '=', $feedback->id);
                                 @if($user->avatar)
                                     <img src="{{asset('storage/' . $user->avatar)}}" alt="book">
                                 @else
-                                    <img src="{{asset('storage/human.png')}}" alt="book">
+                                    <img src="{{asset('storage/human.jpg')}}" alt="book">
                                 @endif
                             </div>
                             <div class="comment_info">

@@ -176,134 +176,44 @@
                 </ul>
             </div>
         </section>
+            <section class="carusel element_pad">
+                <div class="container">
+                    <header class="index_catalog_heading">
+                        <h2 class="title_custom2"><span class="strong">Высокооцененные</span> Книги</h2>
+                        <hr>
+                        <div class="aux_carousel_navigation">
+                            <button class="aux_prev_btn"></button>
+                            <button class="aux_next_btn"></button>
+                        </div>
+                    </header>
+                    <ul class="aux_carousel">
+                        @foreach($bookScores as $book)
+                            <li class="aux_carousel_item fadeLeft">
+                                <div class="aux_carousel_item_ctn">
+                                    <div class="auxshp-entry-main">
+                                        <div class="book_stars_par">
+                                            <div class="book_stars_unfill">
+                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                            </div>
+                                            <div class="book_stars_fill" style="width: {{$book['ratingWidth']}}px">
+                                                <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                            </div>
+                                        </div>
+                                        <h3 class="aux_carousel_item_heading">{{$book['book']->name}}</h3>
+                                        <p class="aux_carousel_item_author">{{\App\Models\Author::find($book['book']->author_id)->name}}</p>
+                                        <p class="aux_carousel_item_description">{{$book['book']->description}}</p>
+                                        <a href="{{route('book', $book['book'])}}" class="aux_item_book_btn">Забронировать</a>
+                                    </div>
+                                    <div class="carousel_book_ctn">
+                                        <img class="aux_carousel_item_image" src="{{asset('storage/' . $book['book']->image)}}" alt="1">
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </section>
 
-        <section class="carusel element_pad">
-            <div class="container">
-                <header class="index_catalog_heading">
-                    <h2 class="title_custom2"><span class="strong">Высокооцененные</span> Книги</h2>
-                    <hr>
-                    <div class="aux_carousel_navigation">
-                        <button class="aux_prev_btn"></button>
-                        <button class="aux_next_btn"></button>
-                    </div>
-                </header>
-                <ul class="aux_carousel">
-                    <li class="aux_carousel_item fadeLeft">
-                        <div class="aux_carousel_item_ctn">
-                            <div class="auxshp-entry-main">
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                </div>
-                                <h3 class="aux_carousel_item_heading">Кто не спрятался</h3>
-                                <p class="aux_carousel_item_author">Яна Вагнер</p>
-                                <p class="aux_carousel_item_description">История девяти друзей, приехавших в отель на вершине снежной горы</p>
-                                <button class="aux_item_book_btn">Забронировать</button>
-                            </div>
-                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="1">
-                        </div>
-                    </li>
-                    <li class="aux_carousel_item fadeLeft">
-                        <div class="aux_carousel_item_ctn">
-                            <div class="auxshp-entry-main">
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                </div>
-                                <h3 class="aux_carousel_item_heading">Реинкарнатор</h3>
-                                <p class="aux_carousel_item_author">Юлия Рыженкова</p>
-                                <p class="aux_carousel_item_description">Перерождение в нашем мире, с воспоминаниями о прошлой жизни</p>
-                                <button class="aux_item_book_btn">Забронировать</button>
-                            </div>
-                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="2">
-                        </div>
-                    </li>
-                    <li class="aux_carousel_item fadeLeft">
-                        <div class="aux_carousel_item_ctn">
-                            <div class="auxshp-entry-main">
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                </div>
-                                <h3 class="aux_carousel_item_heading">Кто не спрятался</h3>
-                                <p class="aux_carousel_item_author">Яна Вагнер</p>
-                                <p class="aux_carousel_item_description">История девяти друзей, приехавших в отель на вершине снежной горы</p>
-                                <button class="aux_item_book_btn">Забронировать</button>
-                            </div>
-                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="1">
-                        </div>
-                    </li>
-                    <li class="aux_carousel_item fadeLeft">
-                        <div class="aux_carousel_item_ctn">
-                            <div class="auxshp-entry-main">
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                </div>
-                                <h3 class="aux_carousel_item_heading">Реинкарнатор</h3>
-                                <p class="aux_carousel_item_author">Юлия Рыженкова</p>
-                                <p class="aux_carousel_item_description">Перерождение в нашем мире, с воспоминаниями о прошлой жизни</p>
-                                <button class="aux_item_book_btn">Забронировать</button>
-                            </div>
-                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="2">
-                        </div>
-                    </li><li class="aux_carousel_item fadeLeft">
-                        <div class="aux_carousel_item_ctn">
-                            <div class="auxshp-entry-main">
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                </div>
-                                <h3 class="aux_carousel_item_heading">Кто не спрятался</h3>
-                                <p class="aux_carousel_item_author">Яна Вагнер</p>
-                                <p class="aux_carousel_item_description">История девяти друзей, приехавших в отель на вершине снежной горы</p>
-                                <button class="aux_item_book_btn">Забронировать</button>
-                            </div>
-                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="1">
-                        </div>
-                    </li>
-                    <li class="aux_carousel_item fadeLeft">
-                        <div class="aux_carousel_item_ctn">
-                            <div class="auxshp-entry-main">
-                                <div class="book_stars_par">
-                                    <div class="book_stars_unfill">
-                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                    <div class="book_stars_fill" style="width: 122px">
-                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                    </div>
-                                </div>
-                                <h3 class="aux_carousel_item_heading">Реинкарнатор</h3>
-                                <p class="aux_carousel_item_author">Юлия Рыженкова</p>
-                                <p class="aux_carousel_item_description">Перерождение в нашем мире, с воспоминаниями о прошлой жизни</p>
-                                <button class="aux_item_book_btn">Забронировать</button>
-                            </div>
-                            <img class="aux_carousel_item_image" src="{{asset('storage/carusel_book.png')}}" alt="2">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
 
         <section class="index_catalog element_pad">
             <div class="container">

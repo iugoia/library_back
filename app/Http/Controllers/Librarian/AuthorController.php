@@ -33,7 +33,7 @@ class AuthorController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'min:5', 'max:60', 'unique:authors,name'],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png'],
-            'description' => ['nullable', 'string', 'min:10', 'max:255']
+            'description' => ['nullable', 'string', 'min:10']
         ]);
         if ($validator->fails())
             return redirect()->back()
@@ -56,7 +56,7 @@ class AuthorController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'min:5', 'max:60', Rule::unique('authors', 'name')->ignore($author->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png'],
-            'description' => ['nullable', 'string', 'min:10', 'max:255']
+            'description' => ['nullable', 'string', 'min:10']
         ]);
         if ($validator->fails())
             return redirect()->back()
@@ -79,8 +79,8 @@ class AuthorController extends Controller
 
     public function destroy(Author $author)
     {
-        $books = Book::where('author_id', '=', $author->id)->get();
-        if (!isEmpty($books))
+        $books = Book::where('author_id', '=', $author->id);
+        if ($books->count() > 0)
             return redirect()->back()->with('error', "Удалите сначала книги, у которых проставлен данный автор");
 
         $author->delete();

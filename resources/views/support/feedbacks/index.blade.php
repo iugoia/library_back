@@ -122,7 +122,7 @@
                                         @if($item['user']->avatar)
                                         <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
                                         @else
-                                            <img src="{{asset('storage/human.png')}}" alt="book">
+                                            <img src="{{asset('storage/human.jpg')}}" alt="book">
                                         @endif
                                     </div>
                                     <div class="comment_info">
@@ -167,7 +167,7 @@
                                         @if($item['user']->avatar)
                                             <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
                                         @else
-                                            <img src="{{asset('storage/human.png')}}" alt="book">
+                                            <img src="{{asset('storage/human.jpg')}}" alt="book">
                                         @endif
                                     </div>
                                     <div class="comment_info">
@@ -215,7 +215,7 @@
                                             @if($item['user']->avatar)
                                                 <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
                                             @else
-                                                <img src="{{asset('storage/human.png')}}" alt="book">
+                                                <img src="{{asset('storage/human.jpg')}}" alt="book">
                                             @endif
                                         </div>
                                         <div class="comment_info">

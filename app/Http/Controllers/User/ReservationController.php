@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
@@ -28,6 +29,13 @@ class ReservationController extends Controller
 
     public function store(Book $book, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'received_time' => ['required', 'date', 'after:now']
+        ]);
+
+        if ($validator->fails())
+            return redirect()->back()->with('error', "Дата выбрана неправильно");
+
         $reservation_user = Reservation::all()->where('user_id', '=', Auth::user()->id)
             ->where('book_id', '=', $book->id);
         if ($reservation_user){

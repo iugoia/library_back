@@ -46,26 +46,15 @@
                         <input type="text" class="form_control" placeholder="Название..">
                         <h2 class="title_custom">Жанр</h2>
                         <form action="#" class="catalog_form">
-                            <fieldset class="catalog_checkbox_field">
-                                <input type="checkbox" class="checkbox_control" id="detective">
-                                <label for="detective" class="checkbox_label">Детективы</label>
-                                <p class="checkbox_result">(6)</p>
-                            </fieldset>
-                            <fieldset class="catalog_checkbox_field">
-                                <input type="checkbox" class="checkbox_control" id="novel">
-                                <label for="novel" class="checkbox_label">Романы</label>
-                                <p class="checkbox_result">(6)</p>
-                            </fieldset>
-                            <fieldset class="catalog_checkbox_field">
-                                <input type="checkbox" class="checkbox_control" id="literature">
-                                <label for="literature" class="checkbox_label">Художественная литература</label>
-                                <p class="checkbox_result">(6)</p>
-                            </fieldset>
-                            <fieldset class="catalog_checkbox_field">
-                                <input type="checkbox" class="checkbox_control" id="phs">
-                                <label for="phs" class="checkbox_label">Психология</label>
-                                <p class="checkbox_result">(6)</p>
-                            </fieldset>
+                            @foreach($genres as $genre)
+                                <fieldset class="catalog_checkbox_field">
+                                    <input type="checkbox" class="checkbox_control" id="detective">
+                                    <label for="detective" class="checkbox_label">{{$genre->name}}</label>
+                                    <p class="checkbox_result">
+                                        ({{\App\Models\Book::all()->where('genre_id', '=', $genre->id)->count()}})
+                                    </p>
+                                </fieldset>
+                            @endforeach
                             <button class="primary_btn">Найти</button>
                         </form>
                     </div>

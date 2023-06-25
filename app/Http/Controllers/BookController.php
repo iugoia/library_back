@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Feedback;
+use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     public function index()
     {
         $books = Book::all();
-        return view('catalog', compact('books'));
+        $genres = DB::table('genres')->orderBy('name')->get();
+        return view('catalog', compact('books', 'genres'));
     }
 
     public function show(Book $book)

@@ -21,7 +21,7 @@
                 @endif
                 @foreach($feedbacks as $feedback)
                     <?php
-                        $ratingWidth = $feedback->score * 20 + $feedback->score * 4;
+                        $ratingWidth = $feedback->score * 22 + $feedback->score * 3;
                     ?>
                     <div class="comment_shadow">
                         <div class="comment_border">
@@ -44,7 +44,7 @@
                                     @if(\Illuminate\Support\Facades\Auth::user()->avatar)
                                         <img src="{{asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatar)}}" alt="Аватарка пользователя">
                                     @else
-                                        <img src="{{asset('storage/human.png')}}" alt="Аватарка пользователя">
+                                        <img src="{{asset('storage/human.jpg')}}" alt="Аватарка пользователя">
                                     @endif
                                 </div>
                                 <div class="comment_info">

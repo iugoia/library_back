@@ -7,6 +7,7 @@ use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class BookController extends Controller
@@ -19,8 +20,8 @@ class BookController extends Controller
 
     public function create()
     {
-        $genres = Genre::all();
-        $authors = Author::all();
+        $genres = DB::table('genres')->orderBy('name')->get();
+        $authors = DB::table('authors')->orderBy('name')->get();
         return view('librarian.books.create', compact('genres', 'authors'));
     }
 

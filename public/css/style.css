@@ -750,8 +750,15 @@ li {
 .aux_carousel_item_description{
     font-weight: 400;
     font-size: 15px;
-    line-height: 21px;
     margin-bottom: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 21px;
+    max-height: 100px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-right: 20px;
 }
 
 .aux_item_book_btn{
@@ -762,6 +769,9 @@ li {
     height: 45px;
     color: white;
     font-family: "Montserrat";
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* каталог на главной странице */
@@ -1095,10 +1105,13 @@ fieldset{
     width: 100%;
     overflow: hidden;
     /* filter: drop-shadow(0px 10px 40px rgba(21, 37, 66, 0.2)); */
+    height: 340px;
 }
 
 .catalog_item_image_ctn img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .book_stars_unfill{
@@ -1545,11 +1558,14 @@ fieldset{
 }
 
 .table_image_ctn{
-    width: 35px;
+    width: 50px;
+    height: 50px;
 }
 
 .table_image_ctn img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .table_image_text{
@@ -1632,7 +1648,14 @@ fieldset{
 
 
 .table_image_ctn.author{
-    width: 50px;
+    width: 60px;
+    height: 60px;
+}
+
+.table_image_ctn.author img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 td.author_description{
@@ -1652,12 +1675,6 @@ th>a{
     color: rgba(150, 144, 169, 1);
 }
 
-
-img.user_avatar{
-    border-radius: 50px;
-    width:50px;
-    height:50px;
-}
 p.name_user{
     margin-left: 30px;
 }
@@ -1743,6 +1760,11 @@ p.name_user{
     width: 85px;
     height: 85px;
     display: flex;
+}
+.comment_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .comment_border{
     padding: 3%;
@@ -1841,9 +1863,31 @@ p.name_user{
     border-radius: 20px;
     padding: 45px 100px;
 }
+
+.book_show_image{
+    flex: 0 0 30%;
+    height: 700px;
+}
+
+.carousel_book_ctn{
+    flex: 0 0 50%;
+    height: 470px;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.carousel_book_ctn img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
 .book_show_image img{
     filter: drop-shadow(0px 10px 40px rgba(21, 37, 66, 0.42));
     border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .book_show_description{
     margin-top: 90px;
@@ -2045,12 +2089,18 @@ p.name_user{
 .comment_user_info_desc{
     margin-left: 40px;
 }
-.comment_user_info_img img{
-    box-sizing: border-box;
+.comment_user_info_img{
     width: 68px;
     height: 68px;
+    box-sizing: border-box;
     border: 1px solid #FFFFFF;
     border-radius: 60px;
+    overflow: hidden;
+}
+.comment_user_info_img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .comment_user_info_desc_name{
     font-weight: 700;
@@ -2175,6 +2225,7 @@ p.name_user{
 }
 .book_author_related_books_list_item_img{
     max-width: 250px;
+    height: 300px;
 }
 
 .book_author_related_books_list_item_heading{
@@ -2427,16 +2478,14 @@ p.name_user{
 }
 
 .settings_avatar_ctn{
-    width: 100px;
+    width: 93px;
     height: 93px;
-    /*border-radius: 50%;*/
-    overflow: hidden;
 }
 
 .settings_avatar_ctn img{
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .settings_avatar_btns{
@@ -2444,6 +2493,7 @@ p.name_user{
     align-items: center;
     margin-bottom: 30px
 }
+
 
 .btn_danger{
     color: #dc3545;

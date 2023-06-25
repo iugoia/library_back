@@ -38,7 +38,7 @@
                                 @if($user->avatar)
                                     <img src="{{asset('storage/' . $user->avatar)}}" alt="" class="img_settings">
                                 @else
-                                    <img src="{{asset('storage/human.png')}}" alt="" class="img_settings">
+                                    <img src="{{asset('storage/human.jpg')}}" alt="" class="img_settings">
                                 @endif
                             </div>
 

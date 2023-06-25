@@ -46,7 +46,11 @@
                             @if($author->photo)
                                 <td class="table_image_text">
                                     <div class="table_image_ctn author">
-                                        <img src="{{asset('storage/authors/author1.png')}}" alt="author">
+                                        @if($author->photo)
+                                            <img src="{{asset('storage/' . $author->photo)}}" alt="author">
+                                        @else
+                                            <img src="{{asset('storage/authors/author1.png')}}" alt="author">
+                                        @endif
                                     </div>
                                     <p>
                                         {{$author->name}}

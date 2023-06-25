@@ -31,7 +31,7 @@ $ratingWidth = $feedback->score * 20 + $feedback->score * 4;
                                 @if($user->avatar)
                                     <img src="{{asset('storage/' . $user->avatar)}}" alt="book">
                                 @else
-                                    <img src="{{asset('storage/human.png')}}" alt="book">
+                                    <img src="{{asset('storage/human.jpg')}}" alt="book">
                                 @endif
                             </div>
                             <div class="comment_info">

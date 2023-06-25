@@ -48,7 +48,8 @@ class FeedbackController extends Controller
 
     public function store(Request $request, Book $book)
     {
-        if (Feedback::query()->where('user_id', Auth::user()->id)->first() && Feedback::query()->where('book_id', $book->id)->first()){
+        $feedbacks = Feedback::all()->where('user_id', '=', Auth::user()->id)->where('book_id', '=', $book->id);
+        if (!$feedbacks->isEmpty()){
             return redirect()->back()->with('error', 'Отзыв уже добавлен');
         }
 
