@@ -45,9 +45,11 @@
                             <div class="btns_flex">
                                 <label for="input_file" class="icon_settings">Изменить</label>
                             </div>
+                            <div id="message"></div>
                         </div>
 
                         <input type="file" name="avatar" accept="image/png,image/jpg,image/jpeg,image/webp" id="input_file" style="display: none">
+
                         @error('avatar')
                         <div class="text-danger">
                             {{$message}}
@@ -111,4 +113,18 @@
         </div>
     </section>
 
+@endsection
+@section('custom_js')
+    <script>
+        let fileInput = document.getElementById('input_file');
+        let messageDiv = document.getElementById('message');
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.value) {
+                messageDiv.innerHTML = '&#10003; Файл выбран!';
+            } else {
+                messageDiv.innerHTML = '';
+            }
+        });
+    </script>
 @endsection
