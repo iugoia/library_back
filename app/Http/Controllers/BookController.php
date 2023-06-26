@@ -11,15 +11,24 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
+        $conditions = [];
+        if ($request->has('genre_id')){
+            $genres = (array) $request->genre_id; // преобразуйте жанры в массив, если они еще не являются массивом
+            $books = DB::table('books')
+                ->whereIn('genre_id', $genres)->get();
+        } else {
+            $books = Book::all();
+        }
+
         $genres = DB::table('genres')->orderBy('name')->get();
         return view('catalog', compact('books', 'genres'));
     }
 
-    public function show(Book $book)
+    public function show($id)
     {
+        $book = Book::find($id);
         $author = Author::find($book->author_id);
         $author_books = Book::all()->where('author_id', '=', $author->id);
         $feedbacks = Feedback::all()->where('book_id', '=', $book->id);

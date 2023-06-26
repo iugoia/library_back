@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\UserAccountController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\IndexController::class, '__invoke'])->name('index');
@@ -10,8 +9,9 @@ Route::get('/works', function() {
 })->name('works');
 
 Route::group(['namespace' => 'books'], function() {
-    Route::get('/catalog', [\App\Http\Controllers\BookController::class, 'index'])->name('catalog');
-    Route::get('/show/{book}', [\App\Http\Controllers\BookController::class, 'show'])->name('book');
+    Route::match(['get', 'post'], '/catalog', [\App\Http\Controllers\BookController::class, 'index'])->name('catalog');
+//    Route::get('/catalog', [\App\Http\Controllers\BookController::class, 'index'])->name('catalog');
+    Route::get('/show/{id}', [\App\Http\Controllers\BookController::class, 'show'])->name('book');
 });
 
 
