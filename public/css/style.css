@@ -179,7 +179,7 @@ li {
 .promo_desc {
     color: rgba(21, 37, 66, 0.6);
     margin-top: 50px;
-    margin-bottom: 42px;
+    /*margin-bottom: 42px;*/
     white-space: pre-line;
     line-height: 24px;
     letter-spacing: -0.48px;
@@ -225,7 +225,9 @@ li {
     animation-fill-mode: both;
     animation-timing-function: cubic-bezier(.77, 0, .175, 1);
 }
-
+.promo_animation_ctn>.primary_btn{
+    margin-top: 42px;
+}
 @keyframes TransformBottom {
     from {
         transform: translateY(100%);
@@ -572,7 +574,6 @@ li {
 }
 
 /* блок "выбирайте нас" на главной странице */
-
 .choose_list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -582,9 +583,8 @@ li {
     gap: 20px;
     margin-top: 70px;
 }
-
 .choose {
-    margin-top: 20px;
+    margin-top: 60px;
     margin-bottom: 80px;
 }
 
@@ -2580,6 +2580,65 @@ p.name_user{
 }
 /*Страница как это рабртает Work*/
 
+.steps_list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 400px 350px 525px;
+    grid-template-areas: 'first second'
+        'third third'
+        'fourth fifth';
+    gap: 20px;
+    margin-top: 70px;
+}
+.steps_list>.category_item{
+    border-radius: 20px;
+}
+.choose_item_work{
+    height: 100%;
+    position: relative;
+}
+.choose_item_work> p.text_container{
+    width: 57%;
+}
+.category_item:nth-child(3)>.choose_item_work> p.text_container{
+    width: 70%;
+}
+.choose_item_work p{
+    font-size: 25px;
+    font-weight: 700;
+    color: #fff;
+    padding: 50px;
+    line-height: 50px;
+}
+.category_item:nth-child(3)>.choose_item_work{
+    display: flex;
+    align-items: center;
+}
+.choose_item_work img{
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+}
+.category_item:first-of-type{
+    background-color: #623BD1;
+    grid-area: first;
+}
+.category_item:nth-child(2){
+    background-color: #213B68;
+    grid-area: second;
+}
+.category_item:nth-child(3){
+    background-color: #A88DE1;
+    grid-area: third;
+}
+.category_item:nth-child(4){
+    background-color: #1F61DC;
+    grid-area: fourth;
+}
+.category_item:nth-child(5){
+    background-color: #8DA4E1;
+    grid-area: fifth;
+}
 .text_work{
     margin-top: 40%;
     font-size: 1.5em;
@@ -2588,36 +2647,7 @@ p.name_user{
     margin-top: 15%;
     font-size: 1.5em;
 }
-.choose_item_work1{background-image: url('http://newlibrary/public/storage/choose_work1.png');
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 300px 300px;
-    margin: 50px;
 
-    height: calc(100% - 100px); height: 450px;}
-.choose_item_work2{background-image: url('http://newlibrary/public/storage/choose_work2.png');
-    background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 300px 300px;
-    margin: 50px;
-    height: calc(100% - 100px);}
-.choose_item_1{
-    background: #9B87C7;
-    border-radius: 20px;
-
-}
-.choose_item_2{
-    background: #858C99;
-    border-radius: 20px;
-
-}
-.choose_item_3{
-    background: #889FC9;
-    border-radius: 20px;
-    grid-area: third;
-}
 .choose_item_work3{background-image: url('http://newlibrary/public/storage/choose_work3.png');;
     background-repeat: no-repeat;
     background-position-x: left;
@@ -2625,20 +2655,7 @@ p.name_user{
     background-size: 400px 390px;
     margin: 50px;
     height: calc(100% - 100px);}
-.choose_item_1{
-    background: #9B87C7;
-    border-radius: 20px;
-}
-.choose_item_4{
-    background: #668CD2;
-    border-radius: 20px;
 
-
-}
-.choose_item_5{
-    background: #57AED8;
-    border-radius: 20px;
-}
 .choose_item_work4{background-image: url('http://newlibrary/public/storage/choose_work4.png');
     background-repeat: no-repeat;
     background-position-x: left;
@@ -2654,11 +2671,7 @@ p.name_user{
     background-size: 300px 300px;
     margin: 50px;
     height: calc(100% - 100px);}
-.choose_item_1{
-    background: #9B87C7;
-    border-radius: 20px;
 
-}
 
 
 /* Редактирование Бронирования */
