@@ -1856,6 +1856,48 @@ p.name_user{
     position: absolute;
     margin-left: 229px;
 }*/
+
+.comment_book{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.comment_book_img_ctn{
+    display: block;
+    flex: 0 0 10%;
+    overflow: hidden;
+    border-radius: 15px;
+    height: 150px;
+}
+
+.comment_book_img_ctn img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment_book_content{
+    margin-left: 35px;
+}
+
+.comment_book_title{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.comment_book_author{
+    font-size: 18px;
+    color: #898989;
+}
+
+.comment_after_book{
+    padding: 20px 35px;
+    font-size: 24px;
+    border-top: 1px solid #DBDBDB;
+    border-bottom: 1px solid #DBDBDB;
+    font-weight: 700;
+}
+
 .comment_inner{
     display: flex;
     gap: 30px;
@@ -1865,6 +1907,7 @@ p.name_user{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 30px;
 }
 .comment_name{
     font-weight: 700;

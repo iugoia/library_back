@@ -16,74 +16,23 @@
                         <div class="__select" data-state="">
                             <div class="__select__title" data-default="great">Высокий</div>
                             <div class="__select__content">
-                                <a href="#" class="__select__label" id="great">Высокий</a>
-                                <a href="#" class="__select__label" id="good">Хороший</a>
-                                <a href="#" class="__select__label" id="average">Средний</a>
-                                <a href="#" class="__select__label" id="bad">Низкий</a>
-                                <a href="#" class="__select__label" id="awful">Плохой</a>
-                                <!--<input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
-                                <label for="singleSelect0" class="__select__label">Высокий</label>
-                                <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
-                                <label for="singleSelect1" class="__select__label">Хороший</label>
-                                <input id="singleSelect2" class="__select__input" type="radio" name="singleSelect"/>
-                                <label for="singleSelect2" class="__select__label">Средний</label>
-                                <input id="singleSelect3" class="__select__input" type="radio" name="singleSelect"/>
-                                <label for="singleSelect3" class="__select__label">Низкий</label>
-                                <input id="singleSelect4" class="__select__input" type="radio" name="singleSelect"/>
-                                <label for="singleSelect4" class="__select__label">Плохой</label>-->
+                                <a href="{{route('support.feedbacks.index', ['select' => 'score', 'value' => 5])}}" class="__select__label" id="great">Высокий</a>
+                                <a href="{{route('support.feedbacks.index', ['select' => 'score', 'value' => 4])}}" class="__select__label" id="good">Хороший</a>
+                                <a href="{{route('support.feedbacks.index', ['select' => 'score', 'value' => 3])}}" class="__select__label" id="average">Средний</a>
+                                <a href="{{route('support.feedbacks.index', ['select' => 'score', 'value' => 2])}}" class="__select__label" id="bad">Низкий</a>
+                                <a href="{{route('support.feedbacks.index', ['select' => 'score', 'value' => 1])}}" class="__select__label" id="awful">Плохой</a>
                             </div>
                         </div>
-                        <!--
-                        <label for="rate" class="lk_filter_label">Рейтинг</label>
-                        <select name="rate" id="rate" class="input">
-                            <option value="great" selected>Высокий</option>
-                            <option value="good">Хороший</option>
-                            <option value="average">Средний</option>
-                            <option value="bad">Низкий</option>
-                            <option value="awful">Плохой</option>
-                        </select>-->
                     </div>
                     <div class="lk_filter">
                         <p class="lk_filter_label">Дата создания</p>
                         <div class="__select" data-state="">
                             <div class="__select__title" data-default="new-created">Сначала новые</div>
                             <div class="__select__content">
-                                <a href="#" class="__select__label" id="new-created">Сначала новые</a>
-                                <a href="#" class="__select__label" id="old-created">Сначала старые</a>
-                                <!--
-                                <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
-                                <label for="singleSelect0" class="__select__label">Сначала новые</label>
-                                <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
-                                <label for="singleSelect1" class="__select__label">Сначала старые</label>-->
+                                <a href="{{route('support.feedbacks.index', ['sort' => 'updated_at', 'direction' => 'asc'])}}" class="__select__label" id="new-created">Сначала новые</a>
+                                <a href="{{route('support.feedbacks.index', ['sort' => 'updated_at', 'direction' => 'desc'])}}" class="__select__label" id="old-created">Сначала старые</a>
                             </div>
                         </div>
-                        <!--
-                        <label for="create" class="lk_filter_label">Дата создания</label>
-                        <select name="create" id="create" class="input">
-                            <option value="old-created" selected>Сначала новые</option>
-                            <option value="new-created">Сначала старые</option>
-                        </select>-->
-                    </div>
-                    <div class="lk_filter">
-                        <p class="lk_filter_label">Дата обновления</p>
-                        <div class="__select" data-state="">
-                            <div class="__select__title" data-default="new-created">Сначала новые</div>
-                            <div class="__select__content">
-                                <a href="#" class="__select__label" id="new-created">Сначала новые</a>
-                                <a href="#" class="__select__label" id="old-created">Сначала старые</a>
-                                <!--
-                                <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked />
-                                <label for="singleSelect0" class="__select__label">Сначала новые</label>
-                                <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
-                                <label for="singleSelect1" class="__select__label">Сначала старые</label>-->
-                            </div>
-                        </div>
-                        <!--
-                        <label for="edit" class="lk_filter_label">Дата обновления</label>
-                        <select name="edit" id="edit" class="input">
-                            <option value="old-edited" selected>Сначала новые</option>
-                            <option value="new-edited">Сначала старые</option>
-                        </select>-->
                     </div>
                 </div>
                 @if(session()->has('success'))
@@ -99,14 +48,13 @@
                 @foreach($arrDataList as $item)
                     <?php
                         $ratingWidth = $item['feedback']->score * 20 + $item['feedback']->score * 4;
+                        $book = \App\Models\Book::find($item['feedback']->book_id);
+                        $author = \App\Models\Author::find($book->author_id);
                         ?>
                     @if($item['answer']->isEmpty())
                         <div class="comment_shadow">
                             <div class="comment_border">
                                 <div class="comment_button">
-                                    <?php
-                                        $book = \App\Models\Book::find($item['feedback']->book_id);
-                                        ?>
                                     <a href="{{route('book', $book)}}" class="but_eye" target="_blank">
                                         <i class="fa fa-eye fa-solid"></i>
                                     </a>
@@ -117,33 +65,50 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="comment_inner">
-                                    <div class="comment_image">
-                                        @if($item['user']->avatar)
-                                        <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
-                                        @else
-                                            <img src="{{asset('storage/human.jpg')}}" alt="book">
-                                        @endif
-                                    </div>
-                                    <div class="comment_info">
-                                        <p class="comment_name">{{$item['user']->name}} {{$item['user']->surname}}</p>
-                                        <p class="comment_phone">{{$item['user']->phone}}</p>
-                                        <div class="comment_star">
-                                            <div class="book_stars_par" style="margin: 0">
-                                                <div class="book_stars_unfill">
-                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                                </div>
-                                                <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
-                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                                </div>
-                                            </div>
-                                            <p class="comment_date">{{date('d.m.Y', strtotime($item['feedback']->updated_at))}}</p>
-                                        </div>
+
+                                <div class="comment_book">
+                                    <a href="{{route('book', $book->id)}}" class="comment_book_img_ctn" target="_blank">
+                                        <img src="{{asset('storage/' . $book->image)}}" alt="">
+                                    </a>
+                                    <div class="comment_book_content">
+                                        <h3 class="comment_book_title">{{$book->name}}</h3>
+                                        <p class="comment_book_author">{{$author->name}}</p>
                                     </div>
                                 </div>
-                                <p class="comment_text">
-                                    {{$item['feedback']->message}}
-                                </p>
+
+                                <div class="comment_after_book">
+                                    <p>Отзыв пользователя:</p>
+                                </div>
+
+                                <div class="comment_info">
+                                    <div class="comment_inner">
+                                        <div class="comment_image">
+                                            @if($item['user']->avatar)
+                                                <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
+                                            @else
+                                                <img src="{{asset('storage/human.jpg')}}" alt="book">
+                                            @endif
+                                        </div>
+                                        <div class="comment_info">
+                                            <p class="comment_name">{{$item['user']->name}} {{$item['user']->surname}}</p>
+                                            <p class="comment_phone">{{$item['user']->phone}}</p>
+                                            <div class="comment_star">
+                                                <div class="book_stars_par" style="margin: 0">
+                                                    <div class="book_stars_unfill">
+                                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                                    </div>
+                                                    <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
+                                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                                    </div>
+                                                </div>
+                                                <p class="comment_date">{{date('d.m.Y', strtotime($item['feedback']->updated_at))}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="comment_text">
+                                        {{$item['feedback']->message}}
+                                    </p>
+                                </div>
                                 <a href="{{route('support.answers.create', [$item['feedback'], $item['user']])}}" class="primary_btn btn_comment">Ответить</a>
                             </div>
                         </div>
@@ -152,7 +117,7 @@
                             <div class="comment_border">
                                 <div class="comment_button">
                                     <p class="comment_heading">Отзыв пользователя</p>
-                                    <a href="#" class="but_eye">
+                                    <a href="{{route('book', $book->id)}}" target="_blank" class="but_eye">
                                         <i class="fa fa-eye fa-solid"></i>
                                     </a>
                                     <form action="{{route('support.feedbacks.destroy', $item['feedback'])}}" method="post" class="but_destroy">
@@ -162,33 +127,52 @@
                                         </button>
                                     </form>
                                 </div>
-                                <div class="comment_inner">
-                                    <div class="comment_image">
-                                        @if($item['user']->avatar)
-                                            <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
-                                        @else
-                                            <img src="{{asset('storage/human.jpg')}}" alt="book">
-                                        @endif
-                                    </div>
-                                    <div class="comment_info">
-                                        <p class="comment_name">{{$item['user']->name}} {{$item['user']->surname}}</p>
-                                        <p class="comment_phone">{{$item['user']->phone}}</p>
-                                        <div class="comment_star">
-                                            <div class="book_stars_par" style="margin: 0">
-                                                <div class="book_stars_unfill">
-                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
-                                                </div>
-                                                <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
-                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
-                                                </div>
-                                            </div>
-                                            <p class="comment_date">{{date('d.m.Y', strtotime($item['feedback']->updated_at))}}</p>
-                                        </div>
+
+                                <div class="comment_book">
+                                    <a href="{{route('book', $book->id)}}" class="comment_book_img_ctn" target="_blank">
+                                        <img src="{{asset('storage/' . $book->image)}}" alt="">
+                                    </a>
+                                    <div class="comment_book_content">
+                                        <h3 class="comment_book_title">{{$book->name}}</h3>
+                                        <p class="comment_book_author">{{$author->name}}</p>
                                     </div>
                                 </div>
-                                <p class="comment_text">
-                                    {{$item['feedback']->message}}
-                                </p>
+
+                                <div class="comment_after_book">
+                                    <p>Отзыв пользователя:</p>
+                                </div>
+
+                                <div class="comment_info">
+                                    <div class="comment_inner">
+                                        <div class="comment_image">
+                                            @if($item['user']->avatar)
+                                                <img src="{{asset('storage/' . $item['user']->avatar)}}" alt="book">
+                                            @else
+                                                <img src="{{asset('storage/human.jpg')}}" alt="book">
+                                            @endif
+                                        </div>
+                                        <div class="comment_info">
+                                            <p class="comment_name">{{$item['user']->name}} {{$item['user']->surname}}</p>
+                                            <p class="comment_phone">{{$item['user']->phone}}</p>
+                                            <div class="comment_star">
+                                                <div class="book_stars_par" style="margin: 0">
+                                                    <div class="book_stars_unfill">
+                                                        <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                                    </div>
+                                                    <div class="book_stars_fill" style="width: {{$ratingWidth}}px">
+                                                        <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                                    </div>
+                                                </div>
+                                                <p class="comment_date">{{date('d.m.Y', strtotime($item['feedback']->updated_at))}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="comment_text">
+                                        {{$item['feedback']->message}}
+                                    </p>
+                                </div>
+
+
                             </div>
                         </div>
                         <!--ответ-->

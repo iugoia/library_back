@@ -11,9 +11,20 @@ use Illuminate\Support\Facades\DB;
 
 class FeedbackController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $feedbacks = Feedback::all();
+        if ($request->input('sort')){
+            $sort = $request->input('sort');
+            $direction = $request->input('direction');
+            $feedbacks = Feedback::orderBy($sort, $direction)->get();
+        } elseif($request->input('select')){
+            $select = $request->input('select');
+            $value = $request->input('value');
+            $feedbacks = Feedback::where($select, '=', $value)->get();
+        }
+        else {
+            $feedbacks = Feedback::all();
+        }
         $arrDataList = array();
         foreach ($feedbacks as $feedback){
             $arrDataList[] = [
