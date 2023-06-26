@@ -8,10 +8,14 @@ use Livewire\WithPagination;
 
 class SearchBooksLibrarian extends Component
 {
-    public $query;
+    public $query = '';
     public $books;
 
     protected $queryString = ['query'];
+
+    protected $paginationTheme = 'bootstrap';
+
+    use WithPagination;
 
     public function render()
     {

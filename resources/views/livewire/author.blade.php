@@ -64,4 +64,7 @@
         @endforeach
         </tbody>
     </table>
+    <div class="paginator-center">
+        {{$paginator->links()}}
+    </div>
 </div>

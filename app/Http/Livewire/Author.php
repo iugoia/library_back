@@ -3,11 +3,16 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Author extends Component
 {
-    public $search;
+    public $search = '';
     public $authors;
+
+    protected $paginationTheme = 'bootstrap';
+
+    use WithPagination;
 
     public function render()
     {
