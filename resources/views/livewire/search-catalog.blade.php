@@ -36,7 +36,7 @@
         <div class="catalog_row">
             <div class="filter_search catalog_col">
                 <h2 class="title_custom">Поиск</h2>
-                <input type="text" class="form_control" wire:model="name" placeholder="Название..">
+                <input type="text" class="form_control" wire:model="name" placeholder="Автор, название..">
                 <h2 class="title_custom">Жанр</h2>
                 <form action="{{route('catalog')}}" class="catalog_form" method="get">
                     @csrf

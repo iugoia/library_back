@@ -27,7 +27,9 @@ class BookController extends Controller
 
     public function edit(Book $book)
     {
-        return view('librarian.books.edit', compact('book'));
+        $genres = DB::table('genres')->orderBy('name')->get();
+        $authors = DB::table('authors')->orderBy('name')->get();
+        return view('librarian.books.edit', compact('book', 'genres', 'authors'));
     }
 
     public function store(Request $request)
@@ -57,7 +59,30 @@ class BookController extends Controller
 
     public function update(Request $request, Book $book)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => ['nullable', 'string', 'min:5', 'max:60'],
+            'image' => ['nullable', 'mimes:png,jpeg,jpg,webp'],
+            'genre_id' => ['nullable', 'exists:genres,id'],
+            'author_id' => ['nullable', 'exists:authors,id'],
+            'count' => ['nullable', 'numeric'],
+            'description' => ['nullable', 'min:10']
+        ]);
 
+        if ($validator->fails())
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        if ($request->image){
+            $filename = $request->file('image')->store('/books', 'public');
+        } else {
+            $filename = $book->image;
+        }
+
+        $book->update([
+                'image' => $filename
+            ] + $request->all());
+
+        return redirect()->back()->with('success', "Книга успешно обновлена");
     }
 
     public function destroy(Book $book)
