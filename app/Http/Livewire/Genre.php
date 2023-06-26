@@ -16,6 +16,7 @@ class Genre extends Component
 
     public function render()
     {
+        sleep(1);
         $search = '%' . $this->name . '%';
         $paginator = \App\Models\Genre::where('name', 'like', $search)->paginate(10);
 
