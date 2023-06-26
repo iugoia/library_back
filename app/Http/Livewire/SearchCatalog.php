@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class SearchCatalog extends Component
 {
-    public $name;
+    public $name = '';
     public $books;
 
     protected $paginationTheme = 'bootstrap';
@@ -31,7 +31,7 @@ class SearchCatalog extends Component
             ->when(!empty($genres), function($query) use ($genres) {
                 $query->whereIn('books.genre_id', $genres);
             })
-            ->paginate(20);
+            ->paginate(10);
 
         $genres = Genre::all();
 

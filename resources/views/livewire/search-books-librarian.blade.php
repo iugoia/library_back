@@ -2,7 +2,7 @@
     <div class="lk_filters">
         <div class="lk_filter">
             <label for="search" class="lk_filter_label">Поиск</label>
-            <input id="search" name="search" wire:model="name" class="input" placeholder="По названию, автору, жанру...">
+            <input id="search" name="search" wire:model="query" class="input" placeholder="По названию, автору, жанру...">
         </div>
     </div>
     <!--<input type="text" class="input search" placeholder="Поиск по названию, автору, жанру...">-->

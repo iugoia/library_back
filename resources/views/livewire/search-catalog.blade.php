@@ -106,4 +106,7 @@
             </div>
         </div>
     </div>
+    <div class="paginator-center">
+        {{$paginator->links()}}
+    </div>
 </section>
