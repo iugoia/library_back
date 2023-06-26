@@ -3,7 +3,11 @@
         <div class="lk_filter">
             <label for="search" class="lk_filter_label">Поиск</label>
             <input type="text" id="search" wire:model.debounce.500ms="search" class="input" placeholder="По имени, описанию...">
-            <span wire:loading>Searching...</span>
+            <div class="preloader-bg" wire:loading>
+                <div class="spinner">
+                    <img src="{{asset('storage/spinner.svg')}}" alt="spinner">
+                </div>
+            </div>
         </div>
     </div>
     <table class="main_table authors_table">

@@ -2,7 +2,12 @@
     <div class="lk_filters">
         <div class="lk_filter">
             <label for="search" class="lk_filter_label">Поиск</label>
-            <input id="search" name="search" wire:model="query" class="input" placeholder="По названию, автору, жанру...">
+            <input id="search" name="search" wire:model.debounce.500ms="query" class="input" placeholder="По названию, автору, жанру...">
+            <div class="preloader-bg" wire:loading>
+                <div class="spinner">
+                    <img src="{{asset('storage/spinner.svg')}}" alt="spinner">
+                </div>
+            </div>
         </div>
     </div>
     <!--<input type="text" class="input search" placeholder="Поиск по названию, автору, жанру...">-->
@@ -24,7 +29,7 @@
                     <div class="table_image_ctn">
                         <img src="{{asset('storage/' . $book->image)}}" alt="{{$book->name}}">
                     </div>
-                    <p>
+                    <p style="text-align: left">
                         {{$book->name}}
                     </p>
                 </td>

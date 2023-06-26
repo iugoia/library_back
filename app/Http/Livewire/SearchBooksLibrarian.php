@@ -19,6 +19,7 @@ class SearchBooksLibrarian extends Component
 
     public function render()
     {
+        sleep(1);
         $paginator = Book::where('name', 'like', '%'.$this->query.'%')
             ->orWhereHas('author', function ($query) {
                 $query->where('name', 'like', '%'.$this->query.'%');

@@ -19,6 +19,7 @@ class SearchCatalog extends Component
     use WithPagination;
     public function render(Request $request)
     {
+        sleep(1);
         $name = '%' . $this->name . '%';
         $genres = (array) $request->genre_id;
 

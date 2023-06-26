@@ -2,9 +2,11 @@
     <div class="lk_filters">
         <div class="lk_filter">
             <label for="search" class="lk_filter_label">Поиск</label>
-            <input id="search" name="search" wire:model.debounce.1000ms="name" class="input" placeholder="По названию...">
+            <input id="search" name="search" wire:model.debounce.500ms="name" class="input" placeholder="По названию...">
             <div class="preloader-bg" wire:loading>
-                <div class="preloader-5"></div>
+                <div class="spinner">
+                    <img src="{{asset('storage/spinner.svg')}}" alt="spinner">
+                </div>
             </div>
         </div>
     </div>

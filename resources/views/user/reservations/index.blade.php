@@ -52,7 +52,14 @@
                                     </div>
                                     <div>
                                         <p class="reservation_label">Статус</p>
-                                        <span class="reservation_span text-danger">{{$reservation['reservation']->status}}</span>
+                                        @if($reservation['reservation']->status === 'Возвращено')
+                                            <span class="reservation_span text-succes">{{$reservation['reservation']->status}}</span>
+                                        @elseif($reservation['reservation']->status === 'Забронировано')
+                                            <span class="reservation_span text-danger">{{$reservation['reservation']->status}}</span>
+                                        @else
+                                            <span class="reservation_span text-warning">{{$reservation['reservation']->status}}</span>
+                                        @endif
+
                                     </div>
                                     <div>
                                         <p class="reservation_label">Период бронирования</p>
