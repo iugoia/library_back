@@ -3,25 +3,29 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class SearchBooksLibrarian extends Component
 {
-    public $searchTerm;
+    public $name;
     public $books;
 
     protected $paginationTheme = 'bootstrap';
 
     use WithPagination;
-
     public function render()
     {
-        $searchTerm = '%' . $this->searchTerm . '%';
-
-        $paginator = Book::where('name', 'like', $searchTerm)
-            ->orwhere('author', 'like', $searchTerm)->paginate(8);
+//        $name = '%' . $this->name . '%';
+        $paginator = Book::where('name', 'like', '%' . $this->name . '%')
+            ->orWhereHas('authors', function ($query) {
+                $query->where('name', 'like', '%' . $this->name . '%');
+            })
+            ->orWhereHas('genres', function ($query) {
+                $query->where('name', 'like', '%' . $this->name . '%');
+            })
+            ->with('author', 'genre')
+            ->paginate(10);
 
         $this->books = $paginator->items();
         return view('livewire.search-books-librarian', ['paginator' => $paginator]);

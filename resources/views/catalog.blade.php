@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    НЧПК | Библиотека
+    НЧПК | Библиотека | Каталог
 @endsection
 
 @section('content')

@@ -31,7 +31,7 @@ class SearchCatalog extends Component
             ->when(!empty($genres), function($query) use ($genres) {
                 $query->whereIn('books.genre_id', $genres);
             })
-            ->paginate(100);
+            ->paginate(20);
 
         $genres = Genre::all();
 
