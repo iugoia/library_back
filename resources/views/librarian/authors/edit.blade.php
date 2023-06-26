@@ -67,3 +67,18 @@
         </div>
     </section>
 @endsection
+@section('custom_js')
+    <script>
+        let fileInput = document.getElementById('input__file');
+        let messageDiv = document.getElementById('message');
+        let message= document.querySelector('.add_form_field__file-fake')
+        fileInput.addEventListener('change', function() {
+            if (fileInput.value) {
+                message.textContent = 'Файл выбран!';
+                message.style.color="#38C08B"
+            } else {
+                message.textContent = 'Файл не выбран';
+            }
+        });
+    </script>
+@endsection
