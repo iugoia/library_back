@@ -90,7 +90,13 @@
                                 </p>
                             </td>
                             <td class="text-danger">
-                                {{$item['reservation']->status}}
+                                @if($item['reservation']->status === 'Возвращено')
+                                    <span class=" text-succes">{{$item['reservation']->status}}</span>
+                                @elseif($item['reservation']->status === 'Забронировано')
+                                    <span class=" text-danger">{{$item['reservation']->status}}</span>
+                                @else
+                                    <span class=" text-warning">{{$item['reservation']->status}}</span>
+                                @endif
                             </td>
                             <td>
                                 {{date('d.m.Y', strtotime($item['reservation']->created_at))}}

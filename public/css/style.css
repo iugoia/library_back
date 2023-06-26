@@ -476,6 +476,13 @@ li {
     z-index: 10000;
 }
 
+.spinner{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .preloader-5 {
     display: block;
     position: absolute;
@@ -1651,13 +1658,17 @@ fieldset{
 }
 
 .text-primary{
-    color: #0D6EFD;
+    color: #0D6EFD !important;
 }
 
 .main_block_lk h1{
     margin-bottom: 40px;
     font-size: 35px;
     text-transform: capitalize;
+}
+
+.text-warning{
+    color: #ffc107!important;
 }
 
 .btn_icon{

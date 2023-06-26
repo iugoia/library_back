@@ -16,6 +16,7 @@ class Author extends Component
 
     public function render()
     {
+        sleep(1);
         $searchTerm = '%' . $this->search . '%';
         $paginator = \App\Models\Author::where('name', 'like', $searchTerm)
             ->orWhere('description', 'like', $searchTerm)
