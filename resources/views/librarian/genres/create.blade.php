@@ -16,7 +16,7 @@
                     <div class="add_genre_form">
                         <div class="add_genre_column">
                             <label class="add_genre_label" for="genre_name">Название жанра *</label>
-                            <input class="add_genre_input" id="genre_name" type="text" name="name" placeholder="Жанр">
+                            <input class="add_genre_input input" id="genre_name" type="text" name="name" placeholder="Жанр">
                             @error('name')
                             <div class="text-danger mt-3">
                                 {{$message}}

@@ -11,15 +11,15 @@
 
                 <div class="left_block_settings">
                     <nav class="nav_setings">
-                        <ul class="">
+                        <ul>
                             <div class="border_security">
                                 <li class="li_setting">
-                                    <i class="fa fa-regular fa-user svg20"></i> <a href="{{route('user.settings.index')}}"
-                                                                                   class="a_setting">Личные данные</a>
+                                    <i class="fa fa-regular fa-user svg20"></i>
+                                    <a href="{{route('user.settings.index')}}" class="a_setting">Личные данные</a>
                                 </li>
                             </div>
                             <div class="border_settings">
-                                <li class="li_security">
+                                <li class="li_security active">
                                     <i class="fa fa-regular fa-house-user svg20"></i>
                                     <a href="{{route('user.settings.security')}}" class="a_setting a_security">Безопасность</a>
                                 </li>
@@ -31,7 +31,7 @@
                 <form action="{{route('user.settings.updateSecurity')}}" method="post">
                     @method('patch')
                     <div class="right_block">
-                        <h1 class="">Безопасность</h1>
+                        <h1>Безопасность</h1>
                         <p class="p_security">Если безопасность вашего аккаунта находится под угрозой, немедленно
                             измените пароль и/или логин для защиты ваших личных данных</p>
 

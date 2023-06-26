@@ -17,7 +17,7 @@
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_name">Название книги *</label>
-                                <input class="add_form_item_input" id="book_name" name="name" type="text" placeholder="Введите название книги">
+                                <input class="add_form_item_input input" id="book_name" name="name" type="text" placeholder="Введите название книги">
                                 @error('name')
                                 <div class="text-danger mb-3 mt-3">
                                     {{$message}}
@@ -69,7 +69,7 @@
                             </div>
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_inst">Количество экземпляров</label>
-                                <input class="add_form_item_input" type="number" name="count" value="0" id="book_inst" min="0">
+                                <input class="add_form_item_input input" type="number" name="count" value="0" id="book_inst" min="0">
                                 @error('count')
                                 <div class="text-danger mb-3 mt-3">
                                     {{$message}}
@@ -107,4 +107,10 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('custom_js')
+    <script>
+
+    </script>
 @endsection

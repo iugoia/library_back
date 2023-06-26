@@ -18,7 +18,7 @@
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_name">Имя и фамилия *</label>
-                                <input class="add_form_item_input" name="name" id="book_name" type="text" value="{{$author->name}}">
+                                <input class="add_form_item_input input" name="name" id="book_name" type="text" value="{{$author->name}}">
                                 @error('name')
                                 <div class="text-danger mt-3">
                                     {{$message}}

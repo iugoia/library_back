@@ -18,7 +18,7 @@
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_name">Название книги</label>
-                                <input class="add_form_item_input" id="book_name" name="name" type="text" placeholder="Введите название" value="{{$book->name}}">
+                                <input class="add_form_item_input input" id="book_name" name="name" type="text" placeholder="Введите название" value="{{$book->name}}">
                                 @error('name')
                                 <div class="text-danger mb-3 mt-3">
                                     {{$message}}
@@ -76,7 +76,7 @@
                             </div>
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_inst">Количество экземпляров</label>
-                                <input class="add_form_item_input" type="text" name="count" value="{{$book->count}}" min="0" id="book_inst">
+                                <input class="add_form_item_input input" type="text" name="count" value="{{$book->count}}" min="0" id="book_inst">
                                 @error('count')
                                 <div class="text-danger mb-3 mt-3">
                                     {{$message}}
@@ -87,7 +87,7 @@
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_form_item_label" for="book_description">Описание</label>
-                                <textarea class="add_form_item_textarea" placeholder="Введите описание" name="description" id="book_description" cols="30" rows="10">{{$book->description}}</textarea>
+                                <textarea class="add_form_item_textarea input" placeholder="Введите описание" name="description" id="book_description" cols="30" rows="10">{{$book->description}}</textarea>
                                 @error('description')
                                 <div class="text-danger mb-3 mt-3">
                                     {{$message}}
@@ -114,4 +114,10 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('custom_js')
+    <script>
+
+    </script>
 @endsection

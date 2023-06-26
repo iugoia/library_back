@@ -2394,7 +2394,6 @@ p.name_user{
 }
 .li_setting{
     height: 40px;
-    color: rgba(86, 23, 210, 0.8);
     display: flex;
     align-items: center;
 }
@@ -2405,9 +2404,13 @@ p.name_user{
     line-height: 49px;
     display: flex;
     align-items: center;
-    color: rgba(21, 37, 66, 0.8);
 }
-
+.li_security.active>svg{
+    color: rgba(86, 23, 210, 0.8);
+}
+.li_setting.active>svg{
+    color: rgba(86, 23, 210, 0.8);
+}
 .a_user{
     padding: 20px 0px;
     color: rgba(86, 23, 210, 0.8);
@@ -2519,7 +2522,7 @@ p.name_user{
     padding-right: 200px;
 }
 .p_set{
-    padding: 0 0 10px 20px ;
+    padding: 0 0 10px 0 ;
 }
 .right_button_set{
     display: block;
@@ -2789,25 +2792,20 @@ p.name_user{
     border-radius:30px;
 }
 
-.add_form_field__file-fake {
+.add_form_field__file-fake, .add_form_field__file-button {
     width: 50%;
     height: 39px;
     display: flex;
     align-items: center;
     padding: 0 15px;
     border: 1px solid #C6C6C6;
+}
+.add_form_field__file-fake{
     border-radius: 0 4px 4px 0;
     border-left: none;
 }
-
 .add_form_field__file-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    height: 39px;
     background: #EFEFEF;
-    border: 1px solid #C6C6C6;
     border-radius: 4px 0px 0px 4px;
 }
 
@@ -3176,4 +3174,12 @@ p.name_user{
 
 .text-center{
     text-align: center;
+}
+
+select:focus, textarea:focus{
+    border: 1px #5617D2 solid;
+    outline: #5617D2;
+}
+textarea{
+    font-family: 'Montserrat', sans-serif;
 }

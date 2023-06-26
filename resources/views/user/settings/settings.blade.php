@@ -12,11 +12,11 @@
 
                 <div class="left_block_settings">
                     <nav class="nav_setings">
-                        <ul class="">
+                        <ul>
                             <div class="border_settings">
-                                <li class="li_setting">
-                                    <i class="fa fa-regular fa-user svg20"></i> <a href="{{route('user.settings.index')}}"
-                                                                                   class="a_setting a_user">Личные данные</a>
+                                <li class="li_setting active">
+                                    <i class="fa fa-regular fa-user svg20"></i>
+                                    <a href="{{route('user.settings.index')}}" class="a_setting a_user">Личные данные</a>
                                 </li>
                             </div>
                             <div class="border_security">
@@ -32,7 +32,7 @@
                 <form action="{{route('user.settings.updateSettings')}}" method="post" enctype="multipart/form-data">
                     @method('patch')
                     <div class="right_block">
-                        <h1 style="text-transform: unset">Профиль | {{$user->login}}</h1>
+                        <h1>Профиль | {{$user->login}}</h1>
                         <div class="settings_avatar_btns">
                             <div class="settings_avatar_ctn">
                                 @if($user->avatar)
