@@ -8,26 +8,23 @@ use Livewire\WithPagination;
 
 class SearchBooksLibrarian extends Component
 {
-    public $name;
+    public $query;
     public $books;
 
-    protected $paginationTheme = 'bootstrap';
+    protected $queryString = ['query'];
 
-    use WithPagination;
     public function render()
     {
-//        $name = '%' . $this->name . '%';
-        $paginator = Book::where('name', 'like', '%' . $this->name . '%')
-            ->orWhereHas('authors', function ($query) {
-                $query->where('name', 'like', '%' . $this->name . '%');
+        $paginator = Book::where('name', 'like', '%'.$this->query.'%')
+            ->orWhereHas('author', function ($query) {
+                $query->where('name', 'like', '%'.$this->query.'%');
             })
-            ->orWhereHas('genres', function ($query) {
-                $query->where('name', 'like', '%' . $this->name . '%');
+            ->orWhereHas('genre', function ($query) {
+                $query->where('name', 'like', '%'.$this->query.'%');
             })
-            ->with('author', 'genre')
             ->paginate(10);
-
         $this->books = $paginator->items();
         return view('livewire.search-books-librarian', ['paginator' => $paginator]);
     }
+
 }
