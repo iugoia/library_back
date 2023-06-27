@@ -107,6 +107,11 @@ li {
 
 .main_header .logo p {
     margin-left: 10px;
+    margin-bottom: 0 !important;
+}
+
+dl, ol, ul{
+    margin: 0 !important;
 }
 
 .strong {
