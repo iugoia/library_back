@@ -66,10 +66,12 @@ Route::middleware('auth')->group(function() {
             Route::delete('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'destroy'])->name('librarian.reservations.destroy');
         });
 
-        Route::group(['namespace' => 'admin'], function() {
-            Route::post('/', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.users.store');
-            Route::patch('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.users.update');
-            Route::delete('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.users.destroy');
+        Route::middleware('admin')->group(function() {
+            Route::group(['namespace' => 'user'], function() {
+                Route::post('/', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('admin.users.store');
+                Route::patch('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('admin.users.update');
+                Route::delete('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('admin.users.destroy');
+            });
         });
     });
 });
