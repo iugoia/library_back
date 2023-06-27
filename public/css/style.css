@@ -610,7 +610,7 @@ dl, ol, ul{
 }
 
 .categories_list .category_item .category_item_bg {
-    background-image: url('http://library/public/storage/categories/1.png');
+    background-image: url('http://newlibrary/public/storage/categories/1.png');
     background-repeat: no-repeat;
     height: 100%;
     background-position: bottom;
@@ -621,28 +621,28 @@ dl, ol, ul{
 }
 
 .categories_list .category_item:nth-child(2) .category_item_bg {
-    background-image: url('http://library/public/storage/categories/2.png');
+    background-image: url('http://newlibrary/public/storage/categories/2.png');
     background-position-y: 66px;
 }
 
 .categories_list .category_item:nth-child(3) .category_item_bg {
-    background-image: url('http://library/public/storage/categories/3.png');
+    background-image: url('http://newlibrary/public/storage/categories/3.png');
     background-position-y: 245px;
 }
 
 .categories_list .category_item:nth-child(4) .category_item_bg {
-    background-image: url('http://library/public/storage/categories/4.png');
+    background-image: url('http://newlibrary/public/storage/categories/4.png');
     background-position-y: 107px;
     background-position-x: right;
 }
 
 .categories_list .category_item:nth-child(5) .category_item_bg {
-    background-image: url('http://library/public/storage/categories/5.png');
+    background-image: url('http://newlibrary/public/storage/categories/5.png');
     background-position-y: 80px;
 }
 
 .categories_list .category_item:nth-child(6) .category_item_bg {
-    background-image: url('http://library/public/storage/categories/6.png');
+    background-image: url('http://newlibrary/public/storage/categories/6.png');
     background-position-y: 27px;
 }
 
@@ -728,7 +728,7 @@ dl, ol, ul{
 }
 
 .choose_item_ctn {
-    background-image: url('http://library/public/storage/choose_service.png');
+    background-image: url('http://newlibrary/public/storage/choose_service.png');
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: center;
@@ -736,11 +736,11 @@ dl, ol, ul{
 }
 
 .choose_list .choose_item:nth-child(2) .choose_item_ctn {
-    background-image: url('http://library/public/storage/choose_ticket.png');
+    background-image: url('http://newlibrary/public/storage/choose_ticket.png');
 }
 
 .choose_list .choose_item:nth-child(3) .choose_item_ctn {
-    background-image: url('http://library/public/storage/choose_info.png');
+    background-image: url('http://newlibrary/public/storage/choose_info.png');
     background-size: 568px 354px;
     background-position-x: right;
 }
@@ -763,7 +763,7 @@ dl, ol, ul{
 }
 
 .aux_btn:hover{
-    background: url('http://library/public/storage/aux-next-hover.svg');
+    background: url('http://newlibrary/public/storage/aux-next-hover.svg');
 }
 
 .aux_prev_btn,
@@ -772,7 +772,7 @@ dl, ol, ul{
     height: 46px;
     border: none;
     cursor: pointer;
-    background: url('http://library/public/storage/aux-next.svg');
+    background: url('http://newlibrary/public/storage/aux-next.svg');
 }
 
 
@@ -1014,7 +1014,7 @@ footer {
     transform: translateY(-50%);
     width: 6px;
     height: 10px;
-    background: url('http://library/public/storage/icons/arrow_link.svg');
+    background: url('http://newlibrary/public/storage/icons/arrow_link.svg');
     background-repeat: no-repeat;
 }
 
@@ -1036,6 +1036,12 @@ footer {
 .catalog_form button{
     margin-top: 40px;
     width: 100%;
+}
+
+.clear_link{
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
 }
 
 .form_control {
@@ -1275,7 +1281,7 @@ fieldset{
 .background-dots{
     position: absolute;
     height: 200px;
-    background: url(http://library/public/storage/background_dots.png);
+    background: url(http://newlibrary/public/storage/background_dots.png);
     background-repeat: no-repeat;
 }
 
@@ -2784,7 +2790,7 @@ p.name_user{
     font-size: 1.5em;
 }
 
-.choose_item_work3{background-image: url('http://library/public/storage/choose_work3.png');;
+.choose_item_work3{background-image: url('http://newlibrary/public/storage/choose_work3.png');;
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: center;
@@ -2792,7 +2798,7 @@ p.name_user{
     margin: 50px;
     height: calc(100% - 100px);}
 
-.choose_item_work4{background-image: url('http://library/public/storage/choose_work4.png');
+.choose_item_work4{background-image: url('http://newlibrary/public/storage/choose_work4.png');
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: center;
@@ -2800,7 +2806,7 @@ p.name_user{
     margin: 50px;
 
     height: calc(100% - 100px); height: 450px;}
-.choose_item_work5{background-image: url('http://library/public/storage/choose_work5.png');
+.choose_item_work5{background-image: url('http://newlibrary/public/storage/choose_work5.png');
     background-repeat: no-repeat;
     background-position-x: left;
     background-position-y: center;
@@ -2859,7 +2865,7 @@ p.name_user{
     background: none;
     border: 1px solid #C6C6C6;
     border-radius: 7px;
-    appearance: url('http://library/public/storage/dropdown-arrow.svg');
+    appearance: url('http://newlibrary/public/storage/dropdown-arrow.svg');
 }
 
 

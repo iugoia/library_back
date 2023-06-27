@@ -48,8 +48,8 @@
                     <div class="filters_ctn_hidden">
                         @foreach($genres as $genre)
                             <fieldset class="catalog_checkbox_field">
-                                <input type="checkbox" name="genre_id[]" value="{{$genre->id}}" class="checkbox_control" id="{{$genre->name}}">
-                                <label for="{{$genre->name}}" class="checkbox_label">{{$genre->name}}</label>
+                                <input type="checkbox" name="genre_id[]" value="{{$genre->id}}" class="checkbox_control" id="{{$genre->id}}">
+                                <label for="{{$genre->id}}" class="checkbox_label">{{$genre->name}}</label>
                                 <p class="checkbox_result">
                                     (<span class="filter_count">{{\App\Models\Book::all()->where('genre_id', '=', $genre->id)->count()}}</span>)
                                 </p>
@@ -58,7 +58,7 @@
                     </div>
 
                     <button class="primary_btn" type="submit">Найти</button>
-                    <a href="{{route('catalog', ['clear'])}}">Очистить поиск</a>
+                    <a href="{{route('catalog', ['clear'])}}" class="text-danger clear_link">Очистить поиск</a>
                 </form>
             </div>
 
