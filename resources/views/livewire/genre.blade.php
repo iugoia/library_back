@@ -24,7 +24,10 @@
     <table class="main_table">
         <tr class="main_table_heading">
             <th>#ID</th>
-            <th class="left_alignment">Название жанра</th>
+            <th class="left_aligment">
+                <a href="{{ route('librarian.genres.index', ['sortBy' => 'name', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}">Название жанра</a>
+                <i class="fa fa-solid fa-sort"></i>
+            </th>
             <th>Действия</th>
         </tr>
         <tbody>
@@ -51,7 +54,4 @@
         @endforeach
         </tbody>
     </table>
-    <div class="paginator-center">
-        {{$paginator->links()}}
-    </div>
 </div>

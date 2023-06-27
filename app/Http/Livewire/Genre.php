@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Http\Request;
 
 class Genre extends Component
 {
@@ -14,14 +15,19 @@ class Genre extends Component
 
     use WithPagination;
 
-    public function render()
+    public function render(Request $request)
     {
         sleep(1);
+        $sortBy = '';
+        $direction = '';
         $search = '%' . $this->name . '%';
-        $paginator = \App\Models\Genre::where('name', 'like', $search)->paginate(10);
+        $this->genres = \App\Models\Genre::where('name', 'like', $search)->get();
+        if ($request->input('sortBy')){
+            $sort = $request->input('sortBy');
+            $direction = $request->input('direction');
+            $this->genres = \App\Models\Genre::orderBy($sort, $direction)->get();
+        }
 
-        $this->genres = $paginator->items();
-
-        return view('livewire.genre', ['paginator' => $paginator]);
+        return view('livewire.genre', [ 'sortBy' => $sortBy, 'direction' => $direction]);
     }
 }
