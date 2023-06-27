@@ -49,6 +49,8 @@ class IndexController extends Controller
 
         $bookScores = array_slice($bookScores, 0, 6);
 
-        return view('index', compact('bookScores'));
+        $books = DB::table('books')->inRandomOrder()->limit(8)->get();
+
+        return view('index', compact('bookScores', 'books'));
     }
 }

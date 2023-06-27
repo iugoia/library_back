@@ -23,7 +23,7 @@ class SearchCatalog extends Component
         $name = '%' . $this->name . '%';
         $genres = (array) $request->genre_id;
 
-        $paginator = Book::select('books.*', 'authors.name as author_name')
+        $this->books = Book::select('books.*', 'authors.name as author_name')
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->where(function($query) use ($name) {
                 $query->where('books.name', 'like', $name)
@@ -32,12 +32,20 @@ class SearchCatalog extends Component
             ->when(!empty($genres), function($query) use ($genres) {
                 $query->whereIn('books.genre_id', $genres);
             })
-            ->paginate(10);
+            ->get();
+
+        if ($request->input('author_id')){
+            $id = $request->input('author_id');
+            $this->books = Book::all()->where('author_id', '=', $id);
+        }
+
+        if ($request->input('clear')){
+            $this->books = Book::all();
+        }
 
         $genres = Genre::all();
 
-        $this->books = $paginator->items();
-        return view('livewire.search-catalog', ['paginator' => $paginator, 'genres' => $genres]);
+        return view('livewire.search-catalog', ['genres' => $genres]);
     }
 
 }

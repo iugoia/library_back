@@ -48,7 +48,7 @@
                                 </a>
                                 <div class="comment_book_content">
                                     <h3 class="comment_book_title">{{$book->name}}</h3>
-                                    <p class="comment_book_author">{{$author->name}}</p>
+                                    <a target="_blank" href="{{route('catalog', ['author_id' => $author->id])}}" class="comment_book_author">{{$author->name}}</a>
                                 </div>
                             </div>
 

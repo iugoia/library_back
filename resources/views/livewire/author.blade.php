@@ -34,7 +34,9 @@
                             @endif
                         </div>
                         <p>
-                            {{$author->name}}
+                            <a href="{{route('catalog', ['author_id' => $author->id])}}" target="_blank">
+                                {{$author->name}}
+                            </a>
                         </p>
                     </td>
                 @else
@@ -50,7 +52,7 @@
                 </td>
                 <td>
                     <div class="table_actions">
-                        <a href="#" class="eye_icon">
+                        <a href="{{route('catalog', ['author_id' => $author->id])}}" target="_blank" class="eye_icon">
                             <i class="fa fa-eye fa-solid"></i>
                         </a>
                         <a href="{{route('librarian.authors.edit', $author)}}" class="text-primary">

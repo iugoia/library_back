@@ -758,20 +758,26 @@ dl, ol, ul{
     justify-content: space-between;
 }
 
+.aux_btn{
+    transition: .3s;
+}
+
+.aux_btn:hover{
+    background: url('http://newlibrary/public/storage/aux-next-hover.svg');
+}
+
 .aux_prev_btn,
 .aux_next_btn{
     width: 45px;
     height: 46px;
     border: none;
     cursor: pointer;
-}
-
-.aux_next_btn{
     background: url('http://newlibrary/public/storage/aux-next.svg');
 }
 
+
 .aux_prev_btn{
-    background: url('http://newlibrary/public/storage/aux-prev.svg');
+    transform: rotate(180deg);
 }
 
 .aux_carousel{
@@ -1020,6 +1026,11 @@ footer {
 
 .filter_search h2:last-of-type{
     margin-top: 23px;
+}
+
+.filters_ctn_hidden{
+    max-height: 300px;
+    overflow-y: scroll;
 }
 
 .catalog_form button{

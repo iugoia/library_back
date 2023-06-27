@@ -183,8 +183,8 @@
                         <h2 class="title_custom2"><span class="strong">Высокооцененные</span> Книги</h2>
                         <hr>
                         <div class="aux_carousel_navigation">
-                            <button class="aux_prev_btn"></button>
-                            <button class="aux_next_btn"></button>
+                            <button class="aux_prev_btn aux_btn"></button>
+                            <button class="aux_next_btn aux_btn"></button>
                         </div>
                     </header>
                     <ul class="aux_carousel">
@@ -226,217 +226,50 @@
                     <header class="index_catalog_heading">
                         <h2 class="title_custom2"><span class="strong">Каталог</span> Книг</h2>
                         <hr>
-                        <a href="catalog.html" class="primary_btn">Посмотреть все</a>
+                        <a href="{{route('catalog')}}" class="primary_btn">Посмотреть все</a>
                     </header>
                     <ul class="catalog_list">
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                        @foreach($books as $book)
+                            @php
+                                $author = \App\Models\Author::find($book->author_id);
+                                $feedbacks = \App\Models\Feedback::all()->where('book_id', '=', $book->id);
+                                $widthRating = 0;
+                                if(!$feedbacks->isEmpty()){
+                                    $countFeedbacks = $feedbacks->count();
+                                    $sum = 0;
+                                    foreach ($feedbacks as $feedback){
+                                        $sum += $feedback->score;
+                                    }
+                                    $sumAvg = $sum / $countFeedbacks;
+                                    $widthRating = ($sumAvg * 22) + (floor($sumAvg) * 3);
+                                } else {
+                                    $widthRating = 122;
+                                }
+                            @endphp
+                            <li class="catalog_item">
+                                <div class="catalog_item_ctn">
+                                    <div class="catalog_item_row">
+                                        <div class="catalog_item_image_ctn" style="height: 450px">
+                                            <a href="{{route('book', $book->id)}}">
+                                                <img src="{{asset('storage/' . $book->image)}}" alt="boook">
+                                            </a>
+                                        </div>
+                                        <div class="catalog_item_info">
+                                            <h3>{{$book->name}}</h3>
+                                            <a href="{{route('catalog', ['author_id' => $author->id])}}" class="author_link">{{$author->name}}</a>
+                                            <div class="book_stars_par">
+                                                <div class="book_stars_unfill">
+                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
+                                                </div>
+                                                <div class="book_stars_fill" style="width: {{$widthRating}}px">
+                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="">
+                                                </div>
                                             </div>
                                         </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="catalog_item">
-                            <div class="catalog_item_ctn">
-                                <div class="catalog_item_row">
-                                    <div class="catalog_item_image_ctn">
-                                        <a href="book.html">
-                                            <img src="{{asset('storage/books/1.png')}}" alt="boook">
-                                        </a>
-                                    </div>
-                                    <div class="catalog_item_info">
-                                        <h3>103 Home Cooked meals</h3>
-                                        <a href="" class="author_link">Kristi Lee</a>
-                                        <div class="book_stars_par">
-                                            <div class="book_stars_unfill">
-                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="">
-                                            </div>
-                                            <div class="book_stars_fill" style="width: 122px">
-                                                <img src="{{asset('storage/filled_stars.png')}}" alt="">
-                                            </div>
-                                        </div>
-                                        <p class="book_desc">
-                                            Укрывшись от погони в академии Лютвидж, Оз и его компания рассказывают Лейму о предательстве герцога Бальмы. Однако вскоре выясняется, что не все так просто, ведь именно Бальма отправил своего подчиненного на помощь Озу. Какую же цель преследует взбалмошный герцог?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

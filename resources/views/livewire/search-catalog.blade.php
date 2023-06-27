@@ -45,16 +45,20 @@
                 <h2 class="title_custom">Жанр</h2>
                 <form action="{{route('catalog')}}" class="catalog_form" method="get">
                     @csrf
-                    @foreach($genres as $genre)
-                        <fieldset class="catalog_checkbox_field">
-                            <input type="checkbox" name="genre_id[]" value="{{$genre->id}}" class="checkbox_control" id="{{$genre->name}}">
-                            <label for="{{$genre->name}}" class="checkbox_label">{{$genre->name}}</label>
-                            <p class="checkbox_result">
-                                ({{\App\Models\Book::all()->where('genre_id', '=', $genre->id)->count()}})
-                            </p>
-                        </fieldset>
-                    @endforeach
+                    <div class="filters_ctn_hidden">
+                        @foreach($genres as $genre)
+                            <fieldset class="catalog_checkbox_field">
+                                <input type="checkbox" name="genre_id[]" value="{{$genre->id}}" class="checkbox_control" id="{{$genre->name}}">
+                                <label for="{{$genre->name}}" class="checkbox_label">{{$genre->name}}</label>
+                                <p class="checkbox_result">
+                                    ({{\App\Models\Book::all()->where('genre_id', '=', $genre->id)->count()}})
+                                </p>
+                            </fieldset>
+                        @endforeach
+                    </div>
+
                     <button class="primary_btn" type="submit">Найти</button>
+                    <a href="{{route('catalog', ['clear'])}}">Очистить поиск</a>
                 </form>
             </div>
 
@@ -87,7 +91,7 @@
                                                     $widthRating = 122;
                                                 }
                                             @endphp
-                                            <a href="dsadasdasd" class="author_link">{{$author->name}}</a>
+                                            <a href="{{route('catalog', ['author_id' => $author->id])}}" class="author_link">{{$author->name}}</a>
                                             @if(!$feedbacks->isEmpty())
                                                 <div class="book_stars_par">
                                                     <div class="book_stars_unfill">
@@ -110,8 +114,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="paginator-center">
-        {{$paginator->links()}}
     </div>
 </section>
