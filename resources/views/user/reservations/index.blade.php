@@ -19,10 +19,7 @@
                         {{session()->get('success')}}
                     </div>
                 @endif
-                @if(!$arrDataList)
-                    <h2>Здесь пока пусто :(</h2><br>
-                    <a href="{{route('catalog')}}" class="primary_btn">Перейти в каталог</a>
-                @endif
+
                 @livewire('reservation-user')
             </div>
         </div>

@@ -51,7 +51,7 @@
                                 <input type="checkbox" name="genre_id[]" value="{{$genre->id}}" class="checkbox_control" id="{{$genre->name}}">
                                 <label for="{{$genre->name}}" class="checkbox_label">{{$genre->name}}</label>
                                 <p class="checkbox_result">
-                                    ({{\App\Models\Book::all()->where('genre_id', '=', $genre->id)->count()}})
+                                    (<span class="filter_count">{{\App\Models\Book::all()->where('genre_id', '=', $genre->id)->count()}}</span>)
                                 </p>
                             </fieldset>
                         @endforeach
@@ -116,3 +116,16 @@
         </div>
     </div>
 </section>
+
+@section('custom_js')
+    <script>
+        const filters = document.querySelectorAll('.catalog_checkbox_field')
+        var count = 0;
+        filters.forEach(filter => {
+            filter.addEventListener('click', (e) => {
+                count += parseInt(filter.querySelector('.filter_count').innerHTML)
+                console.log(count)
+            })
+        })
+    </script>
+@endsection

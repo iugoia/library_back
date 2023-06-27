@@ -32,7 +32,7 @@ class AuthorController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'min:5', 'max:60', 'unique:authors,name'],
-            'photo' => ['nullable', 'mimes:jpg,jpeg,png'],
+            'photo' => ['nullable', 'mimes:jpg,jpeg,png,webp'],
             'description' => ['nullable', 'string', 'min:10']
         ]);
         if ($validator->fails())
