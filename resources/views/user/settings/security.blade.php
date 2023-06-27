@@ -68,8 +68,12 @@
                         <fieldset class="settings_field">
                             <div class="input_wrapper input_set">
 
-                                <input id="input3" class="input" type="password" placeholder="Текущий пароль"
-                                       name="current_password">
+                                <div class="password-container">
+                                    <input class="password-input input" type="password" placeholder="Пароль" name="password" id="pass" maxlength="255" required>
+                                    <span toggle="#pass" class="field-icon toggle-password">
+                                        <i class="fa fa-fw fa-eye"></i>
+                                    </span>
+                                </div>
                                 <span class="message1"></span>
 
                             </div>
@@ -110,6 +114,23 @@
         $(function(){
             $(".phone").mask("+ 7 (999) 999-99-99");
         });
+
+
+
+        // Получаем элементы DOM
+        const passwordInput = document.querySelector('#pass');
+        const togglePassword = document.querySelector('.toggle-password');
+
+        // Добавляем обработчик клика на иконку глазика
+        togglePassword.addEventListener('click', function (e) {
+            // Получаем текущее значение атрибута type у инпута с паролем
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            // Устанавливаем новое значение атрибута type
+            passwordInput.setAttribute('type', type);
+            // Изменяем иконку глазика в зависимости от типа поля с паролем
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+
 
     </script>
 @endsection

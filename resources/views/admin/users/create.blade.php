@@ -26,7 +26,8 @@
                         <div class="add_form_row">
                             <div class="add_form_item">
                                 <label class="add_author_label" for="genre_name">Имя *</label>
-                                <input class="add_author_input input" id="genre_name" name="name" type="text" placeholder="Введите имя">
+                                <input class="add_author_input input" id="input1 genre_name" name="name" type="text" placeholder="Введите имя">
+                                <span class="message1"></span>
                                 @error('name')
                                 <div class="text-danger">
                                     {{$message}}
@@ -35,7 +36,8 @@
                             </div>
                             <div class="add_form_item">
                                 <label class="add_author_label" for="genre_name">Фамилия *</label>
-                                <input class="add_author_input input" id="genre_name" name="surname" type="text" placeholder="Введите фамилию">
+                                <input class="add_author_input input" id="input2 genre_name" name="surname" type="text" placeholder="Введите фамилию">
+                                <span class="message2"></span>
                                 @error('surname')
                                 <div class="text-danger">
                                     {{$message}}
