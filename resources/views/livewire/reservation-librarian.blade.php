@@ -1,4 +1,21 @@
 <div>
+    <style>
+        .input{
+            margin-bottom: 0;
+        }
+        .__select__title{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 0;
+        }
+        .select_download{
+            max-width: 70px;
+        }
+        .__select__title::before, .__select__title::after{
+            content: unset;
+        }
+    </style>
     <div class="lk_filters">
         <div class="lk_filter">
             <label for="search" class="lk_filter_label">Поиск</label>
@@ -18,7 +35,16 @@
             <label for="end" class="lk_filter_label">Конец бронирования</label>
             <input type="date" id="end" name="end" class="input" wire:model="received_at">
         </div>
+        <div class="__select select_download" data-state="">
+            <div class="__select__title" data-default="great"><i class="fa-solid fa-arrow-down-to-line fa-xl"></i></div>
+            <div class="__select__content">
+                <a class="__select__label" href="{{route('librarian.reservations.export', ['array' => $arrDataList])}}">Excel</a>
+                <a class="__select__label" href="{{route('librarian.reservations.exportToHtml', ['array' => $arrDataList])}}">HTML</a>
+            </div>
+        </div>
     </div>
+
+
     @if(session()->has('success'))
         <div class="alert alert-success mb-5">
             {{session()->get('success')}}
@@ -86,7 +112,7 @@
                 <td>
                     {{date('d.m.Y', strtotime($reservation->received_time))}}
                 </td>
-                <td>{{$user->name}} {{$user->surname}}</td>
+                <td>{{$user->name}} {{$user->surname}} | <strong>{{$user->login}}</strong></td>
                 <td>
                     <div class="table_actions">
                         <a href="#" class="eye_icon">

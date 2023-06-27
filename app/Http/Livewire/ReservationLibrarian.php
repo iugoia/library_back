@@ -16,7 +16,7 @@ class ReservationLibrarian extends Component
 
     public function render(Request $request)
     {
-        sleep(1);
+//        sleep(1);
         $sort = '';
         $direction = '';
         if ($request->input('sort')){

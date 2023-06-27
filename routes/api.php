@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function() {
         });
 
         Route::group(['prefix' => 'libreservations'], function() {
+            Route::get('/exportToHtml', [\App\Http\Controllers\Librarian\ReservationController::class, 'exportToHtml'])->name('librarian.reservations.exportToHtml');
+            Route::get('/export', [\App\Http\Controllers\Librarian\ReservationController::class, 'export'])->name('librarian.reservations.export');
             Route::patch('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'update'])->name('librarian.reservations.update');
             Route::delete('/{reservation}', [\App\Http\Controllers\Librarian\ReservationController::class, 'destroy'])->name('librarian.reservations.destroy');
         });

@@ -176,43 +176,48 @@
                 </ul>
             </div>
         </section>
-{{--            <section class="carusel element_pad">--}}
-{{--                <div class="container">--}}
-{{--                    <header class="index_catalog_heading">--}}
-{{--                        <h2 class="title_custom2"><span class="strong">Высокооцененные</span> Книги</h2>--}}
-{{--                        <hr>--}}
-{{--                        <div class="aux_carousel_navigation">--}}
-{{--                            <button class="aux_prev_btn"></button>--}}
-{{--                            <button class="aux_next_btn"></button>--}}
-{{--                        </div>--}}
-{{--                    </header>--}}
-{{--                    <ul class="aux_carousel">--}}
-{{--                        @foreach($bookScores as $book)--}}
-{{--                            <li class="aux_carousel_item fadeLeft">--}}
-{{--                                <div class="aux_carousel_item_ctn">--}}
-{{--                                    <div class="auxshp-entry-main">--}}
-{{--                                        <div class="book_stars_par">--}}
-{{--                                            <div class="book_stars_unfill">--}}
-{{--                                                <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="book_stars_fill" style="width: {{$book['ratingWidth']}}px">--}}
-{{--                                                <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                        <h3 class="aux_carousel_item_heading">{{$book['book']->name}}</h3>--}}
-{{--                                        <p class="aux_carousel_item_author">{{\App\Models\Author::find($book['book']->author_id)->name}}</p>--}}
-{{--                                        <p class="aux_carousel_item_description">{{$book['book']->description}}</p>--}}
-{{--                                        <a href="{{route('book', $book['book'])}}" class="aux_item_book_btn">Забронировать</a>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="carousel_book_ctn">--}}
-{{--                                        <img class="aux_carousel_item_image" src="{{asset('storage/' . $book['book']->image)}}" alt="1">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-{{--            </section>--}}
+        @if($bookScores !== [])
+            <section class="carusel element_pad">
+                <div class="container">
+                    <header class="index_catalog_heading">
+                        <h2 class="title_custom2"><span class="strong">Высокооцененные</span> Книги</h2>
+                        <hr>
+                        <div class="aux_carousel_navigation">
+                            <button class="aux_prev_btn"></button>
+                            <button class="aux_next_btn"></button>
+                        </div>
+                    </header>
+                    <ul class="aux_carousel">
+                        @for($i = 0; $i < 6; $i++)
+                            @if(isset($bookScores[$i]))
+                                <li class="aux_carousel_item fadeLeft">
+                                    <div class="aux_carousel_item_ctn">
+                                        <div class="auxshp-entry-main">
+                                            <div class="book_stars_par">
+                                                <div class="book_stars_unfill">
+                                                    <img src="{{asset('storage/unfilled_stars.png')}}" alt="prev_btn">
+                                                </div>
+                                                <div class="book_stars_fill" style="width: {{$bookScores[$i]['ratingWidth']}}px">
+                                                    <img src="{{asset('storage/filled_stars.png')}}" alt="prev_btn">
+                                                </div>
+                                            </div>
+                                            <h3 class="aux_carousel_item_heading">{{$bookScores[$i]['book']->name}}</h3>
+                                            <p class="aux_carousel_item_author">{{\App\Models\Author::find($bookScores[$i]['book']->author_id)->name}}</p>
+                                            <p class="aux_carousel_item_description">{{$bookScores[$i]['book']->description}}</p>
+                                            <a href="{{route('book', $bookScores[$i]['book'])}}" class="aux_item_book_btn">Забронировать</a>
+                                        </div>
+                                        <div class="carousel_book_ctn">
+                                            <img class="aux_carousel_item_image" src="{{asset('storage/' . $bookScores[$i]['book']->image)}}" alt="1">
+                                        </div>
+                                    </div>
+                                </li>
+                            @endif
+                        @endfor
+                    </ul>
+                </div>
+            </section>
+        @endif
+
 
 
         <section class="index_catalog element_pad">
